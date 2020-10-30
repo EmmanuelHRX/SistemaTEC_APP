@@ -97,6 +97,7 @@ public class InicioAlumno extends AppCompatActivity
         } else if (id == R.id.nav_slideshow) {
 
         } else if (id == R.id.nav_tools) {
+            //declaración he inicio de una nueva actividad
             Intent actSettings = new Intent(this, Settings2.class);
             startActivity(actSettings);
         } else if (id == R.id.nav_share) {
