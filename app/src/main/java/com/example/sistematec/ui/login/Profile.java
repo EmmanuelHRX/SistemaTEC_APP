@@ -19,10 +19,11 @@ import android.widget.TextView;
 
 import org.w3c.dom.Text;
 
-public class InicioAlumno extends AppCompatActivity
+public class Profile extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    TextView txtAlumnoNombre, txtAlumnoMatricula, txtAlumnoCarrera, txtAlumnoSemestre;
+    private TextView txtAlumnoNombre, txtAlumnoMatricula, txtAlumnoCarrera, txtAlumnoSemestre;
+    private String TIPO_USUARIO;
 
 
 
@@ -34,9 +35,27 @@ public class InicioAlumno extends AppCompatActivity
 
         setSupportActionBar(toolbar);
 
+        TIPO_USUARIO = getIntent().getStringExtra("TIPO_USUARIO");
+
+
+        //TIPO USUARIO MÉTODO SE SELECCIÓN DE DRAWER
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        NavigationView navigationView = findViewById(R.id.nav_view);
+        NavigationView navigationView;
+        switch(TIPO_USUARIO){
+            case "Al":{
+                navigationView = findViewById(R.id.nav_view);
+                break;
+
+            }
+            case "Se":{
+                navigationView = findViewById(R.id.nav_view_service);
+                break;
+            }
+            default: navigationView = findViewById(R.id.nav_view);
+            break;
+        }
+
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
@@ -49,7 +68,7 @@ public class InicioAlumno extends AppCompatActivity
         txtAlumnoCarrera = findViewById(R.id.txtAlumnoCarrera);
         txtAlumnoSemestre = findViewById(R.id.txtAlumnoSemestre);
 
-        setAlumnoDatos();
+        setData();
 
     }
 
@@ -70,41 +89,66 @@ public class InicioAlumno extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_home) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
+        switch (TIPO_USUARIO){
+            case "Al":{
+                if (id == R.id.nav_home) {
 
-        } else if (id == R.id.nav_slideshow) {
+                } else if (id == R.id.nav_gallery) {
 
-        } else if (id == R.id.nav_tools) {
-            //declaración he inicio de una nueva actividad
-            Intent actSettings = new Intent(this, Settings2.class);
-            startActivity(actSettings);
-        } else if (id == R.id.nav_share) {
+                } else if (id == R.id.nav_slideshow) {
 
-        } else if (id == R.id.nav_send) {
+                } else if (id == R.id.nav_tools) {
+                    //declaración he inicio de una nueva actividad configuracion
+                    Intent actSettings = new Intent(this, Settings2.class);
+                    startActivity(actSettings);
+                } else if (id == R.id.nav_share) {
 
+                } else if (id == R.id.nav_send) {
+
+                }
+                break;
+            }
+
+            case "Se" :{
+                if (id == R.id.nav_My_Profile) {
+                    //ya se encuentra en mi perfil
+                } else if (id == R.id.nav_Requests) {
+
+                } else if (id == R.id.nav_Requests_History) {
+
+                } else if (id == R.id.nav_Notifications) {
+
+                } else if (id == R.id.nav_Configuration) {
+                    //declaración he inicio de una nueva actividad configuracion
+                    Intent actSettings = new Intent(this, Settings2.class);
+                    startActivity(actSettings);
+                } else if (id == R.id.nav_Close_Session) {
+
+                }
+            }
         }
+
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
 
-    private void setAlumnoDatos() {
+    private void setData() {
 
-        //Lógica de extración de datos de la BD
+        //Lógica de extración de datos de la BD según el tipo de usuario
 
-        //
+        //TIPO_USUARIO MÉTODO DE LLENADO
 
 
-        this.txtAlumnoNombre.setText("Nombre: El Pepe");
-        this.txtAlumnoMatricula.setText("Matrícula: 17171403");
+        this.txtAlumnoNombre.setText("Nombre: Román Alejandro Gaspar Atondo");
+        this.txtAlumnoMatricula.setText("Matrícula: 17171372");
         this.txtAlumnoCarrera.setText("Carrera: Ing. Sistemas Computacionales");
         this.txtAlumnoSemestre.setText("Semestre: 12vo :'c");
 
 
     }
+
 
 
 }

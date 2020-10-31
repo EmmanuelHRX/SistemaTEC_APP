@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_My_Profile"
+            android:title="Mi Perfil" />
+        <item
+            android:id="@+id/nav_Requests"
+            android:title="Solicitudes" />
+        <item
+            android:id="@+id/nav_Requests_History"
+            android:title="Historial de Solicitudes" />
+        <item
+            android:id="@+id/nav_Notifications"
+            android:title="Notificaciones" />
+    </group>
+
+    <item
+        android:id="@+id/nav_settings"
+        android:title="Otros">
+        <menu>
+            <item
+                android:id="@+id/nav_Configuration"
+                android:title="Configuración" />
+            <item
+                android:id="@+id/nav_Close_Session"
+                android:title="Cerrar Sesión" />
+        </menu>
+    </item>
+
+</menu>

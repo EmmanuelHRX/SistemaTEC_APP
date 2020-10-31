@@ -20,12 +20,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.sistematec.R;
-import com.example.sistematec.ui.login.LoginViewModel;
-import com.example.sistematec.ui.login.LoginViewModelFactory;
 
 public class LoginActivity extends AppCompatActivity {
 
     private LoginViewModel loginViewModel;
+    public String tipoUsuario;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -112,14 +111,14 @@ public class LoginActivity extends AppCompatActivity {
                 loadingProgressBar.setVisibility(View.VISIBLE);
                 loginViewModel.login(usernameEditText.getText().toString(),
                         passwordEditText.getText().toString());
-                String tipoUsuario = "Alumno";
-                switch (tipoUsuario) {
-                    case "Alumno": {
-                        Intent actInicioUsuario = new Intent(getApplicationContext(), InicioAlumno.class);
-                        startActivity(actInicioUsuario);
-                        finish();
-                    }
-                }
+
+                //método para obtener tipo de usuario mediante la BD
+                tipoUsuario = usernameEditText.getText().toString();
+
+                Intent actInicioUsuario = new Intent(getApplicationContext(), Profile.class);
+                actInicioUsuario.putExtra("TIPO_USUARIO",tipoUsuario);
+                startActivity(actInicioUsuario);
+                finish();
             }
         });
     }
@@ -133,4 +132,5 @@ public class LoginActivity extends AppCompatActivity {
     private void showLoginFailed(@StringRes Integer errorString) {
         Toast.makeText(getApplicationContext(), errorString, Toast.LENGTH_SHORT).show();
     }
+
 }
