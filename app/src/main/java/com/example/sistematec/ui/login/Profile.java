@@ -2,9 +2,6 @@ package com.example.sistematec.ui.login;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.view.View;
 import android.support.v4.view.GravityCompat;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.view.MenuItem;
@@ -14,10 +11,7 @@ import com.example.sistematec.R;
 
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
 import android.widget.TextView;
-
-import org.w3c.dom.Text;
 
 public class Profile extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -30,7 +24,7 @@ public class Profile extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_inicio_alumno);
+        setContentView(R.layout.activity_profile);
         Toolbar toolbar = findViewById(R.id.toolbar);
 
         setSupportActionBar(toolbar);
@@ -40,22 +34,25 @@ public class Profile extends AppCompatActivity
 
         //TIPO USUARIO MÉTODO SE SELECCIÓN DE DRAWER
 
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        DrawerLayout drawer;
         NavigationView navigationView;
         switch(TIPO_USUARIO){
             case "Al":{
+                drawer = findViewById(R.id.drawer_layout_service);
                 navigationView = findViewById(R.id.nav_view);
                 break;
 
             }
             case "Se":{
+                drawer = findViewById(R.id.drawer_layout_service);
                 navigationView = findViewById(R.id.nav_view_service);
                 break;
             }
-            default: navigationView = findViewById(R.id.nav_view);
+            default:
+                drawer = findViewById(R.id.drawer_layout_service);
+                navigationView = findViewById(R.id.nav_view);
             break;
         }
-
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
@@ -74,7 +71,7 @@ public class Profile extends AppCompatActivity
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout_service);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
@@ -129,7 +126,7 @@ public class Profile extends AppCompatActivity
         }
 
 
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout_service);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
