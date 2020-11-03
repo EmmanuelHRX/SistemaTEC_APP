@@ -11,22 +11,21 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.sistematec.R;
-import com.example.sistematec.ui.login.FragmentAllSettings;
 
-public class FragmentRequestsService extends Fragment implements View.OnClickListener {
+public class FragmentServiceRequests extends Fragment implements View.OnClickListener {
 
     //creacion de array de botones
     Button btn;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.fragment_requests_service, container, false);
+        View v = inflater.inflate(R.layout.fragment_service_requests, container, false);
         setData(v);
         return v;
     }
 
     //método en ciclo para la inicializacion y asignación de listener de los botones
-    public void setData(View v){
+    private void setData(View v){
         btn = v.findViewById(R.id.btnRequestService1);
         btn.setText("17171372 Román Alejandro Gaspar Atondo");
         btn.setOnClickListener(this);
@@ -36,7 +35,7 @@ public class FragmentRequestsService extends Fragment implements View.OnClickLis
         Toast.makeText(getContext(),"se presionó el botón",Toast.LENGTH_LONG).show();
         switch (v.getId()){
             case R.id.btnRequestService1:{
-                getFragmentManager().beginTransaction().replace(R.id.fragment_container, new FragmentAwaitingRequestsService());
+                getFragmentManager().beginTransaction().replace(R.id.fragment_container, new FragmentServiceAwaitingRequests());
                 break;
             }
 

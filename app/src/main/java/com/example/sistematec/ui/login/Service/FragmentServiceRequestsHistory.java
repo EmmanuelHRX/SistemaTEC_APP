@@ -7,17 +7,14 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 
 import com.example.sistematec.R;
 
-public class FragmentAwaitingRequestsService extends Fragment {
+public class FragmentServiceRequestsHistory extends Fragment {
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.fragment_service_awaiting_requests, container, false);
-        return v;
+        return inflater.inflate(R.layout.fragment_service_requests_history, container, false);
     }
-
 }

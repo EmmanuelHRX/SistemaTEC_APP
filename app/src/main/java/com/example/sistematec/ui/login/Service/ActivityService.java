@@ -15,7 +15,7 @@ import com.example.sistematec.ui.login.LoginActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
-public class ServiceActivity extends AppCompatActivity
+public class ActivityService extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     @Override
@@ -61,15 +61,15 @@ public class ServiceActivity extends AppCompatActivity
                 break;
             }
             case R.id.nav_Requests :{
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new FragmentRequestsService()).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new FragmentServiceRequests()).commit();
                 break;
             }
             case R.id.nav_Requests_History :{
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new FragmentRequestsHistoryService()).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new FragmentServiceRequestsHistory()).commit();
                 break;
             }
             case R.id.nav_Notifications :{
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new FragmentNotificationService()).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new FragmentServiceNotification()).commit();
                 break;
             }
             case R.id.nav_Configuration :{
