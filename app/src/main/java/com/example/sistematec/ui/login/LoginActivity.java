@@ -20,6 +20,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.sistematec.R;
+import com.example.sistematec.ui.login.Student.StudentActivity;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -116,7 +117,7 @@ public class LoginActivity extends AppCompatActivity {
                 tipoUsuario = usernameEditText.getText().toString();
                 switch(tipoUsuario){
                     case "Al":{
-                        Intent actInicioUsuario = new Intent(getApplicationContext(), Profile.class);
+                        Intent actInicioUsuario = new Intent(getApplicationContext(), StudentActivity.class);
                         startActivity(actInicioUsuario);
                         finish();
                         break;
@@ -129,7 +130,7 @@ public class LoginActivity extends AppCompatActivity {
                         break;
                     }
                     default:
-                        Intent actInicioUsuario = new Intent(getApplicationContext(), Profile.class);
+                        Intent actInicioUsuario = new Intent(getApplicationContext(), StudentActivity.class);
                         startActivity(actInicioUsuario);
                         finish();
                         break;
