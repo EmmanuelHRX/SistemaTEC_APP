@@ -1,4 +1,4 @@
-package com.example.sistematec.ui.login;
+package com.example.sistematec.ui.login.Service;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,6 +9,9 @@ import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 
 import com.example.sistematec.R;
+import com.example.sistematec.ui.login.FragmentAllSettings;
+import com.example.sistematec.ui.login.LoginActivity;
+
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
@@ -86,4 +89,5 @@ public class ServiceActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
 }

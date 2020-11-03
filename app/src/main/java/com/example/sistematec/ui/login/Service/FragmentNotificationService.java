@@ -1,4 +1,4 @@
-package com.example.sistematec.ui.login;
+package com.example.sistematec.ui.login.Service;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -15,6 +15,6 @@ public class FragmentNotificationService extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_notification_service, container, false);
+        return inflater.inflate(R.layout.fragment_service_notification, container, false);
     }
 }
