@@ -96,7 +96,7 @@ public class Profile extends AppCompatActivity
 
                 } else if (id == R.id.nav_tools) {
                     //declaración he inicio de una nueva actividad configuracion
-                    Intent actSettings = new Intent(this, Settings2.class);
+                    Intent actSettings = new Intent(this, ServiceActivity.class);
                     startActivity(actSettings);
                 } else if (id == R.id.nav_share) {
 
@@ -117,7 +117,7 @@ public class Profile extends AppCompatActivity
 
                 } else if (id == R.id.nav_Configuration) {
                     //declaración he inicio de una nueva actividad configuracion
-                    Intent actSettings = new Intent(this, Settings2.class);
+                    Intent actSettings = new Intent(this, ServiceActivity.class);
                     startActivity(actSettings);
                 } else if (id == R.id.nav_Close_Session) {
 

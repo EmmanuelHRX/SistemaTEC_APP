@@ -114,11 +114,26 @@ public class LoginActivity extends AppCompatActivity {
 
                 //método para obtener tipo de usuario mediante la BD
                 tipoUsuario = usernameEditText.getText().toString();
+                switch(tipoUsuario){
+                    case "Al":{
+                        Intent actInicioUsuario = new Intent(getApplicationContext(), Profile.class);
+                        startActivity(actInicioUsuario);
+                        finish();
+                        break;
 
-                Intent actInicioUsuario = new Intent(getApplicationContext(), Profile.class);
-                actInicioUsuario.putExtra("TIPO_USUARIO",tipoUsuario);
-                startActivity(actInicioUsuario);
-                finish();
+                    }
+                    case "Se":{
+                        Intent actService = new Intent(getApplicationContext(), ServiceActivity.class);
+                        startActivity(actService);
+                        finish();
+                        break;
+                    }
+                    default:
+                        Intent actInicioUsuario = new Intent(getApplicationContext(), Profile.class);
+                        startActivity(actInicioUsuario);
+                        finish();
+                        break;
+                }
             }
         });
     }
