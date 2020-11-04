@@ -8,8 +8,8 @@
 
     <TextView
         android:id="@+id/txtRevalidateSubjects"
-        android:layout_width="395dp"
-        android:layout_height="31dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="44dp"
         android:text="REVALIDACIÓN DE ASIGNATURAS"
@@ -20,10 +20,61 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtRevalidateSubjects">
+
+        <TextView
+            android:id="@+id/txtStudentDateAR"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="30dp"
+            android:text="TextView" />
+
+        <TextView
+            android:id="@+id/txtStudentNameAR"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="10dp"
+            android:text="TextView" />
+
+        <TextView
+            android:id="@+id/txtStudentIDAR"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="10dp"
+            android:text="TextView" />
+
+        <TextView
+            android:id="@+id/txtStudentOldSyllabusAR"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="10dp"
+            android:text="TextView" />
+
+        <TextView
+            android:id="@+id/txtStudentNewSyllabusAR"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="10dp"
+            android:text="TextView" />
+    </LinearLayout>
+
     <TextView
         android:id="@+id/txtRevalidateSubjects2"
-        android:layout_width="360dp"
-        android:layout_height="28dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="8dp"
         android:text="Lista de Asignaturas por Revalidar"
@@ -32,63 +83,13 @@
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtStudentNewSyllabusAR" />
-
-    <TextView
-        android:id="@+id/txtStudentDateAR"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="30dp"
-        android:text="TextView"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtRevalidateSubjects" />
-
-    <TextView
-        android:id="@+id/txtStudentNameAR"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="10dp"
-        android:text="TextView"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtStudentDateAR" />
-
-    <TextView
-        android:id="@+id/txtStudentIDAR"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="10dp"
-        android:text="TextView"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtStudentNameAR" />
-
-    <TextView
-        android:id="@+id/txtStudentOldSyllabusAR"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="10dp"
-        android:text="TextView"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtStudentIDAR" />
-
-    <TextView
-        android:id="@+id/txtStudentNewSyllabusAR"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="10dp"
-        android:text="TextView"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtStudentOldSyllabusAR" />
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 
     <ScrollView
-        android:layout_width="409dp"
-        android:layout_height="441dp"
-        android:layout_marginTop="10dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:id="@+id/scrollView2"
+        android:layout_width="0dp"
+        android:layout_height="316dp"
+        android:layout_marginTop="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtRevalidateSubjects2">
@@ -110,15 +111,17 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:text="No."
-                    android:textSize="12sp" />
+                    android:textAlignment="center"
+                    android:textSize="10sp" />
 
                 <TextView
                     android:id="@+id/txtServiceAwaitingSubject"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Asignatura Cursada"
-                    android:textSize="12sp" />
+                    android:text="Asg. Cursada"
+                    android:textAlignment="center"
+                    android:textSize="10sp" />
 
                 <TextView
                     android:id="@+id/txtServiceAwaitingGrade"
@@ -126,15 +129,17 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="Calificación"
-                    android:textSize="12sp" />
+                    android:textAlignment="center"
+                    android:textSize="10sp" />
 
                 <TextView
                     android:id="@+id/txtServiceAwaitingSubjectValidated"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Asignatura Convalidada"
-                    android:textSize="12sp" />
+                    android:text="Asg. Convalidada"
+                    android:textAlignment="center"
+                    android:textSize="10sp" />
 
                 <TextView
                     android:id="@+id/txtServiceAwaitingPercentage"
@@ -142,7 +147,8 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="Porcentaje"
-                    android:textSize="12sp" />
+                    android:textAlignment="center"
+                    android:textSize="10sp" />
 
             </LinearLayout>
 
@@ -158,15 +164,17 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="1"
-                    android:textSize="12sp" />
+                    android:textAlignment="center"
+                    android:textSize="10sp" />
 
                 <TextView
                     android:id="@+id/txtServiceAwaitingSubject2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Calculo Diferencial"
-                    android:textSize="12sp" />
+                    android:text="Calc. Diferencial"
+                    android:textAlignment="center"
+                    android:textSize="10sp" />
 
                 <TextView
                     android:id="@+id/txtServiceAwaitingGrade2"
@@ -174,15 +182,17 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="90"
-                    android:textSize="12sp" />
+                    android:textAlignment="center"
+                    android:textSize="10sp" />
 
                 <TextView
                     android:id="@+id/txtServiceAwaitingSubjectValidated2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Calculo Diferencial"
-                    android:textSize="12sp" />
+                    android:text="Calc. Diferencial"
+                    android:textAlignment="center"
+                    android:textSize="10sp" />
 
                 <TextView
                     android:id="@+id/txtServiceAwaitingPercentage2"
@@ -190,11 +200,36 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="90%"
-                    android:textSize="12sp" />
+                    android:textAlignment="center"
+                    android:textSize="10sp" />
             </LinearLayout>
 
         </LinearLayout>
     </ScrollView>
+
+    <Button
+        android:id="@+id/btnServiceValidateAR"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="50dp"
+        android:background="@color/colorAccent"
+        android:text="AUTORIZAR"
+        android:textColor="#FFFFFF"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/scrollView2" />
+
+    <Button
+        android:id="@+id/btnServiceDenyAR"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="50dp"
+        android:background="@color/colorAccent"
+        android:text="RECHAZAR"
+        android:textColor="#FFFFFF"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/scrollView2" />
 
 
 </android.support.constraint.ConstraintLayout>

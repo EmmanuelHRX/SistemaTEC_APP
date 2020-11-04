@@ -9,12 +9,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.sistematec.R;
 
-public class FragmentServiceAwaitingRequests extends Fragment {
+public class FragmentServiceAwaitingRequests extends Fragment implements View.OnClickListener{
 
     TextView txtStudentDateAR, txtStudentNameAR, txtStudentIDAR, txtStudentOldSyllabusAR, txtStudentNewSyllabusAR;
+    Button btnServiceValidateAR, btnServiceDenyAR;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -29,6 +31,10 @@ public class FragmentServiceAwaitingRequests extends Fragment {
         txtStudentIDAR = v.findViewById(R.id.txtStudentIDAR);
         txtStudentOldSyllabusAR = v.findViewById(R.id.txtStudentOldSyllabusAR);
         txtStudentNewSyllabusAR = v.findViewById(R.id.txtStudentNewSyllabusAR);
+        btnServiceValidateAR = v.findViewById(R.id.btnServiceValidateAR);
+        btnServiceDenyAR = v.findViewById(R.id.btnServiceDenyAR);
+        btnServiceValidateAR.setOnClickListener(this);
+        btnServiceDenyAR.setOnClickListener(this);
         //procedimiento de llenado de información
         txtStudentDateAR.setText("Fecha: 25 de octubre de 2019");
         txtStudentNameAR.setText("Nombre: Juan Emmanuel López Laguna");
@@ -38,4 +44,22 @@ public class FragmentServiceAwaitingRequests extends Fragment {
 
     }
 
+    @Override
+    public void onClick(View view) {
+        //logica de aceptar o rechazar solicitud
+        switch (view.getId()){
+            case R.id.btnServiceValidateAR:{
+                Toast.makeText(getContext(),"Solicitud Aceptada",Toast.LENGTH_SHORT).show();
+                btnServiceValidateAR.setEnabled(false);
+                btnServiceDenyAR.setEnabled(false);
+                break;
+            }
+            case R.id.btnServiceDenyAR:{
+                Toast.makeText(getContext(),"Solicitud Rechazada",Toast.LENGTH_SHORT).show();
+                btnServiceValidateAR.setEnabled(false);
+                btnServiceDenyAR.setEnabled(false);
+                break;
+            }
+        }
+    }
 }

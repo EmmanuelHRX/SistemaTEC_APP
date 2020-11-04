@@ -36,6 +36,7 @@ public class FragmentServiceRequests extends Fragment implements View.OnClickLis
         switch (v.getId()){
             case R.id.btnRequestService1:{
                 // código que abra el fragmento awaiting request
+                getFragmentManager().beginTransaction().replace(R.id.fragment_container, new FragmentServiceAwaitingRequests()).commit();
                 break;
             }
 
