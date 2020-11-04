@@ -35,7 +35,7 @@ public class FragmentServiceRequests extends Fragment implements View.OnClickLis
         Toast.makeText(getContext(),"se presionó el botón",Toast.LENGTH_LONG).show();
         switch (v.getId()){
             case R.id.btnRequestService1:{
-                getFragmentManager().beginTransaction().replace(R.id.fragment_container, new FragmentServiceAwaitingRequests());
+                // código que abra el fragmento awaiting request
                 break;
             }
 
