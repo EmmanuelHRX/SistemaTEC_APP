@@ -1,5 +1,6 @@
 package com.example.sistematec.ui.login.Student;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.view.GravityCompat;
@@ -8,16 +9,22 @@ import android.view.MenuItem;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import com.example.sistematec.R;
+import com.example.sistematec.ui.login.FragmentAllSettings;
+import com.example.sistematec.ui.login.LoginActivity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.widget.TextView;
 
 public class StudentActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, FragmentStudentProfile.OnFragmentInteractionListener {
+        implements NavigationView.OnNavigationItemSelectedListener, FragmentStudentProfile.OnFragmentInteractionListener,
+        FragmentStudentRequests.OnFragmentInteractionListener, FragmentStudentRequestsCapture.OnFragmentInteractionListener,
+        FragmentStudentRequestsConfirmation.OnFragmentInteractionListener,
+        FragmentStudentRequestsNotifications.OnFragmentInteractionListener,
+        FragmentStudentRequestsStatus.OnFragmentInteractionListener{
 
 
-
+    DrawerLayout drawer;
+    NavigationView navigationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,8 +33,8 @@ public class StudentActivity extends AppCompatActivity
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        DrawerLayout drawer;
-        NavigationView navigationView;
+
+
         drawer = findViewById(R.id.drawer_layout_service);
         navigationView = findViewById(R.id.nav_view_student);
 
@@ -40,7 +47,7 @@ public class StudentActivity extends AppCompatActivity
         if(savedInstanceState == null){
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.fragment_container_student, FragmentStudentProfile.newInstance("Nothing", "Nothing")).commit();
-            navigationView.setCheckedItem(R.id.nav_home);
+            navigationView.setCheckedItem(R.id.nav_student_profile);
         }
 
     }
@@ -63,18 +70,39 @@ public class StudentActivity extends AppCompatActivity
         int id = item.getItemId();
 
 
-        if (id == R.id.nav_home) {
+        if (id == R.id.nav_student_profile) {
+            if (navigationView.getCheckedItem().getItemId() != R.id.nav_student_profile) {
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.fragment_container_student, FragmentStudentProfile.newInstance("Nothing", "Nothing"))
+                        .commit();
+            }
 
-        } else if (id == R.id.nav_gallery) {
+        } else if (id == R.id.nav_student_requests) {
+            if (navigationView.getCheckedItem().getItemId() != R.id.nav_student_requests) {
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.fragment_container_student, FragmentStudentRequests.newInstance("Nothing", "Nothing"))
+                        .commit();
+            }
 
-        } else if (id == R.id.nav_slideshow) {
+        } else if (id == R.id.nav_student_notifications) {
+            if (navigationView.getCheckedItem().getItemId() != R.id.nav_student_notifications) {
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.fragment_container_student, FragmentStudentRequestsNotifications.newInstance("Nothing", "Nothing"))
+                        .commit();
+            }
 
-        } else if (id == R.id.nav_tools) {
-            //declaración he inicio de una nueva actividad configuracion
-        } else if (id == R.id.nav_share) {
+        } else if (id == R.id.nav_student_settings) {
+            if (navigationView.getCheckedItem().getItemId() != R.id.nav_student_settings) {
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.fragment_container_student, new FragmentAllSettings()).commit();
+            }
 
-        } else if (id == R.id.nav_send) {
-
+        } else if (id == R.id.nav_student_logout) {
+            if (navigationView.getCheckedItem().getItemId() != R.id.nav_student_logout) {
+                Intent actLogin = new Intent(this, LoginActivity.class);
+                startActivity(actLogin);
+                finish();
+            }
         }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout_service);
