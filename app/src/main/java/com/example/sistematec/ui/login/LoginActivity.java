@@ -20,6 +20,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.sistematec.R;
+import com.example.sistematec.ui.login.Service.ActivityService;
 import com.example.sistematec.ui.login.Student.StudentActivity;
 
 public class LoginActivity extends AppCompatActivity {
@@ -123,8 +124,8 @@ public class LoginActivity extends AppCompatActivity {
                         break;
 
                     }
-                    case "Se":{
-                        Intent actService = new Intent(getApplicationContext(), ServiceActivity.class);
+                    case "se":{
+                        Intent actService = new Intent(getApplicationContext(), ActivityService.class);
                         startActivity(actService);
                         finish();
                         break;

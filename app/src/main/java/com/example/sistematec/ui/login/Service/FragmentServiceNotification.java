@@ -1,4 +1,4 @@
-package com.example.sistematec.ui.login;
+package com.example.sistematec.ui.login.Service;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -7,13 +7,14 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
 import com.example.sistematec.R;
 
-public class FragmentProfileService extends Fragment {
+public class FragmentServiceNotification extends Fragment {
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_profile_service, container, false);
+        return inflater.inflate(R.layout.fragment_service_notification, container, false);
     }
 }
