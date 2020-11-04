@@ -3,6 +3,7 @@ package com.example.sistematec.ui.login.Student;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,7 +19,7 @@ import com.example.sistematec.R;
  * Use the {@link FragmentStudentRequests#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class FragmentStudentRequests extends Fragment {
+public class FragmentStudentRequests extends Fragment implements View.OnClickListener {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -65,7 +66,12 @@ public class FragmentStudentRequests extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_student_requests, container, false);
+        View view = inflater.inflate(R.layout.fragment_student_requests, container, false);
+
+        FloatingActionButton floatbtnAddRequest = view.findViewById(R.id.floatbtn_student_requests_add);
+        floatbtnAddRequest.setOnClickListener(this);
+
+        return view;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -90,6 +96,18 @@ public class FragmentStudentRequests extends Fragment {
     public void onDetach() {
         super.onDetach();
         mListener = null;
+    }
+
+    @Override
+    public void onClick(View view) {
+        int id = view.getId();
+
+        if(id == R.id.floatbtn_student_requests_add) {
+            getActivity().getSupportFragmentManager().beginTransaction()
+                    .replace(((ViewGroup) getView().getParent())
+                            .getId(), FragmentStudentRequestsCapture.newInstance("Nothing", "Nothing"))
+                            .commit();
+        }
     }
 
     /**
