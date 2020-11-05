@@ -127,7 +127,7 @@ public class FragmentStudentProfile extends Fragment {
 
         //TIPO_USUARIO MÉTODO DE LLENADO
 
-        this.txtAlumnoNombre.setText("Nombre: Román Alejandro Gaspar Atondo");
+        this.txtAlumnoNombre.setText("Nombre: Juan Emmanuel López Laguna");
         this.txtAlumnoMatricula.setText("Matrícula: 17171372");
         this.txtAlumnoCarrera.setText("Carrera: Ing. Sistemas Computacionales");
         this.txtAlumnoSemestre.setText("Semestre: 12vo :'c");
