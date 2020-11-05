@@ -24,12 +24,12 @@ public class AcademyActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_service);
+        setContentView(R.layout.activity_academy);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        DrawerLayout drawer = findViewById(R.id.drawer_layout_service);
-        NavigationView navigationView = findViewById(R.id.nav_view_service);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout_academy);
+        NavigationView navigationView = findViewById(R.id.nav_view_academy);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
@@ -44,7 +44,7 @@ public class AcademyActivity extends AppCompatActivity
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = findViewById(R.id.drawer_layout_service);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout_academy);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
@@ -88,7 +88,7 @@ public class AcademyActivity extends AppCompatActivity
         }
 
 
-        DrawerLayout drawer = findViewById(R.id.drawer_layout_service);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout_academy);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }

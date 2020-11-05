@@ -4,7 +4,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:id="@+id/fragmentAcademyProfile">
+
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -16,19 +18,19 @@
         tools:layout_editor_absoluteX="0dp">
 
         <LinearLayout
-            android:layout_width="367dp"
-            android:layout_height="183dp"
+            android:layout_width="372dp"
+            android:layout_height="181dp"
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
-            android:layout_marginLeft="24dp"
-            android:layout_marginTop="312dp"
+            android:layout_marginLeft="25dp"
+            android:layout_marginTop="319dp"
             android:background="@drawable/selector_fieldset_background"
             android:orientation="vertical"></LinearLayout>
 
     </RelativeLayout>
 
     <ImageView
-        android:id="@+id/imgServiceProfile"
+        android:id="@+id/imgAcademyProfile"
         android:layout_width="281dp"
         android:layout_height="257dp"
         android:layout_marginTop="20dp"
@@ -49,12 +51,12 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imgServiceProfile"
+        app:layout_constraintTop_toBottomOf="@+id/imgAcademyProfile"
         tools:visibility="visible">
 
 
         <TextView
-            android:id="@+id/txtServiceProfileName"
+            android:id="@+id/txtAcademyProfileName"
             android:layout_width="wrap_content"
             android:layout_height="60dp"
             android:text="Nombre:"
@@ -62,14 +64,14 @@
             android:textSize="20dp" />
 
         <TextView
-            android:id="@+id/txtServiceProfileID"
+            android:id="@+id/txtAcademyProfileID"
             android:layout_width="wrap_content"
             android:layout_height="60dp"
             android:text="Matricula:"
             android:textSize="20dp" />
 
         <TextView
-            android:id="@+id/txtServiceProfileJob"
+            android:id="@+id/txtAcademyProfileJob"
             android:layout_width="wrap_content"
             android:layout_height="60dp"
             android:text="Puesto:"

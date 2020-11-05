@@ -28,7 +28,7 @@ public class FragmentAcademyRequests extends Fragment implements View.OnClickLis
 
     //método en ciclo para la inicializacion y asignación de listener de los botones
     private void setData(View v){
-        btn = v.findViewById(R.id.btnRequestService);
+        btn = v.findViewById(R.id.btnRequestAcademy);
         btn.setText("17171372 Román Alejandro Gaspar Atondo");
         btn.setOnClickListener(this);
     }
@@ -36,7 +36,7 @@ public class FragmentAcademyRequests extends Fragment implements View.OnClickLis
     public void onClick (View v){
         Toast.makeText(getContext(),"se presionó el botón",Toast.LENGTH_LONG).show();
         switch (v.getId()){
-            case R.id.btnRequestService:{
+            case R.id.btnRequestAcademy:{
                 // código que abra el fragmento awaiting request
                 getFragmentManager().beginTransaction().replace(R.id.fragment_container, new FragmentServiceAwaitingRequests()).commit();
                 break;
