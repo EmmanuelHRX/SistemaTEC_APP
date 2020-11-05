@@ -60,19 +60,19 @@ public class AcademyActivity extends AppCompatActivity
 
         switch(item.getItemId()){
             case R.id.nav_academy_Profile :{
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_academy, new FragmentProfileService()).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_academy, new FragmentAcademyProfile()).commit();
                 break;
             }
             case R.id.nav_academy_Requests :{
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_academy, new FragmentServiceRequests()).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_academy, new FragmentAcademyRequests()).commit();
                 break;
             }
             case R.id.nav_academy_Requests_History :{
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_academy, new FragmentServiceRequestsHistory()).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_academy, new FragmentAcademyRequestsHistory()).commit();
                 break;
             }
             case R.id.nav_academy_Notifications :{
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_academy, new FragmentServiceNotification()).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_academy, new FragmentAcademyNotifications()).commit();
                 break;
             }
             case R.id.nav_academy_Configuration :{
