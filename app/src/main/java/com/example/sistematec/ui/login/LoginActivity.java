@@ -22,6 +22,7 @@ import android.widget.Toast;
 import com.example.sistematec.R;
 import com.example.sistematec.ui.login.Service.ActivityService;
 import com.example.sistematec.ui.login.Student.StudentActivity;
+import com.example.sistematec.ui.login.academy.AcademyActivity;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -128,6 +129,13 @@ public class LoginActivity extends AppCompatActivity {
                         Intent actService = new Intent(getApplicationContext(), ActivityService.class);
                         startActivity(actService);
                         Toast.makeText(getApplicationContext(), "abriendo perfil service", Toast.LENGTH_LONG).show();
+                        finish();
+                        break;
+                    }
+                    case "Ac": {
+                        Intent actAcademy = new Intent(getApplicationContext(), AcademyActivity.class);
+                        startActivity(actAcademy);
+                        Toast.makeText(getApplicationContext(), "abriendo perfil academia", Toast.LENGTH_LONG).show();
                         finish();
                         break;
                     }
