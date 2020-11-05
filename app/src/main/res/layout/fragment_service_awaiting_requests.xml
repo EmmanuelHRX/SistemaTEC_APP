@@ -11,7 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="44dp"
+        android:layout_marginTop="55dp"
         android:text="REVALIDACIÓN DE ASIGNATURAS"
         android:textColor="#000000"
         android:textSize="24sp"
@@ -88,8 +88,10 @@
     <ScrollView
         android:id="@+id/scrollView2"
         android:layout_width="0dp"
-        android:layout_height="316dp"
+        android:layout_height="0dp"
         android:layout_marginTop="20dp"
+        android:layout_marginBottom="100dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtRevalidateSubjects2">

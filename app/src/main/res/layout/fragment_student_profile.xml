@@ -1,67 +1,92 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.login.Student.FragmentStudentProfile">
 
-    <android.support.constraint.ConstraintLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+        android:layout_height="match_parent">
 
-        <ImageView
-            android:id="@+id/ImgAlumno"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:layout_marginStart="141dp"
-            android:layout_marginTop="86dp"
-            android:layout_marginEnd="142dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@android:color/holo_blue_dark" />
-
-        <TextView
-            android:id="@+id/txtAlumnoNombre"
-            android:layout_width="wrap_content"
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="100dp"
-            android:layout_marginTop="50dp"
-            android:text="TextView"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/ImgAlumno" />
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <TextView
-            android:id="@+id/txtAlumnoMatricula"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="100dp"
-            android:layout_marginTop="14dp"
-            android:text="TextView"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txtAlumnoNombre" />
+            <TextView
+                android:id="@+id/txtStudentGreeting"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="120dp"
+                android:layout_marginTop="55dp"
+                android:layout_marginEnd="120dp"
+                android:text="Hola, Alumno"
+                android:textSize="25dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/txtAlumnoCarrera"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="100dp"
-            android:layout_marginTop="14dp"
-            android:text="TextView"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txtAlumnoMatricula" />
+            <ImageView
+                android:id="@+id/ImgAlumno"
+                android:layout_width="281dp"
+                android:layout_height="257dp"
+                android:layout_marginStart="141dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="142dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txtStudentGreeting"
+                app:srcCompat="@mipmap/defaultprofilemen" />
 
-        <TextView
-            android:id="@+id/txtAlumnoSemestre"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="100dp"
-            android:layout_marginTop="14dp"
-            android:text="TextView"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txtAlumnoCarrera" />
-    </android.support.constraint.ConstraintLayout>
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="65dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginEnd="65dp"
+                android:background="@color/colorBackground"
+                android:orientation="vertical"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/ImgAlumno">
 
-</FrameLayout>
+                <TextView
+                    android:id="@+id/txtAlumnoNombre"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="10dp"
+                    android:text="TextView" />
+
+                <TextView
+                    android:id="@+id/txtAlumnoMatricula"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="14dp"
+                    android:text="TextView" />
+
+                <TextView
+                    android:id="@+id/txtAlumnoCarrera"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="14dp"
+                    android:text="TextView" />
+
+                <TextView
+                    android:id="@+id/txtAlumnoSemestre"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="14dp"
+                    android:text="TextView" />
+
+            </LinearLayout>
+
+        </android.support.constraint.ConstraintLayout>
+    </ScrollView>
+
+</android.support.constraint.ConstraintLayout>

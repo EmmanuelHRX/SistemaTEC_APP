@@ -24,7 +24,7 @@
         android:layout_marginTop="30dp"
         android:layout_marginEnd="30dp"
         android:layout_marginBottom="30dp"
-        android:background="#00FFFFFF"
+        android:background="@color/colorBackground"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -37,6 +37,8 @@
             android:id="@+id/txtServiceProfileName"
             android:layout_width="wrap_content"
             android:layout_height="60dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="0dp"
             android:text="Nombre:"
             android:textAlignment="viewStart"
             android:textSize="20dp" />
@@ -45,6 +47,8 @@
             android:id="@+id/txtServiceProfileID"
             android:layout_width="wrap_content"
             android:layout_height="60dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="0dp"
             android:text="Matricula:"
             android:textSize="20dp" />
 
@@ -52,6 +56,8 @@
             android:id="@+id/txtServiceProfileJob"
             android:layout_width="wrap_content"
             android:layout_height="60dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="0dp"
             android:text="Puesto:"
             android:textSize="20dp" />
     </LinearLayout>

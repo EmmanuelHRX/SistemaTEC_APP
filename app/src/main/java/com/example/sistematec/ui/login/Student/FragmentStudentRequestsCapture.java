@@ -4,9 +4,12 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import com.example.sistematec.R;
 
@@ -18,15 +21,20 @@ import com.example.sistematec.R;
  * Use the {@link FragmentStudentRequestsCapture#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class FragmentStudentRequestsCapture extends Fragment {
+public class FragmentStudentRequestsCapture extends Fragment implements View.OnClickListener {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
+
+
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    FragmentManager manager;
+    private Button btnStudentRequestsConfirm;
 
     private OnFragmentInteractionListener mListener;
 
@@ -65,7 +73,14 @@ public class FragmentStudentRequestsCapture extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_student_requests_capture, container, false);
+        View view = inflater.inflate(R.layout.fragment_student_requests_capture, container, false);
+
+        manager = getFragmentManager();
+
+        btnStudentRequestsConfirm = view.findViewById(R.id.btn_student_requests_confirm);
+        btnStudentRequestsConfirm.setOnClickListener(this);
+
+        return view;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -90,6 +105,19 @@ public class FragmentStudentRequestsCapture extends Fragment {
     public void onDetach() {
         super.onDetach();
         mListener = null;
+    }
+
+    @Override
+    public void onClick(View view) {
+        int id = view.getId();
+
+        if (id == R.id.btn_student_requests_confirm) {
+            FragmentStudentRequestsConfirmation frgStudentRCon = FragmentStudentRequestsConfirmation.newInstance("Nothing", "Nothing");
+            FragmentTransaction transaction = manager.beginTransaction();
+            transaction.replace(R.id.fragment_container_student, frgStudentRCon, "StudentRCon");
+            transaction.addToBackStack("addStudentRCon");
+            transaction.commit();
+        }
     }
 
     /**

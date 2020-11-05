@@ -5,6 +5,8 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,12 +24,16 @@ import com.example.sistematec.R;
 public class FragmentStudentRequests extends Fragment implements View.OnClickListener {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    FragmentManager manager;
+    FloatingActionButton floatbtnAddRequest;
 
     private OnFragmentInteractionListener mListener;
 
@@ -68,7 +74,9 @@ public class FragmentStudentRequests extends Fragment implements View.OnClickLis
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_student_requests, container, false);
 
-        FloatingActionButton floatbtnAddRequest = view.findViewById(R.id.floatbtn_student_requests_add);
+        manager = getFragmentManager();
+
+        floatbtnAddRequest = view.findViewById(R.id.floatbtn_student_requests_add);
         floatbtnAddRequest.setOnClickListener(this);
 
         return view;
@@ -103,10 +111,12 @@ public class FragmentStudentRequests extends Fragment implements View.OnClickLis
         int id = view.getId();
 
         if(id == R.id.floatbtn_student_requests_add) {
-            getActivity().getSupportFragmentManager().beginTransaction()
-                    .replace(((ViewGroup) getView().getParent())
-                            .getId(), FragmentStudentRequestsCapture.newInstance("Nothing", "Nothing"))
-                            .commit();
+            FragmentStudentRequestsCapture frgStudentRC = FragmentStudentRequestsCapture.newInstance("Nothing", "Nothing");
+            FragmentTransaction transaction = manager.beginTransaction();
+            transaction.replace(R.id.fragment_container_student, frgStudentRC, "StudentRC");
+            transaction.addToBackStack("addStudentRC");
+            transaction.commit();
+
         }
     }
 
