@@ -36,7 +36,7 @@ public class AcademyActivity extends AppCompatActivity
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
         if(savedInstanceState == null){
-            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new FragmentProfileService()).commit();
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_academy, new FragmentProfileService()).commit();
             navigationView.setCheckedItem(R.id.nav_academy_Profile);
         }
 
@@ -60,23 +60,23 @@ public class AcademyActivity extends AppCompatActivity
 
         switch(item.getItemId()){
             case R.id.nav_academy_Profile :{
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new FragmentProfileService()).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_academy, new FragmentProfileService()).commit();
                 break;
             }
             case R.id.nav_academy_Requests :{
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new FragmentServiceRequests()).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_academy, new FragmentServiceRequests()).commit();
                 break;
             }
             case R.id.nav_academy_Requests_History :{
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new FragmentServiceRequestsHistory()).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_academy, new FragmentServiceRequestsHistory()).commit();
                 break;
             }
             case R.id.nav_academy_Notifications :{
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new FragmentServiceNotification()).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_academy, new FragmentServiceNotification()).commit();
                 break;
             }
             case R.id.nav_academy_Configuration :{
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new FragmentAllSettings()).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_academy, new FragmentAllSettings()).commit();
                 break;
             }
             case R.id.nav_academy_Close_Session :{
