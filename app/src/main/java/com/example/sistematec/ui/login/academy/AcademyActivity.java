@@ -37,7 +37,7 @@ public class AcademyActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
         if(savedInstanceState == null){
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new FragmentProfileService()).commit();
-            navigationView.setCheckedItem(R.id.nav_My_Profile);
+            navigationView.setCheckedItem(R.id.nav_academy_Profile);
         }
 
     }
@@ -59,27 +59,27 @@ public class AcademyActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
 
         switch(item.getItemId()){
-            case R.id.nav_My_Profile :{
+            case R.id.nav_academy_Profile :{
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new FragmentProfileService()).commit();
                 break;
             }
-            case R.id.nav_Requests :{
+            case R.id.nav_academy_Requests :{
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new FragmentServiceRequests()).commit();
                 break;
             }
-            case R.id.nav_Requests_History :{
+            case R.id.nav_academy_Requests_History :{
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new FragmentServiceRequestsHistory()).commit();
                 break;
             }
-            case R.id.nav_Notifications :{
+            case R.id.nav_academy_Notifications :{
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new FragmentServiceNotification()).commit();
                 break;
             }
-            case R.id.nav_Configuration :{
+            case R.id.nav_academy_Configuration :{
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new FragmentAllSettings()).commit();
                 break;
             }
-            case R.id.nav_Close_Session :{
+            case R.id.nav_academy_Close_Session :{
                 Intent actLogin = new Intent(this, LoginActivity.class);
                 startActivity(actLogin);
                 finish();

@@ -5,28 +5,28 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_My_Profile"
+            android:id="@+id/nav_academy_Profile"
             android:title="Mi Perfil" />
         <item
-            android:id="@+id/nav_Requests"
+            android:id="@+id/nav_academy_Requests"
             android:title="Solicitudes" />
         <item
-            android:id="@+id/nav_Requests_History"
+            android:id="@+id/nav_academy_Requests_History"
             android:title="Historial de Solicitudes" />
         <item
-            android:id="@+id/nav_Notifications"
+            android:id="@+id/nav_academy_Notifications"
             android:title="Notificaciones" />
     </group>
 
     <item
-        android:id="@+id/nav_settings"
+        android:id="@+id/nav_academy_settings"
         android:title="Otros">
         <menu>
             <item
-                android:id="@+id/nav_Configuration"
+                android:id="@+id/nav_academy_Configuration"
                 android:title="Configuración" />
             <item
-                android:id="@+id/nav_Close_Session"
+                android:id="@+id/nav_academy_Close_Session"
                 android:title="Cerrar Sesión" />
         </menu>
     </item>
