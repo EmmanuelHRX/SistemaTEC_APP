@@ -12,15 +12,20 @@ import com.example.sistematec.R;
 
 public class FragmentStudentRequestsConfirmation extends Fragment {
 
+    private static final String ARG_CAREER = "career";
+
     private OnFragmentInteractionListener mListener;
+
+    private String career;
 
     public FragmentStudentRequestsConfirmation() {
         // Required empty public constructor
     }
 
-    public static FragmentStudentRequestsConfirmation newInstance() {
+    public static FragmentStudentRequestsConfirmation newInstance(String career) {
         FragmentStudentRequestsConfirmation fragment = new FragmentStudentRequestsConfirmation();
         Bundle args = new Bundle();
+        args.putString(ARG_CAREER, career);
         fragment.setArguments(args);
         return fragment;
     }
@@ -29,6 +34,7 @@ public class FragmentStudentRequestsConfirmation extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
+            career = getArguments().getString(ARG_CAREER);
         }
     }
 

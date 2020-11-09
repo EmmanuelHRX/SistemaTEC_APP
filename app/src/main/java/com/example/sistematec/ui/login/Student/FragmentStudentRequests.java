@@ -16,6 +16,8 @@ import com.example.sistematec.R;
 
 public class FragmentStudentRequests extends Fragment implements View.OnClickListener {
 
+    private static final String ARG_ID = "id";
+
     FragmentManager manager;
     FloatingActionButton floatbtnAddRequest;
     TextView txt_studentRequests_type;
@@ -24,6 +26,11 @@ public class FragmentStudentRequests extends Fragment implements View.OnClickLis
     Button btn_studentRequests_check;
     ImageView img_studentRequests_noReq;
 
+    private String id;
+
+    String requestType;
+    String requestFolio;
+
     private OnFragmentInteractionListener mListener;
 
     public FragmentStudentRequests() {
@@ -31,9 +38,10 @@ public class FragmentStudentRequests extends Fragment implements View.OnClickLis
     }
 
 
-    public static FragmentStudentRequests newInstance() {
+    public static FragmentStudentRequests newInstance(String id) {
         FragmentStudentRequests fragment = new FragmentStudentRequests();
         Bundle args = new Bundle();
+        args.putString(ARG_ID, id);
         fragment.setArguments(args);
         return fragment;
     }
@@ -42,6 +50,7 @@ public class FragmentStudentRequests extends Fragment implements View.OnClickLis
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
+            id = getArguments().getString(ARG_ID);
         }
     }
 
@@ -64,8 +73,19 @@ public class FragmentStudentRequests extends Fragment implements View.OnClickLis
         floatbtnAddRequest.setOnClickListener(this);
 
         showRequestExistence();
+        setRequestData();
 
         return view;
+    }
+
+    private void setRequestData() {
+        //BD request
+        requestType = "Convalidación de estudios";
+        requestFolio = "123";
+
+        txt_studentRequests_type.setText(requestType);
+        txt_studentRequests_folio.setText(requestFolio);
+
     }
 
     private void showRequestExistence() {
@@ -131,7 +151,7 @@ public class FragmentStudentRequests extends Fragment implements View.OnClickLis
         int id = view.getId();
 
         if (id == R.id.floatbtn_student_requests_add) {
-            FragmentStudentRequestsCapture frgStudentRC = FragmentStudentRequestsCapture.newInstance();
+            FragmentStudentRequestsCapture frgStudentRC = FragmentStudentRequestsCapture.newInstance(this.id);
             FragmentTransaction transaction = manager.beginTransaction();
             transaction.replace(R.id.fragment_container_student, frgStudentRC, "StudentRC");
             transaction.addToBackStack("addStudentRC");

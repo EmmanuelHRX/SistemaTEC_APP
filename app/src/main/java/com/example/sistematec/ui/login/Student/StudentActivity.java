@@ -94,6 +94,11 @@ public class StudentActivity extends AppCompatActivity
         id = "17171372";
         career = "Ing. Sistemas Computacionales";
         semester = "7vo :'c";
+
+        getIntent().putExtra("name", name);
+        getIntent().putExtra("id", id);
+        getIntent().putExtra("career", career);
+        getIntent().putExtra("semester", semester);
     }
 
     public void setNavHeaderText() {
@@ -120,7 +125,7 @@ public class StudentActivity extends AppCompatActivity
         } else if (id == R.id.nav_student_requests) {
             if (navigationView.getCheckedItem().getItemId() != R.id.nav_student_requests) {
                 getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.fragment_container_student, FragmentStudentRequests.newInstance())
+                        .replace(R.id.fragment_container_student, FragmentStudentRequests.newInstance(this.id))
                         .commit();
             }
 
