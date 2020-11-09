@@ -81,7 +81,7 @@ public class FragmentStudentRequestsCapture extends Fragment implements View.OnC
         int id = view.getId();
 
         if (id == R.id.btn_student_requests_confirm) {
-            FragmentStudentRequestsConfirmation frgStudentRCon = FragmentStudentRequestsConfirmation.newInstance("Nothing", "Nothing");
+            FragmentStudentRequestsConfirmation frgStudentRCon = FragmentStudentRequestsConfirmation.newInstance();
             FragmentTransaction transaction = manager.beginTransaction();
             transaction.replace(R.id.fragment_container_student, frgStudentRCon, "StudentRCon");
             transaction.addToBackStack("addStudentRCon");

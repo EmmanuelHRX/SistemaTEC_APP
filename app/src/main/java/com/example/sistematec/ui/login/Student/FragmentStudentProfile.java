@@ -13,17 +13,31 @@ import com.example.sistematec.R;
 
 public class FragmentStudentProfile extends Fragment {
 
+    private static final String ARG_NAME = "name";
+    private static final String ARG_ID = "id";
+    private static final String ARG_CAREER = "career";
+    private static final String ARG_SEMESTER = "semester";
+
     private OnFragmentInteractionListener mListener;
 
     private TextView txtAlumnoNombre, txtAlumnoMatricula, txtAlumnoCarrera, txtAlumnoSemestre;
+
+    private String name;
+    private String id;
+    private String career;
+    private String semester;
 
     public FragmentStudentProfile() {
         // Required empty public constructor
     }
 
-    public static FragmentStudentProfile newInstance() {
+    public static FragmentStudentProfile newInstance(String name, String id, String career, String semester) {
         FragmentStudentProfile fragment = new FragmentStudentProfile();
         Bundle args = new Bundle();
+        args.putString(ARG_NAME, name);
+        args.putString(ARG_ID, id);
+        args.putString(ARG_CAREER, career);
+        args.putString(ARG_SEMESTER, semester);
         fragment.setArguments(args);
         return fragment;
     }
@@ -31,6 +45,16 @@ public class FragmentStudentProfile extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (getArguments() != null) {
+            name = getArguments().getString(ARG_NAME);
+            id = getArguments().getString(ARG_ID);
+            career = getArguments().getString(ARG_CAREER);
+            semester = getArguments().getString(ARG_SEMESTER);
+        }
+
+
+
+
     }
 
     @Override
@@ -83,10 +107,10 @@ public class FragmentStudentProfile extends Fragment {
 
         //TIPO_USUARIO MÉTODO DE LLENADO
 
-        this.txtAlumnoNombre.setText("Nombre: Juan Emmanuel López Laguna");
-        this.txtAlumnoMatricula.setText("Matrícula: 17171372");
-        this.txtAlumnoCarrera.setText("Carrera: Ing. Sistemas Computacionales");
-        this.txtAlumnoSemestre.setText("Semestre: 12vo :'c");
+        this.txtAlumnoNombre.setText("Nombre: " + name);
+        this.txtAlumnoMatricula.setText("Matrícula: " + id);
+        this.txtAlumnoCarrera.setText("Carrera: " + career);
+        this.txtAlumnoSemestre.setText("Semestre: " + semester);
     }
 
 

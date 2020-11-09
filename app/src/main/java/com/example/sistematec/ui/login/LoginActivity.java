@@ -120,6 +120,7 @@ public class LoginActivity extends AppCompatActivity {
                 switch(tipoUsuario){
                     case "Al":{
                         Intent actInicioUsuario = new Intent(getApplicationContext(), StudentActivity.class);
+                        actInicioUsuario.putExtra("userEmail", tipoUsuario);
                         startActivity(actInicioUsuario);
                         finish();
                         break;

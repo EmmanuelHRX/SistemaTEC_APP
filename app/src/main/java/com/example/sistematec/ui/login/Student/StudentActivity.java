@@ -24,8 +24,18 @@ public class StudentActivity extends AppCompatActivity
         FragmentStudentRequestsNotifications.OnFragmentInteractionListener,
         FragmentStudentRequestsStatus.OnFragmentInteractionListener{
 
+    // Necessary data
+    private String userEmail;
+    private String name;
+    private String id;
+    private String career;
+    private String semester;
+
+    //
+
+
     private TextView txt_navHeaderStudent_name;
-    private TextView txt_navHeaderStudent_name;
+    private TextView txt_navHeaderStudent_id;
 
 
 
@@ -47,15 +57,20 @@ public class StudentActivity extends AppCompatActivity
         drawer.addDrawerListener(toggle);
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
+        //Components Init///////////////////////////////////////////////////////////////////////////
+
+        txt_navHeaderStudent_name = navigationView.getHeaderView(0).findViewById(R.id.txt_navHeaderStudent_name);
+        txt_navHeaderStudent_id = navigationView.getHeaderView(0).findViewById(R.id.txt_navHeaderStudent_id);
+
         ////////////////////////////////////////////////////////////////////////////////////////////
 
-
-
+        setNecessaryData();
+        setNavHeaderText();
 
 
         if(savedInstanceState == null){
             getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.fragment_container_student, FragmentStudentProfile.newInstance()).commit();
+                    .replace(R.id.fragment_container_student, FragmentStudentProfile.newInstance(name, id, career, semester)).commit();
             navigationView.setCheckedItem(R.id.nav_student_profile);
         }
 
@@ -71,8 +86,21 @@ public class StudentActivity extends AppCompatActivity
         }
     }
 
-    public void setNavHeaderText() {
+    public void setNecessaryData() {
 
+        //BD data request
+        userEmail = getIntent().getStringExtra("userEmail");
+        name = "Juan Emmanuel López Laguna";
+        id = "17171372";
+        career = "Ing. Sistemas Computacionales";
+        semester = "7vo :'c";
+    }
+
+    public void setNavHeaderText() {
+        //Recolección de datos de BD
+
+        txt_navHeaderStudent_name.setText(name);
+        txt_navHeaderStudent_id.setText(userEmail);
     }
 
     @SuppressWarnings("StatementWithEmptyBody")
@@ -85,7 +113,7 @@ public class StudentActivity extends AppCompatActivity
         if (id == R.id.nav_student_profile) {
             if (navigationView.getCheckedItem().getItemId() != R.id.nav_student_profile) {
                 getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.fragment_container_student, FragmentStudentProfile.newInstance())
+                        .replace(R.id.fragment_container_student, FragmentStudentProfile.newInstance(name, this.id, career, semester))
                         .commit();
             }
 

@@ -82,7 +82,7 @@ public class FragmentStudentRequests extends Fragment implements View.OnClickLis
         int id = view.getId();
 
         if(id == R.id.floatbtn_student_requests_add) {
-            FragmentStudentRequestsCapture frgStudentRC = FragmentStudentRequestsCapture.newInstance("Nothing", "Nothing");
+            FragmentStudentRequestsCapture frgStudentRC = FragmentStudentRequestsCapture.newInstance();
             FragmentTransaction transaction = manager.beginTransaction();
             transaction.replace(R.id.fragment_container_student, frgStudentRC, "StudentRC");
             transaction.addToBackStack("addStudentRC");
