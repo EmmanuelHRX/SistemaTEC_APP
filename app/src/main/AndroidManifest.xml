@@ -10,6 +10,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".ui.login.academy.AcademyActivity"
+            android:label="@string/title_activity_academy"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
             android:name=".ui.login.Coordinator.CoordinatorActivity"
             android:label="@string/title_activity_coordinator"
             android:theme="@style/AppTheme.NoActionBar"></activity>

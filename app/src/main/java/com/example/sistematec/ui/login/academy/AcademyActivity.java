@@ -36,7 +36,7 @@ public class AcademyActivity extends AppCompatActivity
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
         if(savedInstanceState == null){
-            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_academy, new FragmentProfileService()).commit();
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_academy, new FragmentAcademyProfile()).commit();
             navigationView.setCheckedItem(R.id.nav_academy_Profile);
         }
 
