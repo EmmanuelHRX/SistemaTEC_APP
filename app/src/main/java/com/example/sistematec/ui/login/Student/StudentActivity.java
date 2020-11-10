@@ -3,6 +3,8 @@ package com.example.sistematec.ui.login.Student;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.view.MenuItem;
@@ -18,11 +20,14 @@ import android.view.TextureView;
 import android.widget.TextView;
 
 public class StudentActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, FragmentStudentProfile.OnFragmentInteractionListener,
+        implements NavigationView.OnNavigationItemSelectedListener, FragmentManager.OnBackStackChangedListener,
+        FragmentStudentProfile.OnFragmentInteractionListener,
         FragmentStudentRequests.OnFragmentInteractionListener, FragmentStudentRequestsCapture.OnFragmentInteractionListener,
         FragmentStudentRequestsConfirmation.OnFragmentInteractionListener,
         FragmentStudentRequestsNotifications.OnFragmentInteractionListener,
         FragmentStudentRequestsStatus.OnFragmentInteractionListener{
+
+    FragmentManager manager;
 
     // Necessary data
     private String userEmail;
@@ -33,7 +38,7 @@ public class StudentActivity extends AppCompatActivity
 
     //
 
-
+    boolean checkOnBackstackchanges;
     private TextView txt_navHeaderStudent_name;
     private TextView txt_navHeaderStudent_id;
 
@@ -58,10 +63,14 @@ public class StudentActivity extends AppCompatActivity
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
         //Components Init///////////////////////////////////////////////////////////////////////////
+        manager = getSupportFragmentManager();
+        manager.addOnBackStackChangedListener(this);
 
         txt_navHeaderStudent_name = navigationView.getHeaderView(0).findViewById(R.id.txt_navHeaderStudent_name);
         txt_navHeaderStudent_id = navigationView.getHeaderView(0).findViewById(R.id.txt_navHeaderStudent_id);
 
+        ////////////////////////////////////////////////////////////////////////////////////////////
+        checkOnBackstackchanges = true;
         ////////////////////////////////////////////////////////////////////////////////////////////
 
         setNecessaryData();
@@ -69,10 +78,14 @@ public class StudentActivity extends AppCompatActivity
 
 
         if(savedInstanceState == null){
+
             getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.fragment_container_student, FragmentStudentProfile.newInstance(name, id, career, semester)).commit();
+                    .replace(R.id.fragment_container_student, FragmentStudentProfile.newInstance(name, this.id, career, semester))
+                    .commit();
+
             navigationView.setCheckedItem(R.id.nav_student_profile);
         }
+
 
     }
 
@@ -82,6 +95,9 @@ public class StudentActivity extends AppCompatActivity
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
+            if (manager.getBackStackEntryCount() == 1) {
+                navigationView.setCheckedItem(R.id.nav_student_profile);
+            }
             super.onBackPressed();
         }
     }
@@ -117,6 +133,9 @@ public class StudentActivity extends AppCompatActivity
 
         if (id == R.id.nav_student_profile) {
             if (navigationView.getCheckedItem().getItemId() != R.id.nav_student_profile) {
+
+                manager.popBackStack(0, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+
                 getSupportFragmentManager().beginTransaction()
                         .replace(R.id.fragment_container_student, FragmentStudentProfile.newInstance(name, this.id, career, semester))
                         .commit();
@@ -124,26 +143,58 @@ public class StudentActivity extends AppCompatActivity
 
         } else if (id == R.id.nav_student_requests) {
             if (navigationView.getCheckedItem().getItemId() != R.id.nav_student_requests) {
-                getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.fragment_container_student, FragmentStudentRequests.newInstance(this.id))
-                        .commit();
+                System.out.println("BEFORE--------> " + manager.getBackStackEntryCount());
+                checkOnBackstackchanges = false;
+                manager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+                checkOnBackstackchanges = true;
+                System.out.println("AFTER--------> " + manager.getBackStackEntryCount());
+
+
+                FragmentStudentRequests frgStudentR = FragmentStudentRequests.newInstance(this.id);
+                FragmentTransaction transaction = manager.beginTransaction();
+                transaction.replace(R.id.fragment_container_student, frgStudentR, "StudentR");
+                transaction.addToBackStack("addStudentR");
+                transaction.commit();
+
             }
 
         } else if (id == R.id.nav_student_notifications) {
             if (navigationView.getCheckedItem().getItemId() != R.id.nav_student_notifications) {
-                getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.fragment_container_student, FragmentStudentRequestsNotifications.newInstance())
-                        .commit();
+                System.out.println("BEFORE--------> " + manager.getBackStackEntryCount());
+                checkOnBackstackchanges = false;
+                manager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+                checkOnBackstackchanges = true;
+                System.out.println("AFTER--------> " + manager.getBackStackEntryCount());
+
+
+                FragmentStudentRequestsNotifications frgStudentN = FragmentStudentRequestsNotifications.newInstance();
+                FragmentTransaction transaction = manager.beginTransaction();
+                transaction.replace(R.id.fragment_container_student, frgStudentN, "StudentN");
+                transaction.addToBackStack("addStudentN");
+                transaction.commit();
+
             }
 
         } else if (id == R.id.nav_student_settings) {
             if (navigationView.getCheckedItem().getItemId() != R.id.nav_student_settings) {
-                getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.fragment_container_student, new FragmentAllSettings()).commit();
+                System.out.println("BEFORE--------> " + manager.getBackStackEntryCount());
+                checkOnBackstackchanges = false;
+                manager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+                checkOnBackstackchanges = true;
+                System.out.println("AFTER--------> " + manager.getBackStackEntryCount());
+
+
+                FragmentAllSettings frgStudentSettings = new FragmentAllSettings();
+                FragmentTransaction transaction = manager.beginTransaction();
+                transaction.replace(R.id.fragment_container_student, frgStudentSettings, "StudentSettings");
+                transaction.addToBackStack("addStudentSettings");
+                transaction.commit();
+
             }
 
         } else if (id == R.id.nav_student_logout) {
             if (navigationView.getCheckedItem().getItemId() != R.id.nav_student_logout) {
+                manager.popBackStack(0, FragmentManager.POP_BACK_STACK_INCLUSIVE);
                 Intent actLogin = new Intent(this, LoginActivity.class);
                 startActivity(actLogin);
                 finish();
@@ -159,5 +210,12 @@ public class StudentActivity extends AppCompatActivity
     @Override
     public void onFragmentInteraction(Uri uri) {
 
+    }
+
+    @Override
+    public void onBackStackChanged() {
+        if (manager.getBackStackEntryCount() == 0 && checkOnBackstackchanges) {
+            navigationView.setCheckedItem(R.id.nav_student_profile);
+        }
     }
 }

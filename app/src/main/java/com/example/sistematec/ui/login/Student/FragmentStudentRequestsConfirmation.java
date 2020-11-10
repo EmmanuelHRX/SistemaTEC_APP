@@ -1,22 +1,33 @@
 package com.example.sistematec.ui.login.Student;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.example.sistematec.R;
 
-public class FragmentStudentRequestsConfirmation extends Fragment {
+public class FragmentStudentRequestsConfirmation extends Fragment implements View.OnClickListener {
 
     private static final String ARG_CAREER = "career";
 
     private OnFragmentInteractionListener mListener;
 
     private String career;
+
+    ImageView img_studentReqConfirmation_confirmation;
+    TextView txt_studentReqConfirmation_message;
+    Button btn_studentReqConfirmation_back;
 
     public FragmentStudentRequestsConfirmation() {
         // Required empty public constructor
@@ -42,7 +53,38 @@ public class FragmentStudentRequestsConfirmation extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_student_requests_confirmation, container, false);
+        View view = inflater.inflate(R.layout.fragment_student_requests_confirmation, container, false);
+
+        img_studentReqConfirmation_confirmation = view.findViewById(R.id.img_studentReqConfirmation_confirmation);
+        txt_studentReqConfirmation_message = view.findViewById(R.id.txt_studentReqConfirmation_message);
+        btn_studentReqConfirmation_back = view.findViewById(R.id.btn_studentReqConfirmation_back);
+        btn_studentReqConfirmation_back.setOnClickListener(this);
+
+        setConfirmation();
+
+        return view;
+    }
+
+    private void setConfirmation() {
+        if (checkInfo()) {
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                img_studentReqConfirmation_confirmation.setImageDrawable(getResources().getDrawable(R.drawable.ic_menu_send,
+                        getActivity().getApplicationContext().getTheme()));
+            } else {
+                img_studentReqConfirmation_confirmation.setImageDrawable(getResources().getDrawable(R.drawable.ic_menu_send));
+            }
+            txt_studentReqConfirmation_message.setText("Tu solicitud ha sido enviada correctamente");
+            return;
+        }
+        txt_studentReqConfirmation_message.setText("No cumples con los requisitos para convalidación." +
+                                                    "\nTu solicitud ha sido rechazada");
+    }
+
+    private boolean checkInfo() {
+        //check student info
+
+        return false;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -67,6 +109,17 @@ public class FragmentStudentRequestsConfirmation extends Fragment {
     public void onDetach() {
         super.onDetach();
         mListener = null;
+    }
+
+    @Override
+    public void onClick(View view) {
+        int id = view.getId();
+
+        if (id == R.id.btn_studentReqConfirmation_back){
+            FragmentManager manager = getActivity().getSupportFragmentManager();
+            manager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+
+        }
     }
 
     public interface OnFragmentInteractionListener {
