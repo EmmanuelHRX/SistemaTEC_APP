@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,7 +13,7 @@ import android.widget.TextView;
 
 import com.example.sistematec.R;
 
-public class FragmentServiceRequestsHistoryExtend extends Fragment {
+public class FragmentServiceRequestsHistoryExtend extends Fragment{
 
     TextView txtSRHE_StudentDate, txtSRHE_StudentName, txtSRHE_StudentID, txtSRHE_StudentOldSyllabus
             , txtSRHE_StudentNewSyllabus;
@@ -37,4 +39,5 @@ public class FragmentServiceRequestsHistoryExtend extends Fragment {
         txtSRHE_StudentNewSyllabus.setText("Plan de Estudios Destino: IIND-2010-227");
 
     }
+
 }

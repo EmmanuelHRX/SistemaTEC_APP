@@ -33,27 +33,29 @@ public class FragmentServiceRequestsHistory extends Fragment {
         tabLayout = v.findViewById(R.id.tablayoutSRH);
         tabItemSRH_validate = v.findViewById(R.id.tabItemSRH_validate);
         tabItemSHR_deny = v.findViewById(R.id.tabItemSHR_deny);
-        pagerAdapter = new PagerService(getFragmentManager(),tabLayout.getTabCount());
-        viewPager.setAdapter(pagerAdapter);
-        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
-            @Override
-            public void onTabSelected(TabLayout.Tab tab) {
-                viewPager.setCurrentItem(tab.getPosition());
 
-            }
+            pagerAdapter = new PagerService(getFragmentManager(),tabLayout.getTabCount());
+            viewPager.setAdapter(pagerAdapter);
+            tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+                @Override
+                public void onTabSelected(TabLayout.Tab tab) {
+                    viewPager.setCurrentItem(tab.getPosition());
 
-            @Override
-            public void onTabUnselected(TabLayout.Tab tab) {
+                }
 
-            }
+                @Override
+                public void onTabUnselected(TabLayout.Tab tab) {
 
-            @Override
-            public void onTabReselected(TabLayout.Tab tab) {
+                }
 
-            }
+                @Override
+                public void onTabReselected(TabLayout.Tab tab) {
+
+                }
 
 
-        });
-        viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
-    }
+            });
+            viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
+        }
+
 }

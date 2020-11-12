@@ -2,6 +2,7 @@ package com.example.sistematec.ui.login.Service;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.view.MenuItem;
@@ -33,7 +34,7 @@ public class ActivityService extends AppCompatActivity
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
         if(savedInstanceState == null){
-            getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, new FragmentServiceProfile()).commit();
+            getSupportFragmentManager().beginTransaction().add(R.id.fragment_container_service, new FragmentServiceProfile()).commit();
             navigationView.setCheckedItem(R.id.nav_My_Profile);
         }
 
@@ -42,9 +43,19 @@ public class ActivityService extends AppCompatActivity
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = findViewById(R.id.drawer_layout_service);
+
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
+            /*if(getSupportFragmentManager().getBackStackEntryCount() == 1){
+                if(getSupportFragmentManager().getBackStackEntryAt(0).getName().equals("addFragmentServiceRequestsHistoryExtend")){
+
+                    getSupportFragmentManager().popBackStack(0, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_service, new FragmentServiceRequestsHistory()).commit();
+                    return;
+                }
+
+            }*/
             super.onBackPressed();
         }
     }
@@ -57,23 +68,23 @@ public class ActivityService extends AppCompatActivity
 
         switch(item.getItemId()){
             case R.id.nav_My_Profile :{
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new FragmentServiceProfile()).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_service, new FragmentServiceProfile()).commit();
                 break;
             }
             case R.id.nav_Requests :{
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new FragmentServiceRequests()).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_service, new FragmentServiceRequests()).commit();
                 break;
             }
             case R.id.nav_Requests_History :{
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new FragmentServiceRequestsHistory()).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_service, new FragmentServiceRequestsHistory()).commit();
                 break;
             }
             case R.id.nav_Notifications :{
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new FragmentServiceNotification()).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_service, new FragmentServiceNotification()).commit();
                 break;
             }
             case R.id.nav_Configuration :{
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new FragmentAllSettings()).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_service, new FragmentAllSettings()).commit();
                 break;
             }
             case R.id.nav_Close_Session :{

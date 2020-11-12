@@ -10,7 +10,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.Toast;
 
 import com.example.sistematec.R;
 
@@ -43,7 +42,7 @@ public class FragmentServiceRequests extends Fragment implements View.OnClickLis
                 // código que abra el fragmento awaiting request
                 FragmentServiceAwaitingRequests FSAR = new FragmentServiceAwaitingRequests();
                 FragmentTransaction transaction = manager.beginTransaction();
-                transaction.replace(R.id.fragment_container,FSAR,"FragmentServiceAwaitingRequests");
+                transaction.replace(R.id.fragment_container_service,FSAR,"FragmentServiceAwaitingRequests");
                 transaction.addToBackStack("addFragmentServiceAwaitingRequests");
                 transaction.commit();
                 break;
