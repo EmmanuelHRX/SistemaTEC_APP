@@ -33,7 +33,7 @@ public class ActivityService extends AppCompatActivity
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
         if(savedInstanceState == null){
-            getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, new FragmentProfileService()).commit();
+            getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, new FragmentServiceProfile()).commit();
             navigationView.setCheckedItem(R.id.nav_My_Profile);
         }
 
@@ -57,7 +57,7 @@ public class ActivityService extends AppCompatActivity
 
         switch(item.getItemId()){
             case R.id.nav_My_Profile :{
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new FragmentProfileService()).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new FragmentServiceProfile()).commit();
                 break;
             }
             case R.id.nav_Requests :{
