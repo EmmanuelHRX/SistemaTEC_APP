@@ -34,7 +34,7 @@ public class FragmentAcademyAwaitingRequests extends Fragment implements View.On
         txtAcademyAwaitingRequestsStudentNewSyllabusAR = v.findViewById(R.id.txtAcademyAwaitingRequestsStudentNewSyllabusAR);
 
         btnAcademyAwaitingRequestsValidateAR = v.findViewById(R.id.btnAcademyAwaitingRequestsValidateAR);
-        btnAcademyAwaitingRequestsDenyAR = v.findViewById(R.id.btnAcademyAwaitingRequestsDenyAR);
+        btnAcademyAwaitingRequestsDenyAR = v.findViewById(R.id.btnAcademyAwaitingRequestsValidateAR);
 
         btnAcademyAwaitingRequestsValidateAR.setOnClickListener(this);
         btnAcademyAwaitingRequestsDenyAR.setOnClickListener(this);
@@ -50,14 +50,16 @@ public class FragmentAcademyAwaitingRequests extends Fragment implements View.On
     @Override
     public void onClick(View view) {
         //logica de aceptar o rechazar solicitud
+        final int a = R.id.btnAcademyAwaitingRequestsValidateAR;
+        final int b = R.id.btnAcademyAwaitingRequestsValidateAR;
         switch (view.getId()){
-            case R.id.btnAcademyAwaitingRequestsValidateAR:{
+            case 1:{
                 Toast.makeText(getContext(),"Solicitud Aceptada",Toast.LENGTH_SHORT).show();
                 getActivity().getSupportFragmentManager().popBackStack();
                 //lógica para borrar la solicitud pendiente y actualizar el historial de solicitudes atendidas
                 break;
             }
-            case R.id.btnAcademyAwaitingRequestsDenyAR:{
+            case b:{
                 Toast.makeText(getContext(),"Solicitud Rechazada",Toast.LENGTH_SHORT).show();
                 getActivity().getSupportFragmentManager().popBackStack();
                 //lógica para borrar la solicitud pendiente y actualizar el historial de solicitudes atendidas
