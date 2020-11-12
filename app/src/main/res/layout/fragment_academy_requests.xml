@@ -52,7 +52,8 @@
                 android:id="@+id/btnRequestAcademy"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#F8EEEEEE" />
+                android:background="#F8EEEEEE"
+                android:textColor="#FFFFFF" />
         </LinearLayout>
     </ScrollView>
 

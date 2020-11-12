@@ -23,6 +23,7 @@ import com.example.sistematec.R;
 import com.example.sistematec.ui.login.Service.ActivityService;
 import com.example.sistematec.ui.login.Student.StudentActivity;
 import com.example.sistematec.ui.login.academy.AcademyActivity;
+import com.example.sistematec.ui.login.coordinator.CoordinatorActivity;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -137,6 +138,13 @@ public class LoginActivity extends AppCompatActivity {
                         Intent actAcademy = new Intent(getApplicationContext(), AcademyActivity.class);
                         startActivity(actAcademy);
                         Toast.makeText(getApplicationContext(), "abriendo perfil academia", Toast.LENGTH_LONG).show();
+                        finish();
+                        break;
+                    }
+                    case "Co":{
+                        Intent actCoordinator = new Intent(getApplicationContext(), CoordinatorActivity.class);
+                        startActivity(actCoordinator);
+                        Toast.makeText(getApplicationContext(), "abriendo perfil coordinador", Toast.LENGTH_LONG).show();
                         finish();
                         break;
                     }

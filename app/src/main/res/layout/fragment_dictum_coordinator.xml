@@ -1,14 +1,90 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.login.coordinator.FragmentDictumCoordinator">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="match_parent">
 
+        <Button
+            android:id="@+id/btnCheckcCoordinatorRequest2"
+            android:layout_width="165dp"
+            android:layout_height="67dp"
+            android:layout_marginStart="123dp"
+            android:layout_marginTop="33dp"
+            android:layout_marginEnd="123dp"
+            android:background="@color/colorAccent"
+            android:text="Revisar"
+            android:textColor="#FFFFFF"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/viewpager" />
+
+        <android.support.design.widget.TabLayout
+            android:id="@+id/TabLayout"
+            android:layout_width="408dp"
+            android:layout_height="63dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.022"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.102"
+            app:tabIndicatorColor="@color/colorAccent"
+            app:tabRippleColor="@color/cardview_dark_background">
+
+            <android.support.design.widget.TabItem
+                android:id="@+id/TabitemPendingDictumCoordinator"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Pendientes" />
+
+            <android.support.design.widget.TabItem
+                android:id="@+id/TabitemAcceptedDictumCoordinator"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Aceptadas" />
+
+            <android.support.design.widget.TabItem
+                android:id="@+id/TabitemRejectedDictumCoordinator"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Rechazadas" />
+        </android.support.design.widget.TabLayout>
+
+        <!-- activity_screen_slide.xml -->
+        <android.support.v4.view.ViewPager
+            android:id="@+id/viewpager"
+            android:layout_width="411dp"
+            android:layout_height="452dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/TabLayout" >
+
+            <android.support.design.widget.NavigationView
+                android:id="@+id/NavigationView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </android.support.v4.view.ViewPager>
+
+        <TextView
+            android:id="@+id/txtDictumCoordinator"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Dictamenes Técnicos"
+            android:textColor="#000000"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/TabLayout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.104"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.571" />
+
+    </android.support.constraint.ConstraintLayout>
 </FrameLayout>
