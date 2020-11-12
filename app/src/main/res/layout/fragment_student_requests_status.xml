@@ -12,15 +12,156 @@
         android:layout_height="match_parent">
 
         <TextView
-            android:layout_width="191dp"
-            android:layout_height="52dp"
-            android:layout_marginStart="110dp"
-            android:layout_marginTop="290dp"
-            android:layout_marginEnd="110dp"
-            android:text="Estado de la solicitud"
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="55dp"
+            android:text="Proceso de tu solicitud"
+            android:textAlignment="center"
+            android:textColor="#000000"
+            android:textSize="30dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/img_studentReqStatus_info1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="52dp"
+            android:layout_marginTop="30dp"
+            android:src="@android:drawable/ic_menu_recent_history"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+        <TextView
+            android:id="@+id/txt_studentReqStatus_info1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:maxWidth="270dp"
+            android:text="Solicitud mandada a revisión"
+            android:textSize="20sp"
+            app:layout_constraintStart_toEndOf="@+id/img_studentReqStatus_info1"
+            app:layout_constraintTop_toTopOf="@+id/img_studentReqStatus_info1" />
+
+        <ImageView
+            android:id="@+id/img_studentReqStatus_info2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="52dp"
+            android:layout_marginTop="20dp"
+            android:src="@android:drawable/ic_menu_recent_history"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txt_studentReqStatus_info1" />
+
+        <TextView
+            android:id="@+id/txt_studentReqStatus_info2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:maxWidth="270dp"
+            android:text="Requisitos verificados por el coordinador"
+            android:textSize="20sp"
+            app:layout_constraintStart_toEndOf="@+id/img_studentReqStatus_info2"
+            app:layout_constraintTop_toTopOf="@+id/img_studentReqStatus_info2" />
+
+        <ImageView
+            android:id="@+id/img_studentReqStatus_info3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="52dp"
+            android:layout_marginTop="20dp"
+            android:src="@android:drawable/ic_menu_recent_history"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txt_studentReqStatus_info2" />
+
+        <TextView
+            android:id="@+id/txt_studentReqStatus_info3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:maxWidth="270dp"
+            android:text="La Academia ha realizado tu análisis académico"
+            android:textSize="20sp"
+            app:layout_constraintStart_toEndOf="@+id/img_studentReqStatus_info3"
+            app:layout_constraintTop_toTopOf="@+id/img_studentReqStatus_info3" />
+
+        <ImageView
+            android:id="@+id/img_studentReqStatus_info4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="52dp"
+            android:layout_marginTop="20dp"
+            android:src="@android:drawable/ic_menu_recent_history"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txt_studentReqStatus_info3" />
+
+        <TextView
+            android:id="@+id/txt_studentReqStatus_info4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:maxWidth="270dp"
+            android:text="Dictámen académico"
+            android:textSize="20sp"
+            app:layout_constraintStart_toEndOf="@+id/img_studentReqStatus_info4"
+            app:layout_constraintTop_toTopOf="@+id/img_studentReqStatus_info4" />
+
+        <ImageView
+            android:id="@+id/img_studentReqStatus_info5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="52dp"
+            android:layout_marginTop="20dp"
+            android:src="@android:drawable/ic_menu_recent_history"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txt_studentReqStatus_info4" />
+
+        <TextView
+            android:id="@+id/txt_studentReqStatus_info5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:maxWidth="270dp"
+            android:text="Revalidación de materias"
+            android:textSize="20sp"
+            app:layout_constraintStart_toEndOf="@+id/img_studentReqStatus_info5"
+            app:layout_constraintTop_toTopOf="@+id/img_studentReqStatus_info5" />
+
+        <ImageView
+            android:id="@+id/img_studentReqStatus_info6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="52dp"
+            android:layout_marginTop="20dp"
+            android:src="@android:drawable/ic_menu_recent_history"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txt_studentReqStatus_info5" />
+
+        <TextView
+            android:id="@+id/txt_studentReqStatus_info6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:maxWidth="270dp"
+            android:text="Revalidación de materias realizada correctamente"
+            android:textSize="20sp"
+            app:layout_constraintStart_toEndOf="@+id/img_studentReqStatus_info6"
+            app:layout_constraintTop_toTopOf="@+id/img_studentReqStatus_info6" />
+
+        <Button
+            android:id="@+id/btn_studentReqStatus_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:background="@color/colorPrimary"
+            android:text="Volver"
+            android:textColor="#FFFFFF"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txt_studentReqStatus_info6" />
+
     </android.support.constraint.ConstraintLayout>
 
 </FrameLayout>

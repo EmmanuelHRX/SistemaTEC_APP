@@ -25,6 +25,7 @@
     <string name="menu_send">Send</string>
     <string name="title_activity_act_ajustes">actAjustes</string>
     <string name="title_activity_settings2">Settings</string>
+    <string name="title_activity_academy">AcademyActivity</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

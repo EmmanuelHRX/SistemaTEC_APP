@@ -10,10 +10,6 @@ import android.support.v4.widget.DrawerLayout;
 import com.example.sistematec.R;
 import com.example.sistematec.ui.login.FragmentAllSettings;
 import com.example.sistematec.ui.login.LoginActivity;
-import com.example.sistematec.ui.login.Service.FragmentProfileService;
-import com.example.sistematec.ui.login.Service.FragmentServiceNotification;
-import com.example.sistematec.ui.login.Service.FragmentServiceRequests;
-import com.example.sistematec.ui.login.Service.FragmentServiceRequestsHistory;
 
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -36,7 +32,7 @@ public class AcademyActivity extends AppCompatActivity
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
         if(savedInstanceState == null){
-            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_academy, new FragmentProfileService()).commit();
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_academy, new FragmentAcademyProfile()).commit();
             navigationView.setCheckedItem(R.id.nav_academy_Profile);
         }
 

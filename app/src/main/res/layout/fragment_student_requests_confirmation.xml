@@ -12,16 +12,50 @@
         android:layout_height="match_parent">
 
         <TextView
-            android:layout_width="314dp"
-            android:layout_height="89dp"
-            android:layout_marginStart="69dp"
-            android:layout_marginTop="292dp"
-            android:layout_marginEnd="69dp"
+            android:id="@+id/txt_studentReqConfirmation_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="55dp"
             android:text="Confirmación de solicitud"
+            android:textColor="#000000"
             android:textSize="30dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/img_studentReqConfirmation_confirmation"
+            android:layout_width="95dp"
+            android:layout_height="92dp"
+            android:layout_marginTop="100dp"
+            android:src="@android:drawable/ic_delete"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txt_studentReqConfirmation_title" />
+
+        <TextView
+            android:id="@+id/txt_studentReqConfirmation_message"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:text="TextView"
+            android:textAlignment="center"
+            android:textSize="24sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/img_studentReqConfirmation_confirmation" />
+
+        <Button
+            android:id="@+id/btn_studentReqConfirmation_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="120dp"
+            android:background="@color/colorPrimary"
+            android:text="Mi perfil"
+            android:textColor="#FFFFFF"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
     </android.support.constraint.ConstraintLayout>
 
 </FrameLayout>

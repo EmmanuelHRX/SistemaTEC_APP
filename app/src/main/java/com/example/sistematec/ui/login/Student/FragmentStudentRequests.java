@@ -10,30 +10,26 @@ import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.*;
 
 import com.example.sistematec.R;
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link FragmentStudentRequests.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link FragmentStudentRequests#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class FragmentStudentRequests extends Fragment implements View.OnClickListener {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    private static final String ARG_ID = "id";
 
     FragmentManager manager;
     FloatingActionButton floatbtnAddRequest;
+    TextView txt_studentRequests_type;
+    TextView txt_studentRequests_folio;
+    TextView txt_studentRequests_noReqWarn;
+    Button btn_studentRequests_check;
+    ImageView img_studentRequests_noReq;
+
+    private String id;
+
+    String requestType;
+    String requestFolio;
 
     private OnFragmentInteractionListener mListener;
 
@@ -41,20 +37,11 @@ public class FragmentStudentRequests extends Fragment implements View.OnClickLis
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment FragmentStudentRequests.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static FragmentStudentRequests newInstance(String param1, String param2) {
+
+    public static FragmentStudentRequests newInstance(String id) {
         FragmentStudentRequests fragment = new FragmentStudentRequests();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
+        args.putString(ARG_ID, id);
         fragment.setArguments(args);
         return fragment;
     }
@@ -63,8 +50,7 @@ public class FragmentStudentRequests extends Fragment implements View.OnClickLis
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+            id = getArguments().getString(ARG_ID);
         }
     }
 
@@ -76,10 +62,63 @@ public class FragmentStudentRequests extends Fragment implements View.OnClickLis
 
         manager = getFragmentManager();
 
+        txt_studentRequests_type = view.findViewById(R.id.txt_studentRequests_type);
+        txt_studentRequests_folio = view.findViewById(R.id.txt_studentRequests_folio);
+        txt_studentRequests_noReqWarn = view.findViewById(R.id.txt_studentRequests_noReqWarn);
+        btn_studentRequests_check = view.findViewById(R.id.btn_studentRequests_check);
+        btn_studentRequests_check.setOnClickListener(this);
+        img_studentRequests_noReq = view.findViewById(R.id.img_studentRequest_noReqs);
+
         floatbtnAddRequest = view.findViewById(R.id.floatbtn_student_requests_add);
         floatbtnAddRequest.setOnClickListener(this);
 
+        showRequestExistence();
+        setRequestData();
+
         return view;
+    }
+
+    private void setRequestData() {
+        //BD request
+        requestType = "Convalidación de estudios";
+        requestFolio = "123";
+
+        txt_studentRequests_type.setText(requestType);
+        txt_studentRequests_folio.setText(requestFolio);
+
+    }
+
+    private void showRequestExistence() {
+        //BD data request
+        //If there's a request, shows the request and hide the noReq message and image
+        boolean testBool = false;
+        boolean theresARequest = true;
+        if (theresARequest) {
+
+            txt_studentRequests_type.setVisibility(View.VISIBLE);
+            txt_studentRequests_folio.setVisibility(View.VISIBLE);
+            btn_studentRequests_check.setVisibility(View.VISIBLE);
+
+            if (testBool) {
+                txt_studentRequests_noReqWarn.setVisibility(View.INVISIBLE);
+                img_studentRequests_noReq.setVisibility(View.INVISIBLE);
+                floatbtnAddRequest.hide();
+            }
+
+            if (testBool)
+                return;
+        }
+
+        img_studentRequests_noReq.setVisibility(View.VISIBLE);
+        txt_studentRequests_noReqWarn.setVisibility(View.VISIBLE);
+        floatbtnAddRequest.show();
+
+        if (testBool) {
+            txt_studentRequests_type.setVisibility(View.INVISIBLE);
+            txt_studentRequests_folio.setVisibility(View.INVISIBLE);
+            btn_studentRequests_check.setVisibility(View.INVISIBLE);
+        }
+
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -106,30 +145,29 @@ public class FragmentStudentRequests extends Fragment implements View.OnClickLis
         mListener = null;
     }
 
+
     @Override
     public void onClick(View view) {
         int id = view.getId();
 
-        if(id == R.id.floatbtn_student_requests_add) {
-            FragmentStudentRequestsCapture frgStudentRC = FragmentStudentRequestsCapture.newInstance("Nothing", "Nothing");
+        if (id == R.id.floatbtn_student_requests_add) {
+            FragmentStudentRequestsCapture frgStudentRC = FragmentStudentRequestsCapture.newInstance(this.id);
             FragmentTransaction transaction = manager.beginTransaction();
             transaction.replace(R.id.fragment_container_student, frgStudentRC, "StudentRC");
             transaction.addToBackStack("addStudentRC");
             transaction.commit();
-
+            return;
+        }
+        if (id == R.id.btn_studentRequests_check) {
+            FragmentStudentRequestsStatus frgStudentRS = FragmentStudentRequestsStatus.newInstance();
+            FragmentTransaction transaction = manager.beginTransaction();
+            transaction.replace(R.id.fragment_container_student, frgStudentRS, "StudentRS");
+            transaction.addToBackStack("addStudentRS");
+            transaction.commit();
+            return;
         }
     }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);

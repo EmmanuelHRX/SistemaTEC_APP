@@ -2,52 +2,38 @@ package com.example.sistematec.ui.login.Student;
 
 import android.content.Context;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageView;
 
 import com.example.sistematec.R;
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link FragmentStudentRequestsStatus.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link FragmentStudentRequestsStatus#newInstance} factory method to
- * create an instance of this fragment.
- */
-public class FragmentStudentRequestsStatus extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+public class FragmentStudentRequestsStatus extends Fragment implements View.OnClickListener {
 
     private OnFragmentInteractionListener mListener;
+
+    ImageView img_studentReqStatus_info1;
+    ImageView img_studentReqStatus_info2;
+    ImageView img_studentReqStatus_info3;
+    ImageView img_studentReqStatus_info4;
+    ImageView img_studentReqStatus_info5;
+    ImageView img_studentReqStatus_info6;
+    Button btn_studentReqStatus_back;
+
 
     public FragmentStudentRequestsStatus() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment FragmentStudentRequestsStatus.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static FragmentStudentRequestsStatus newInstance(String param1, String param2) {
+    public static FragmentStudentRequestsStatus newInstance() {
         FragmentStudentRequestsStatus fragment = new FragmentStudentRequestsStatus();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;
     }
@@ -56,8 +42,6 @@ public class FragmentStudentRequestsStatus extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
         }
     }
 
@@ -65,7 +49,108 @@ public class FragmentStudentRequestsStatus extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_student_requests_status, container, false);
+        View view = inflater.inflate(R.layout.fragment_student_requests_status, container, false);
+
+        img_studentReqStatus_info1 = view.findViewById(R.id.img_studentReqStatus_info1);
+        img_studentReqStatus_info2 = view.findViewById(R.id.img_studentReqStatus_info2);
+        img_studentReqStatus_info3 = view.findViewById(R.id.img_studentReqStatus_info3);
+        img_studentReqStatus_info4 = view.findViewById(R.id.img_studentReqStatus_info4);
+        img_studentReqStatus_info5 = view.findViewById(R.id.img_studentReqStatus_info5);
+        img_studentReqStatus_info6 = view.findViewById(R.id.img_studentReqStatus_info6);
+        btn_studentReqStatus_back = view.findViewById(R.id.btn_studentReqStatus_back);
+        btn_studentReqStatus_back.setOnClickListener(this);
+
+        setInfoStatus();
+
+        return view;
+    }
+
+    private void setInfoStatus() {
+        //DB request
+        int[] infoStatus = new int[] {1, 1, 1, 0, 0, 0};
+
+        for (int i = 0; i < infoStatus.length; i++) {
+            if (infoStatus[i] == 0) {
+                continue;
+            }
+            setInfoStatus(i);
+        }
+
+    }
+    //TODO: Cambiar íconos ic_menu_send por palomitas
+    private void setInfoStatus(int infoNumber) {
+        switch (infoNumber) {
+
+            case 0: {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    img_studentReqStatus_info1.setImageDrawable(getResources().getDrawable(R.drawable.ic_menu_send,
+                            getActivity().getApplicationContext().getTheme()));
+                } else {
+                    img_studentReqStatus_info1.setImageDrawable(getResources().getDrawable(R.drawable.ic_menu_send));
+                }
+                break;
+            }
+
+            case 1: {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    img_studentReqStatus_info2.setImageDrawable(getResources().getDrawable(R.drawable.ic_menu_send,
+                            getActivity().getApplicationContext().getTheme()));
+                } else {
+                    img_studentReqStatus_info2.setImageDrawable(getResources().getDrawable(R.drawable.ic_menu_send));
+                }
+
+                break;
+            }
+
+            case 2: {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    img_studentReqStatus_info3.setImageDrawable(getResources().getDrawable(R.drawable.ic_menu_send,
+                            getActivity().getApplicationContext().getTheme()));
+                } else {
+                    img_studentReqStatus_info3.setImageDrawable(getResources().getDrawable(R.drawable.ic_menu_send));
+                }
+
+                break;
+            }
+
+            case 3: {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    img_studentReqStatus_info4.setImageDrawable(getResources().getDrawable(R.drawable.ic_menu_send,
+                            getActivity().getApplicationContext().getTheme()));
+                } else {
+                    img_studentReqStatus_info4.setImageDrawable(getResources().getDrawable(R.drawable.ic_menu_send));
+                }
+
+                break;
+            }
+
+            case 4: {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    img_studentReqStatus_info5.setImageDrawable(getResources().getDrawable(R.drawable.ic_menu_send,
+                            getActivity().getApplicationContext().getTheme()));
+                } else {
+                    img_studentReqStatus_info5.setImageDrawable(getResources().getDrawable(R.drawable.ic_menu_send));
+                }
+
+                break;
+            }
+
+            case 5: {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    img_studentReqStatus_info6.setImageDrawable(getResources().getDrawable(R.drawable.ic_menu_send,
+                            getActivity().getApplicationContext().getTheme()));
+                } else {
+                    img_studentReqStatus_info6.setImageDrawable(getResources().getDrawable(R.drawable.ic_menu_send));
+                }
+
+                break;
+            }
+
+            default: {
+
+            }
+
+        }
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -92,16 +177,15 @@ public class FragmentStudentRequestsStatus extends Fragment {
         mListener = null;
     }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
+    @Override
+    public void onClick(View view) {
+        int id = view.getId();
+
+        if (id == R.id.btn_studentReqStatus_back) {
+            getActivity().getSupportFragmentManager().popBackStack();
+        }
+    }
+
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);

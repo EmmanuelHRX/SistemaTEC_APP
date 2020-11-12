@@ -12,7 +12,7 @@ import android.widget.TextView;
 
 import com.example.sistematec.R;
 
-public class FragmentProfileService extends Fragment {
+public class FragmentServiceProfile extends Fragment {
 
     ImageView img;
     TextView txtServiceProfileName, txtServiceProfileEnrollment,txtServiceProfileJob;

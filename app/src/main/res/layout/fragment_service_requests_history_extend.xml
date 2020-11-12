@@ -7,7 +7,7 @@
     android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/txtServiceAwaitingRequestsRevalidateSubjects"
+        android:id="@+id/txtSHRE_RevalidateSubjects"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -31,10 +31,10 @@
         android:background="@drawable/rectangle_layout_border"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtServiceAwaitingRequestsRevalidateSubjects">
+        app:layout_constraintTop_toBottomOf="@+id/txtSHRE_RevalidateSubjects">
 
         <TextView
-            android:id="@+id/txtServiceAwaitingRequestsStudentDateAR"
+            android:id="@+id/txtSHRE_StudentDate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="0dp"
@@ -42,7 +42,7 @@
             android:text="TextView" />
 
         <TextView
-            android:id="@+id/txtServiceAwaitingRequestsStudentNameAR"
+            android:id="@+id/txtSHRE_StudentName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="0dp"
@@ -50,7 +50,7 @@
             android:text="TextView" />
 
         <TextView
-            android:id="@+id/txtServiceAwaitingRequestsStudentIDAR"
+            android:id="@+id/txtSHRE_StudentID"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="0dp"
@@ -58,7 +58,7 @@
             android:text="TextView" />
 
         <TextView
-            android:id="@+id/txtServiceAwaitingRequestsStudentOldSyllabusAR"
+            android:id="@+id/txtSHRE_StudentOldSyllabus"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="0dp"
@@ -66,7 +66,7 @@
             android:text="TextView" />
 
         <TextView
-            android:id="@+id/txtServiceAwaitingRequestsStudentNewSyllabusAR"
+            android:id="@+id/txtSHRE_StudentNewSyllabus"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="0dp"
@@ -75,7 +75,7 @@
     </LinearLayout>
 
     <TextView
-        android:id="@+id/txtServiceAwaitingRequestsRevalidateSubjects2"
+        android:id="@+id/txtSHRE_RevalidateSubjects2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
@@ -89,7 +89,7 @@
         app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 
     <ScrollView
-        android:id="@+id/scrollViewServiceAwaitingRequests"
+        android:id="@+id/scrollSHRE"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="20dp"
@@ -97,7 +97,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtServiceAwaitingRequestsRevalidateSubjects2">
+        app:layout_constraintTop_toBottomOf="@+id/txtSHRE_RevalidateSubjects2">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -111,7 +111,7 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/txtServiceAwaitingRequestsNo"
+                    android:id="@+id/txtSHRE_No"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -120,7 +120,7 @@
                     android:textSize="10sp" />
 
                 <TextView
-                    android:id="@+id/txtServiceAwaitingRequestsSubject"
+                    android:id="@+id/txtSHRE_Subject"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -129,7 +129,7 @@
                     android:textSize="10sp" />
 
                 <TextView
-                    android:id="@+id/txtServiceAwaitingRequestsGrade"
+                    android:id="@+id/txtSHRE_Grade"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -138,7 +138,7 @@
                     android:textSize="10sp" />
 
                 <TextView
-                    android:id="@+id/txtServiceAwaitingRequestsSubjectValidated"
+                    android:id="@+id/txtSHRE_SubjectValidated"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -147,7 +147,7 @@
                     android:textSize="10sp" />
 
                 <TextView
-                    android:id="@+id/txtServiceAwaitingRequestsPercentage"
+                    android:id="@+id/txtSHRE_Percentage"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -164,7 +164,7 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/txtServiceAwaitingRequestsNo2"
+                    android:id="@+id/txtSHRE_No2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -173,7 +173,7 @@
                     android:textSize="10sp" />
 
                 <TextView
-                    android:id="@+id/txtServiceAwaitingRequestsSubject2"
+                    android:id="@+id/txtSHRE_Subject2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -182,7 +182,7 @@
                     android:textSize="10sp" />
 
                 <TextView
-                    android:id="@+id/txtServiceAwaitingRequestsGrade2"
+                    android:id="@+id/txtSHRE_Grade2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -191,7 +191,7 @@
                     android:textSize="10sp" />
 
                 <TextView
-                    android:id="@+id/txtServiceAwaitingRequestsSubjectValidated2"
+                    android:id="@+id/txtSHRE_Validated2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -200,7 +200,7 @@
                     android:textSize="10sp" />
 
                 <TextView
-                    android:id="@+id/txtServiceAwaitingRequestsPercentage2"
+                    android:id="@+id/txtSHRE_Percentage2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -212,29 +212,18 @@
         </LinearLayout>
     </ScrollView>
 
-    <Button
-        android:id="@+id/btnServiceAwaitingRequestsValidateAR"
-        android:layout_width="wrap_content"
+    <TextView
+        android:id="@+id/txtSHRE_Description"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="50dp"
-        android:background="@color/colorAccent"
-        android:text="AUTORIZAR"
-        android:textColor="#FFFFFF"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/scrollViewServiceAwaitingRequests" />
-
-    <Button
-        android:id="@+id/btnServiceAwaitingRequestsDenyAR"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="50dp"
-        android:background="@color/colorAccent"
-        android:text="RECHAZAR"
-        android:textColor="#FFFFFF"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="40dp"
+        android:text="REVALIDACION REALIZADA CORRECTAMENTE"
+        android:textSize="15dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/scrollViewServiceAwaitingRequests" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/scrollSHRE" />
 
 
 </android.support.constraint.ConstraintLayout>
