@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 import com.example.sistematec.R;
 
@@ -14,6 +15,14 @@ import com.example.sistematec.R;
 public class FragmentStudentRequestsNotifications extends Fragment {
 
     private OnFragmentInteractionListener mListener;
+
+    LinearLayout lay_studentReqNotif_notif1;
+    LinearLayout lay_studentReqNotif_notif2;
+    LinearLayout lay_studentReqNotif_notif3;
+    LinearLayout lay_studentReqNotif_notif4;
+    LinearLayout lay_studentReqNotif_notif5;
+    LinearLayout lay_studentReqNotif_notif6;
+
 
     public FragmentStudentRequestsNotifications() {
         // Required empty public constructor
@@ -38,8 +47,63 @@ public class FragmentStudentRequestsNotifications extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_student_requests_notifications, container, false);
+        View view = inflater.inflate(R.layout.fragment_student_requests_notifications, container, false);
+
+        lay_studentReqNotif_notif1 = view.findViewById(R.id.lay_studentReqNotif_notif1);
+        lay_studentReqNotif_notif1.setVisibility(View.INVISIBLE);
+        lay_studentReqNotif_notif2 = view.findViewById(R.id.lay_studentReqNotif_notif2);
+        lay_studentReqNotif_notif2.setVisibility(View.INVISIBLE);
+        lay_studentReqNotif_notif3 = view.findViewById(R.id.lay_studentReqNotif_notif3);
+        lay_studentReqNotif_notif3.setVisibility(View.INVISIBLE);
+        lay_studentReqNotif_notif4 = view.findViewById(R.id.lay_studentReqNotif_notif4);
+        lay_studentReqNotif_notif4.setVisibility(View.INVISIBLE);
+        lay_studentReqNotif_notif5 = view.findViewById(R.id.lay_studentReqNotif_notif5);
+        lay_studentReqNotif_notif5.setVisibility(View.INVISIBLE);
+        lay_studentReqNotif_notif6 = view.findViewById(R.id.lay_studentReqNotif_notif6);
+        lay_studentReqNotif_notif6.setVisibility(View.INVISIBLE);
+
+        showNotifications();
+
+        return view;
     }
+
+    private void showNotifications() {
+        //DB request
+
+        int processProgress = 3;
+
+        switch  (processProgress) {
+            case 6: {
+                lay_studentReqNotif_notif6.setVisibility(View.VISIBLE);
+            }
+            case 5: {
+                lay_studentReqNotif_notif5.setVisibility(View.VISIBLE);
+            }
+            case 4: {
+                lay_studentReqNotif_notif4.setVisibility(View.VISIBLE);
+            }
+            case 3: {
+                lay_studentReqNotif_notif3.setVisibility(View.VISIBLE);
+            }
+            case 2: {
+                lay_studentReqNotif_notif2.setVisibility(View.VISIBLE);
+            }
+            case 1: {
+                lay_studentReqNotif_notif1.setVisibility(View.VISIBLE);
+            }
+            case 0: {
+
+                break;
+            }
+            default : {
+
+            }
+        }
+
+
+
+    }
+
 
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {

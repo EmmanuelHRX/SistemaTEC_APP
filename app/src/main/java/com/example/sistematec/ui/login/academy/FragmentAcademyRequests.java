@@ -41,7 +41,7 @@ public class FragmentAcademyRequests extends Fragment implements View.OnClickLis
                 // código que abra el fragmento awaiting request
                 FragmentAcademyAwaitingRequests FAAR = new FragmentAcademyAwaitingRequests();
                 FragmentTransaction transaction = manager.beginTransaction();
-                transaction.replace(R.id.fragment_container,FAAR,"FragmentAcademyAwaitingRequests");
+                transaction.replace(R.id.fragmentAcademyProfile,FAAR,"FragmentAcademyAwaitingRequests");
                 transaction.addToBackStack("addFragmentAcademyAwaitingRequests");
                 transaction.commit();
                 break;

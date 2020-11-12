@@ -12,18 +12,280 @@
         android:layout_height="match_parent">
 
         <TextView
-            android:layout_width="262dp"
-            android:layout_height="87dp"
-            android:layout_marginStart="74dp"
-            android:layout_marginTop="300dp"
-            android:layout_marginEnd="75dp"
-            android:layout_marginBottom="344dp"
-            android:text="Notificaciones de solicitudes"
+            android:id="@+id/txt_studentReqNotif_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="55dp"
+            android:text="Notificaciones"
+            android:textAlignment="center"
+            android:textColor="#000000"
             android:textSize="30dp"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <LinearLayout
+            android:id="@+id/lay_studentReqNotif_notifs"
+            android:layout_width="wrap_content"
+            android:layout_height="448dp"
+            android:layout_marginTop="20dp"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txt_studentReqNotif_title">
+
+            <LinearLayout
+                android:id="@+id/lay_studentReqNotif_notif1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/custom_layout_border"
+                android:gravity="center_vertical"
+                android:minHeight="50dp"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:minWidth="300dp"
+                    android:orientation="vertical"
+                    android:textAlignment="center">
+
+                    <TextView
+                        android:id="@+id/txt_studentReqNotif_notif1_1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:maxWidth="300dp"
+                        android:text="Solicitud aceptada"
+                        android:textColor="#000000" />
+
+                    <TextView
+                        android:id="@+id/txt_studentReqNotif_notif1_2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:maxWidth="300dp"
+                        android:text="El coordinador ha verificado los requisitos de tu solicitud con éxito" />
+                </LinearLayout>
+
+                <ImageView
+                    android:id="@+id/img_studentReqNotif_notif1"
+                    android:layout_width="45dp"
+                    android:layout_height="32dp"
+                    android:layout_weight="1"
+                    android:src="@android:drawable/checkbox_on_background" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/lay_studentReqNotif_notif2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/custom_layout_border"
+                android:gravity="center_vertical"
+                android:minHeight="50dp"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:minWidth="300dp"
+                    android:orientation="vertical"
+                    android:textAlignment="center">
+
+                    <TextView
+                        android:id="@+id/txt_studentReqNotif_notif2_1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:maxWidth="300dp"
+                        android:text="Análisis académico"
+                        android:textColor="#000000" />
+
+                    <TextView
+                        android:id="@+id/txt_studentReqNotif_notif2_2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:maxWidth="300dp"
+                        android:text="La academia ha realizado el análisis académico con base en tu solicitud" />
+                </LinearLayout>
+
+                <ImageView
+                    android:id="@+id/img_studentReqNotif_notif2"
+                    android:layout_width="45dp"
+                    android:layout_height="32dp"
+                    android:layout_weight="1"
+                    android:src="@android:drawable/checkbox_on_background" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/lay_studentReqNotif_notif3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/custom_layout_border"
+                android:gravity="center_vertical"
+                android:minHeight="50dp"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:minWidth="300dp"
+                    android:orientation="vertical"
+                    android:textAlignment="center">
+
+                    <TextView
+                        android:id="@+id/txt_studentReqNotif_notif3_1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:maxWidth="300dp"
+                        android:text="Dictámen técnico"
+                        android:textColor="#000000" />
+
+                    <TextView
+                        android:id="@+id/txt_studentReqNotif_notif3_2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:maxWidth="300dp"
+                        android:text="El Coordinador ha realizado el dictámen técnico de tu solicitud y ha mandado a revalidación las materias validadas" />
+                </LinearLayout>
+
+                <ImageView
+                    android:id="@+id/img_studentReqNotif_notif3"
+                    android:layout_width="45dp"
+                    android:layout_height="32dp"
+                    android:layout_weight="1"
+                    android:src="@android:drawable/checkbox_on_background" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/lay_studentReqNotif_notif4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/custom_layout_border"
+                android:gravity="center_vertical"
+                android:minHeight="50dp"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:minWidth="300dp"
+                    android:orientation="vertical"
+                    android:textAlignment="center">
+
+                    <TextView
+                        android:id="@+id/txt_studentReqNotif_notif4_1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:maxWidth="300dp"
+                        android:text="Notificación 4"
+                        android:textColor="#000000" />
+
+                    <TextView
+                        android:id="@+id/txt_studentReqNotif_notif4_2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:maxWidth="300dp"
+                        android:text="Descripción 4" />
+                </LinearLayout>
+
+                <ImageView
+                    android:id="@+id/img_studentReqNotif_notif4"
+                    android:layout_width="45dp"
+                    android:layout_height="32dp"
+                    android:layout_weight="1"
+                    android:src="@android:drawable/checkbox_on_background" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/lay_studentReqNotif_notif5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/custom_layout_border"
+                android:gravity="center_vertical"
+                android:minHeight="50dp"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:minWidth="300dp"
+                    android:orientation="vertical"
+                    android:textAlignment="center">
+
+                    <TextView
+                        android:id="@+id/txt_studentReqNotif_notif5_1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:maxWidth="300dp"
+                        android:text="Notificación 5"
+                        android:textColor="#000000" />
+
+                    <TextView
+                        android:id="@+id/txt_studentReqNotif_notif5_2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:maxWidth="300dp"
+                        android:text="Descripción 5" />
+                </LinearLayout>
+
+                <ImageView
+                    android:id="@+id/img_studentReqNotif_notif5"
+                    android:layout_width="45dp"
+                    android:layout_height="32dp"
+                    android:layout_weight="1"
+                    android:src="@android:drawable/checkbox_on_background" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/lay_studentReqNotif_notif6"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/custom_layout_border"
+                android:gravity="center_vertical"
+                android:minHeight="50dp"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:minWidth="300dp"
+                    android:orientation="vertical"
+                    android:textAlignment="center">
+
+                    <TextView
+                        android:id="@+id/txt_studentReqNotif_notif6_1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:maxWidth="300dp"
+                        android:text="Notificación 6"
+                        android:textColor="#000000" />
+
+                    <TextView
+                        android:id="@+id/txt_studentReqNotif_notif6_2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:maxWidth="300dp"
+                        android:text="Descripción 6" />
+                </LinearLayout>
+
+                <ImageView
+                    android:id="@+id/img_studentReqNotif_notif6"
+                    android:layout_width="45dp"
+                    android:layout_height="32dp"
+                    android:layout_weight="1"
+                    android:src="@android:drawable/checkbox_on_background" />
+
+            </LinearLayout>
+        </LinearLayout>
     </android.support.constraint.ConstraintLayout>
 
 </FrameLayout>
