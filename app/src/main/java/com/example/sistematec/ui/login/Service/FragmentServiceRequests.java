@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +18,8 @@ public class FragmentServiceRequests extends Fragment implements View.OnClickLis
 
     //creacion de array de botones
     Button btn;
+    FragmentManager manager;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -26,17 +30,22 @@ public class FragmentServiceRequests extends Fragment implements View.OnClickLis
 
     //método en ciclo para la inicializacion y asignación de listener de los botones
     private void setData(View v){
+        manager = getFragmentManager();
         btn = v.findViewById(R.id.btnRequestService);
         btn.setText("17171372 Román Alejandro Gaspar Atondo");
         btn.setOnClickListener(this);
     }
 
     public void onClick (View v){
-        Toast.makeText(getContext(),"se presionó el botón",Toast.LENGTH_LONG).show();
+
         switch (v.getId()){
             case R.id.btnRequestService:{
                 // código que abra el fragmento awaiting request
-                getFragmentManager().beginTransaction().replace(R.id.fragment_container, new FragmentServiceAwaitingRequests()).commit();
+                FragmentServiceAwaitingRequests FSAR = new FragmentServiceAwaitingRequests();
+                FragmentTransaction transaction = manager.beginTransaction();
+                transaction.replace(R.id.fragment_container,FSAR,"FragmentServiceAwaitingRequests");
+                transaction.addToBackStack("addFragmentServiceAwaitingRequests");
+                transaction.commit();
                 break;
             }
 

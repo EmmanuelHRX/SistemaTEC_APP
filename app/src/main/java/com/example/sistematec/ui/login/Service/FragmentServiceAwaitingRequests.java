@@ -15,8 +15,9 @@ import com.example.sistematec.R;
 
 public class FragmentServiceAwaitingRequests extends Fragment implements View.OnClickListener{
 
-    TextView txtStudentDateAR, txtStudentNameAR, txtStudentIDAR, txtStudentOldSyllabusAR, txtStudentNewSyllabusAR;
-    Button btnServiceValidateAR, btnServiceDenyAR;
+    TextView txtServiceAwaitingRequestsStudentDateAR, txtServiceAwaitingRequestsStudentNameAR, txtServiceAwaitingRequestsStudentIDAR, txtServiceAwaitingRequestsStudentOldSyllabusAR
+            , txtServiceAwaitingRequestsStudentNewSyllabusAR;
+    Button btnServiceAwaitingRequestsValidateAR, btnServiceAwaitingRequestsDenyAR;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -26,21 +27,23 @@ public class FragmentServiceAwaitingRequests extends Fragment implements View.On
     }
 
     private void setData(View v) {
-        txtStudentDateAR = v.findViewById(R.id.txtStudentDateAR);
-        txtStudentNameAR = v.findViewById(R.id.txtStudentNameAR);
-        txtStudentIDAR = v.findViewById(R.id.txtStudentIDAR);
-        txtStudentOldSyllabusAR = v.findViewById(R.id.txtStudentOldSyllabusAR);
-        txtStudentNewSyllabusAR = v.findViewById(R.id.txtStudentNewSyllabusAR);
-        btnServiceValidateAR = v.findViewById(R.id.btnServiceValidateAR);
-        btnServiceDenyAR = v.findViewById(R.id.btnServiceDenyAR);
-        btnServiceValidateAR.setOnClickListener(this);
-        btnServiceDenyAR.setOnClickListener(this);
+        txtServiceAwaitingRequestsStudentDateAR = v.findViewById(R.id.txtServiceAwaitingRequestsStudentDateAR);
+        txtServiceAwaitingRequestsStudentNameAR = v.findViewById(R.id.txtServiceAwaitingRequestsStudentNameAR);
+        txtServiceAwaitingRequestsStudentIDAR = v.findViewById(R.id.txtServiceAwaitingRequestsStudentIDAR);
+        txtServiceAwaitingRequestsStudentOldSyllabusAR = v.findViewById(R.id.txtServiceAwaitingRequestsStudentOldSyllabusAR);
+        txtServiceAwaitingRequestsStudentNewSyllabusAR = v.findViewById(R.id.txtServiceAwaitingRequestsStudentNewSyllabusAR);
+
+        btnServiceAwaitingRequestsValidateAR = v.findViewById(R.id.btnServiceAwaitingRequestsValidateAR);
+        btnServiceAwaitingRequestsDenyAR = v.findViewById(R.id.btnServiceAwaitingRequestsDenyAR);
+
+        btnServiceAwaitingRequestsValidateAR.setOnClickListener(this);
+        btnServiceAwaitingRequestsDenyAR.setOnClickListener(this);
         //procedimiento de llenado de información
-        txtStudentDateAR.setText("Fecha: 25 de octubre de 2019");
-        txtStudentNameAR.setText("Nombre: Juan Emmanuel López Laguna");
-        txtStudentIDAR.setText("Matrícula: 17171403");
-        txtStudentOldSyllabusAR.setText("Plan de Estudios Origen: ISIC-2010-224");
-        txtStudentNewSyllabusAR.setText("Plan de Estudios Destino: IIND-2010-227");
+        txtServiceAwaitingRequestsStudentDateAR.setText("Fecha: 25 de octubre de 2019");
+        txtServiceAwaitingRequestsStudentNameAR.setText("Nombre: Juan Emmanuel López Laguna");
+        txtServiceAwaitingRequestsStudentIDAR.setText("Matrícula: 17171403");
+        txtServiceAwaitingRequestsStudentOldSyllabusAR.setText("Plan de Estudios Origen: ISIC-2010-224");
+        txtServiceAwaitingRequestsStudentNewSyllabusAR.setText("Plan de Estudios Destino: IIND-2010-227");
 
     }
 
@@ -48,16 +51,16 @@ public class FragmentServiceAwaitingRequests extends Fragment implements View.On
     public void onClick(View view) {
         //logica de aceptar o rechazar solicitud
         switch (view.getId()){
-            case R.id.btnServiceValidateAR:{
+            case R.id.btnServiceAwaitingRequestsValidateAR:{
                 Toast.makeText(getContext(),"Solicitud Aceptada",Toast.LENGTH_SHORT).show();
-                btnServiceValidateAR.setEnabled(false);
-                btnServiceDenyAR.setEnabled(false);
+                getActivity().getSupportFragmentManager().popBackStack();
+                //lógica para borrar la solicitud pendiente y actualizar el historial de solicitudes atendidas
                 break;
             }
-            case R.id.btnServiceDenyAR:{
+            case R.id.btnServiceAwaitingRequestsDenyAR:{
                 Toast.makeText(getContext(),"Solicitud Rechazada",Toast.LENGTH_SHORT).show();
-                btnServiceValidateAR.setEnabled(false);
-                btnServiceDenyAR.setEnabled(false);
+                getActivity().getSupportFragmentManager().popBackStack();
+                //lógica para borrar la solicitud pendiente y actualizar el historial de solicitudes atendidas
                 break;
             }
         }
