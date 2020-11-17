@@ -2,7 +2,6 @@ package com.example.sistematec.ui.login.Service;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.view.MenuItem;
@@ -11,7 +10,7 @@ import android.support.v4.widget.DrawerLayout;
 
 import com.example.sistematec.R;
 import com.example.sistematec.ui.login.FragmentAllSettings;
-import com.example.sistematec.ui.login.LoginActivity;
+import com.example.sistematec.ui.login.Login.LoginActivity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -76,6 +75,7 @@ public class ActivityService extends AppCompatActivity
                 break;
             }
             case R.id.nav_Requests_History :{
+                FragmentServiceRequestsHistory fsh = new FragmentServiceRequestsHistory();
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_service, new FragmentServiceRequestsHistory()).commit();
                 break;
             }

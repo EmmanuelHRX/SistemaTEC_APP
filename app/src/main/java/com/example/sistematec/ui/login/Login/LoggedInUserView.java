@@ -1,4 +1,4 @@
-package com.example.sistematec.ui.login;
+package com.example.sistematec.ui.login.Login;
 
 /**
  * Class exposing authenticated user details to the UI.
