@@ -21,7 +21,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <LinearLayout
-        android:id="@+id/linearLayout"
+        android:id="@+id/linearLayoutCAR"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
@@ -68,8 +68,8 @@
         android:textColor="#000000"
         android:textSize="22sp"
         android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="@+id/linearLayout"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+        app:layout_constraintStart_toStartOf="@+id/linearLayoutCAR"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayoutCAR" />
 
     <TextView
         android:id="@+id/txtAAR_Kardex"
@@ -113,7 +113,7 @@
         android:background="@color/colorAccent"
         android:text="REVISAR"
         android:textColor="#FFFFFF"
-        app:layout_constraintEnd_toEndOf="@+id/linearLayout"
+        app:layout_constraintEnd_toEndOf="@+id/linearLayoutCAR"
         app:layout_constraintTop_toTopOf="@+id/txtAAR_Request" />
 
     <Button
