@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme" >
         <activity
-            android:name=".ui.login.coordinator.CoordinatorActivity"
+            android:name=".ui.login.Coordinator.ActivityCoordinator"
             android:label="CoordinatorActivity"
             android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity

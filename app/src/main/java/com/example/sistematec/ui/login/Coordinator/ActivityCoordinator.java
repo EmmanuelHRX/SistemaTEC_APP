@@ -13,14 +13,13 @@ import android.support.v4.widget.DrawerLayout;
 import com.example.sistematec.R;
 import com.example.sistematec.ui.login.Coordinator.FragmentCoordinatorRequest;
 import com.example.sistematec.ui.login.Login.LoginActivity;
-import com.example.sistematec.ui.login.Service.FragmentServiceProfile;
-import com.example.sistematec.ui.login.coordinator.FragmentProfileCoordinator;
+import com.example.sistematec.ui.login.Coordinator.FragmentProfileCoordinator;
 
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 
-public class CoordinatorActivity extends AppCompatActivity
+public class ActivityCoordinator extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     @Override
