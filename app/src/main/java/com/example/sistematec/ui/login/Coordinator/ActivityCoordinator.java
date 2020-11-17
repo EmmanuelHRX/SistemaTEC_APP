@@ -2,18 +2,13 @@ package com.example.sistematec.ui.login.Coordinator;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.view.View;
 import android.support.v4.view.GravityCompat;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.view.MenuItem;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import com.example.sistematec.R;
-import com.example.sistematec.ui.login.Coordinator.FragmentCoordinatorRequest;
 import com.example.sistematec.ui.login.Login.LoginActivity;
-import com.example.sistematec.ui.login.Coordinator.FragmentProfileCoordinator;
 
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -28,14 +23,7 @@ public class ActivityCoordinator extends AppCompatActivity
         setContentView(R.layout.activity_coordinator);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+
         DrawerLayout drawer = findViewById(R.id.drawer);
         NavigationView navigationView = findViewById(R.id.NavigationView);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -44,8 +32,9 @@ public class ActivityCoordinator extends AppCompatActivity
         toggle.setDrawerIndicatorEnabled(true);
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
+
         if(savedInstanceState == null){
-            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_coordinator, new FragmentProfileCoordinator()).commit();
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_coordinator, new FragmentCoordinatorProfile()).commit();
             navigationView.setCheckedItem(R.id.nav_coordinator_profile);
         }
     }
@@ -86,11 +75,10 @@ public class ActivityCoordinator extends AppCompatActivity
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
-        int id = item.getItemId();
 
         switch (item.getItemId()){
             case R.id.nav_coordinator_profile: {
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_coordinator, new FragmentProfileCoordinator()).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_coordinator, new FragmentCoordinatorProfile()).commit();
                 break;
             }
             case R.id.nav_coordinator_request: {
@@ -98,7 +86,7 @@ public class ActivityCoordinator extends AppCompatActivity
                 break;
             }
             case R.id.nav_coordinator_dictums: {
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_coordinator, new FragmentProfileCoordinator()).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_coordinator, new FragmentCoordinatorDictum()).commit();
                 break;
             }
             case R.id.nav_coordinator_logout: {

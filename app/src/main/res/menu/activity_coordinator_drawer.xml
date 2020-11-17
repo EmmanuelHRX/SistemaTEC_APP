@@ -19,7 +19,8 @@
         <item
             android:id="@+id/nav_coordinator_notifications"
             android:icon="@android:drawable/stat_notify_more"
-            android:title="Notificaciones" />
+            android:title="Notificaciones"
+            android:visible="false"/>
     </group>
 
     <item android:title="Communicate">
@@ -27,7 +28,8 @@
             <item
                 android:id="@+id/nav_coordinator_configurations"
                 android:icon="@drawable/ic_menu_manage"
-                android:title="Configuraciones" />
+                android:title="Configuraciones"
+                android:visible="false"/>
             <item
                 android:id="@+id/nav_coordinator_logout"
                 android:icon="?attr/actionModeCloseDrawable"

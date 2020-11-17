@@ -33,8 +33,8 @@ public class FragmentAcademyAwaitingRequests extends Fragment implements View.On
         txtAcademyAwaitingRequestsStudentOldSyllabusAR = v.findViewById(R.id.txtAcademyAwaitingRequestsStudentOldSyllabusAR);
         txtAcademyAwaitingRequestsStudentNewSyllabusAR = v.findViewById(R.id.txtAcademyAwaitingRequestsStudentNewSyllabusAR);
 
-        btnAcademyAwaitingRequestsValidateAR = v.findViewById(R.id.btnAcademyAwaitingRequestsValidateAR);
-        btnAcademyAwaitingRequestsDenyAR = v.findViewById(R.id.btnAcademyAwaitingRequestsValidateAR);
+        btnAcademyAwaitingRequestsValidateAR = v.findViewById(R.id.btnAAR_Upload);
+        btnAcademyAwaitingRequestsDenyAR = v.findViewById(R.id.btnAAR_Upload);
 
         btnAcademyAwaitingRequestsValidateAR.setOnClickListener(this);
         btnAcademyAwaitingRequestsDenyAR.setOnClickListener(this);
@@ -50,8 +50,8 @@ public class FragmentAcademyAwaitingRequests extends Fragment implements View.On
     @Override
     public void onClick(View view) {
         //logica de aceptar o rechazar solicitud
-        final int a = R.id.btnAcademyAwaitingRequestsValidateAR;
-        final int b = R.id.btnAcademyAwaitingRequestsValidateAR;
+        final int a = R.id.btnAAR_Upload;
+        final int b = R.id.btnAAR_Upload;
         switch (view.getId()){
             case 1:{
                 Toast.makeText(getContext(),"Solicitud Aceptada",Toast.LENGTH_SHORT).show();

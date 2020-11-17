@@ -45,16 +45,8 @@ public class ActivityService extends AppCompatActivity
 
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
-        } else {
-            /*if(getSupportFragmentManager().getBackStackEntryCount() == 1){
-                if(getSupportFragmentManager().getBackStackEntryAt(0).getName().equals("addFragmentServiceRequestsHistoryExtend")){
 
-                    getSupportFragmentManager().popBackStack(0, FragmentManager.POP_BACK_STACK_INCLUSIVE);
-                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_service, new FragmentServiceRequestsHistory()).commit();
-                    return;
-                }
-
-            }*/
+        } else{
             super.onBackPressed();
         }
     }
@@ -75,16 +67,15 @@ public class ActivityService extends AppCompatActivity
                 break;
             }
             case R.id.nav_Requests_History :{
-                FragmentServiceRequestsHistory fsh = new FragmentServiceRequestsHistory();
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_service, new FragmentServiceRequestsHistory()).commit();
+                //getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_service, new FragmentServiceRequestsHistory()).commit();
                 break;
             }
             case R.id.nav_Notifications :{
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_service, new FragmentServiceNotification()).commit();
+                //getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_service, new FragmentServiceNotification()).commit();
                 break;
             }
             case R.id.nav_Configuration :{
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_service, new FragmentAllSettings()).commit();
+                //getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_service, new FragmentAllSettings()).commit();
                 break;
             }
             case R.id.nav_Close_Session :{

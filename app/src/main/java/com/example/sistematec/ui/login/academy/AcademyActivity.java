@@ -64,15 +64,15 @@ public class AcademyActivity extends AppCompatActivity
                 break;
             }
             case R.id.nav_academy_Requests_History :{
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_academy, new FragmentAcademyRequestsHistory()).commit();
+                //getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_academy, new FragmentAcademyRequestsHistory()).commit();
                 break;
             }
             case R.id.nav_academy_Notifications :{
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_academy, new FragmentAcademyNotifications()).commit();
+                //getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_academy, new FragmentAcademyNotifications()).commit();
                 break;
             }
             case R.id.nav_academy_Configuration :{
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_academy, new FragmentAllSettings()).commit();
+                //getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_academy, new FragmentAllSettings()).commit();
                 break;
             }
             case R.id.nav_academy_Close_Session :{

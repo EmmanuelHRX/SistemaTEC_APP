@@ -12,10 +12,12 @@
             android:title="Solicitudes" />
         <item
             android:id="@+id/nav_Requests_History"
-            android:title="Historial de Solicitudes" />
+            android:title="Historial de Solicitudes"
+            android:visible="false"/>
         <item
             android:id="@+id/nav_Notifications"
-            android:title="Notificaciones" />
+            android:title="Notificaciones"
+            android:visible="false"/>
     </group>
 
     <item
@@ -24,7 +26,8 @@
         <menu>
             <item
                 android:id="@+id/nav_Configuration"
-                android:title="Configuración" />
+                android:title="Configuración"
+                android:visible="false"/>
             <item
                 android:id="@+id/nav_Close_Session"
                 android:title="Cerrar Sesión" />
