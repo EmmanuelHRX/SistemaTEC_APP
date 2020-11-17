@@ -1,5 +1,6 @@
-package com.example.sistematec.ui.login.coordinator;
+package com.example.sistematec.ui.login.Coordinator;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -10,6 +11,9 @@ import android.view.MenuItem;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import com.example.sistematec.R;
+import com.example.sistematec.ui.login.Coordinator.FragmentCoordinatorRequest;
+import com.example.sistematec.ui.login.Login.LoginActivity;
+import com.example.sistematec.ui.login.Service.FragmentServiceProfile;
 import com.example.sistematec.ui.login.coordinator.FragmentProfileCoordinator;
 
 import android.support.v7.app.AppCompatActivity;
@@ -85,17 +89,25 @@ public class CoordinatorActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_coordinator_profile) {
-            // Handle the camera action
-        } else if (id == R.id.nav_coordinator_request) {
-
-        } else if (id == R.id.nav_coordinator_dictums) {
-
-        } else if (id == R.id.nav_coordinator_notifications) {
-
-        } else if (id == R.id.nav_coordinator_configurations) {
-
-        } else if (id == R.id.nav_coordinator_logout) {
+        switch (item.getItemId()){
+            case R.id.nav_coordinator_profile: {
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_coordinator, new FragmentProfileCoordinator()).commit();
+                break;
+            }
+            case R.id.nav_coordinator_request: {
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_coordinator, new FragmentCoordinatorRequest()).commit();
+                break;
+            }
+            case R.id.nav_coordinator_dictums: {
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_coordinator, new FragmentProfileCoordinator()).commit();
+                break;
+            }
+            case R.id.nav_coordinator_logout: {
+                Intent actLogin = new Intent(this, LoginActivity.class);
+                startActivity(actLogin);
+                finish();
+                break;
+            }
 
         }
 

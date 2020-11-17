@@ -1,4 +1,4 @@
-package com.example.sistematec.ui.login.coordinator;
+package com.example.sistematec.ui.login.Coordinator;
 
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;

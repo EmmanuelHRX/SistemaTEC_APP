@@ -34,7 +34,7 @@ public class FragmentServiceRequestsHistory extends Fragment {
         tabItemSRH_validate = v.findViewById(R.id.tabItemSRH_validate);
         tabItemSHR_deny = v.findViewById(R.id.tabItemSHR_deny);
 
-            pagerAdapter = new PagerService(getFragmentManager(),tabLayout.getTabCount());
+            pagerAdapter = new PagerService(getChildFragmentManager(),tabLayout.getTabCount());
             viewPager.setAdapter(pagerAdapter);
             tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
                 @Override
