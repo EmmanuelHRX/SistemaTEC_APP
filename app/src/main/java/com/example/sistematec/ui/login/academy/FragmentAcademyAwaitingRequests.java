@@ -30,8 +30,6 @@ public class FragmentAcademyAwaitingRequests extends Fragment implements View.On
         txtAcademyAwaitingRequestsStudentDateAR = v.findViewById(R.id.txtAcademyAwaitingRequestsStudentDateAR);
         txtAcademyAwaitingRequestsStudentNameAR = v.findViewById(R.id.txtAcademyAwaitingRequestsStudentNameAR);
         txtAcademyAwaitingRequestsStudentIDAR = v.findViewById(R.id.txtAcademyAwaitingRequestsStudentIDAR);
-        txtAcademyAwaitingRequestsStudentOldSyllabusAR = v.findViewById(R.id.txtAcademyAwaitingRequestsStudentOldSyllabusAR);
-        txtAcademyAwaitingRequestsStudentNewSyllabusAR = v.findViewById(R.id.txtAcademyAwaitingRequestsStudentNewSyllabusAR);
 
         btnAcademyAwaitingRequestsValidateAR = v.findViewById(R.id.btnAAR_Upload);
         btnAcademyAwaitingRequestsDenyAR = v.findViewById(R.id.btnAAR_Upload);

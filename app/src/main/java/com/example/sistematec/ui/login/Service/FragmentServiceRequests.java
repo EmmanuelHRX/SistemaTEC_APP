@@ -10,14 +10,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
 
 import com.example.sistematec.R;
 
-public class FragmentServiceRequests extends Fragment implements View.OnClickListener {
+
+public class FragmentServiceRequests extends Fragment {
 
     //creacion de array de botones
-    Button btn;
+    LinearLayout linearLayout;
     FragmentManager manager;
+    Button [] buttonArray;
 
     @Nullable
     @Override
@@ -30,26 +33,29 @@ public class FragmentServiceRequests extends Fragment implements View.OnClickLis
     //método en ciclo para la inicializacion y asignación de listener de los botones
     private void setData(View v){
         manager = getFragmentManager();
-        btn = v.findViewById(R.id.btnRequestService);
-        btn.setText("17171372 Román Alejandro Gaspar Atondo");
-        btn.setOnClickListener(this);
-
-    }
-
-    public void onClick (View v){
-
-        switch (v.getId()){
-            case R.id.btnRequestService:{
-                // código que abra el fragmento awaiting request
-                FragmentServiceAwaitingRequests FSAR = new FragmentServiceAwaitingRequests();
-                FragmentTransaction transaction = manager.beginTransaction();
-                transaction.replace(R.id.fragment_container_service,FSAR,"FragmentServiceAwaitingRequests");
-                transaction.addToBackStack("addFragmentServiceAwaitingRequests");
-                transaction.commit();
-                break;
-            }
-
+        linearLayout = v.findViewById(R.id.linearLayoutSR);
+        //obtener la cantidad de solicitudes de la base de datos
+        int num = 15;
+        buttonArray = new Button[num];
+        for (int i = 0 ; i < num; i++){
+            buttonArray[i] = new Button(getActivity().getApplicationContext());
+            buttonArray[i].setId(i);
+            //obtención de datos de la base de datos
+            buttonArray[i].setText("datos de usuario");
+            buttonArray[i].setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    FragmentServiceAwaitingRequests FSAR = new FragmentServiceAwaitingRequests();
+                    FragmentTransaction transaction = manager.beginTransaction();
+                    transaction.replace(R.id.fragment_container_service,FSAR,"FragmentServiceAwaitingRequests");
+                    transaction.addToBackStack("addFragmentServiceAwaitingRequests");
+                    transaction.commit();
+                }
+            });
+            //llenado de botones al view
+            linearLayout.addView(buttonArray[i]);
         }
+
     }
 
 }

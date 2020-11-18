@@ -15,9 +15,8 @@ import com.example.sistematec.R;
 
 public class FragmentServiceAwaitingRequests extends Fragment implements View.OnClickListener{
 
-    TextView txtServiceAwaitingRequestsStudentDateAR, txtServiceAwaitingRequestsStudentNameAR, txtServiceAwaitingRequestsStudentIDAR, txtServiceAwaitingRequestsStudentOldSyllabusAR
-            , txtServiceAwaitingRequestsStudentNewSyllabusAR;
-    Button btnServiceAwaitingRequestsValidateAR, btnServiceAwaitingRequestsDenyAR;
+    TextView txtServiceAwaitingRequestsStudentDateAR, txtServiceAwaitingRequestsStudentNameAR, txtServiceAwaitingRequestsStudentIDAR;
+    Button btnSAR_Review, btnSAR_Confirm;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -30,20 +29,16 @@ public class FragmentServiceAwaitingRequests extends Fragment implements View.On
         txtServiceAwaitingRequestsStudentDateAR = v.findViewById(R.id.txtServiceAwaitingRequestsStudentDateAR);
         txtServiceAwaitingRequestsStudentNameAR = v.findViewById(R.id.txtServiceAwaitingRequestsStudentNameAR);
         txtServiceAwaitingRequestsStudentIDAR = v.findViewById(R.id.txtServiceAwaitingRequestsStudentIDAR);
-        txtServiceAwaitingRequestsStudentOldSyllabusAR = v.findViewById(R.id.txtServiceAwaitingRequestsStudentOldSyllabusAR);
-        txtServiceAwaitingRequestsStudentNewSyllabusAR = v.findViewById(R.id.txtServiceAwaitingRequestsStudentNewSyllabusAR);
 
-        btnServiceAwaitingRequestsValidateAR = v.findViewById(R.id.btnServiceAwaitingRequestsValidateAR);
-        btnServiceAwaitingRequestsDenyAR = v.findViewById(R.id.btnServiceAwaitingRequestsDenyAR);
+        btnSAR_Review = v.findViewById(R.id.btnSAR_Review);
+        btnSAR_Confirm = v.findViewById(R.id.btnSAR_Confirm);
 
-        btnServiceAwaitingRequestsValidateAR.setOnClickListener(this);
-        btnServiceAwaitingRequestsDenyAR.setOnClickListener(this);
+        btnSAR_Confirm.setOnClickListener(this);
+        btnSAR_Review.setOnClickListener(this);
         //procedimiento de llenado de información
         txtServiceAwaitingRequestsStudentDateAR.setText("Fecha: 25 de octubre de 2019");
         txtServiceAwaitingRequestsStudentNameAR.setText("Nombre: Juan Emmanuel López Laguna");
         txtServiceAwaitingRequestsStudentIDAR.setText("Matrícula: 17171403");
-        txtServiceAwaitingRequestsStudentOldSyllabusAR.setText("Plan de Estudios Origen: ISIC-2010-224");
-        txtServiceAwaitingRequestsStudentNewSyllabusAR.setText("Plan de Estudios Destino: IIND-2010-227");
 
     }
 
@@ -51,13 +46,13 @@ public class FragmentServiceAwaitingRequests extends Fragment implements View.On
     public void onClick(View view) {
         //logica de aceptar o rechazar solicitud
         switch (view.getId()){
-            case R.id.btnServiceAwaitingRequestsValidateAR:{
+            case R.id.btnSAR_Review:{
                 Toast.makeText(getContext(),"Solicitud Aceptada",Toast.LENGTH_SHORT).show();
                 getActivity().getSupportFragmentManager().popBackStack();
                 //lógica para borrar la solicitud pendiente y actualizar el historial de solicitudes atendidas
                 break;
             }
-            case R.id.btnServiceAwaitingRequestsDenyAR:{
+            case R.id.btnSAR_Confirm:{
                 Toast.makeText(getContext(),"Solicitud Rechazada",Toast.LENGTH_SHORT).show();
                 getActivity().getSupportFragmentManager().popBackStack();
                 //lógica para borrar la solicitud pendiente y actualizar el historial de solicitudes atendidas

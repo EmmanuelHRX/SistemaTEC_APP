@@ -73,7 +73,7 @@
         app:layout_constraintTop_toBottomOf="@+id/linearLayoutCAR" />
 
     <Button
-        android:id="@+id/btnServiceAwaitingRequestsValidateAR"
+        android:id="@+id/btnSAR_Review"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
@@ -84,7 +84,7 @@
         app:layout_constraintTop_toTopOf="@+id/txtServiceAwaitingRequestsRevalidateSubjects2" />
 
     <Button
-        android:id="@+id/btnServiceAwaitingRequestsDenyAR"
+        android:id="@+id/btnSAR_Confirm"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="176dp"
