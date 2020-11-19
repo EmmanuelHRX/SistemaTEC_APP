@@ -21,7 +21,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <LinearLayout
-        android:id="@+id/linearLayoutCAR"
+        android:id="@+id/linearLayoutSAR"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
@@ -34,7 +34,7 @@
         app:layout_constraintTop_toBottomOf="@+id/txtServiceAwaitingRequestsRevalidateSubjects">
 
         <TextView
-            android:id="@+id/txtServiceAwaitingRequestsStudentDateAR"
+            android:id="@+id/txtSAR_StudentDate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="0dp"
@@ -42,7 +42,7 @@
             android:text="TextView" />
 
         <TextView
-            android:id="@+id/txtServiceAwaitingRequestsStudentNameAR"
+            android:id="@+id/txtSAR_StudentName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="0dp"
@@ -50,7 +50,7 @@
             android:text="TextView" />
 
         <TextView
-            android:id="@+id/txtServiceAwaitingRequestsStudentIDAR"
+            android:id="@+id/txtSAR_StudentID"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="0dp"
@@ -70,7 +70,7 @@
         android:textSize="22sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayoutCAR" />
+        app:layout_constraintTop_toBottomOf="@+id/linearLayoutSAR" />
 
     <Button
         android:id="@+id/btnSAR_Review"

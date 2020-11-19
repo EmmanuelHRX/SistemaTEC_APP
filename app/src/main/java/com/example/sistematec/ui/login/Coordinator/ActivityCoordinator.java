@@ -86,7 +86,7 @@ public class ActivityCoordinator extends AppCompatActivity
                 break;
             }
             case R.id.nav_coordinator_dictums: {
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_coordinator, new FragmentCoordinatorDictum()).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_coordinator, new FragmentCoordinatorAnalysisRequest()).commit();
                 break;
             }
             case R.id.nav_coordinator_logout: {

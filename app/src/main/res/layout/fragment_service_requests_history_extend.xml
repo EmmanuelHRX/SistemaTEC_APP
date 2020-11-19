@@ -21,7 +21,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <LinearLayout
-        android:id="@+id/linearLayoutCAR"
+        android:id="@+id/linearLayoutSAR"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
@@ -86,7 +86,7 @@
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayoutCAR" />
+        app:layout_constraintTop_toBottomOf="@+id/linearLayoutSAR" />
 
     <ScrollView
         android:id="@+id/scrollSHRE"

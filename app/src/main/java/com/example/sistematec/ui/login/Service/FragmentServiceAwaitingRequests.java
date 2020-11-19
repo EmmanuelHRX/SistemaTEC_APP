@@ -15,7 +15,7 @@ import com.example.sistematec.R;
 
 public class FragmentServiceAwaitingRequests extends Fragment implements View.OnClickListener{
 
-    TextView txtServiceAwaitingRequestsStudentDateAR, txtServiceAwaitingRequestsStudentNameAR, txtServiceAwaitingRequestsStudentIDAR;
+    TextView txtSAR_StudentDate, txtSAR_StudentName, txtSAR_StudentID;
     Button btnSAR_Review, btnSAR_Confirm;
     @Nullable
     @Override
@@ -26,9 +26,9 @@ public class FragmentServiceAwaitingRequests extends Fragment implements View.On
     }
 
     private void setData(View v) {
-        txtServiceAwaitingRequestsStudentDateAR = v.findViewById(R.id.txtServiceAwaitingRequestsStudentDateAR);
-        txtServiceAwaitingRequestsStudentNameAR = v.findViewById(R.id.txtServiceAwaitingRequestsStudentNameAR);
-        txtServiceAwaitingRequestsStudentIDAR = v.findViewById(R.id.txtServiceAwaitingRequestsStudentIDAR);
+        txtSAR_StudentDate = v.findViewById(R.id.txtSAR_StudentDate);
+        txtSAR_StudentName = v.findViewById(R.id.txtSAR_StudentName);
+        txtSAR_StudentID = v.findViewById(R.id.txtSAR_StudentID);
 
         btnSAR_Review = v.findViewById(R.id.btnSAR_Review);
         btnSAR_Confirm = v.findViewById(R.id.btnSAR_Confirm);
@@ -36,26 +36,26 @@ public class FragmentServiceAwaitingRequests extends Fragment implements View.On
         btnSAR_Confirm.setOnClickListener(this);
         btnSAR_Review.setOnClickListener(this);
         //procedimiento de llenado de información
-        txtServiceAwaitingRequestsStudentDateAR.setText("Fecha: 25 de octubre de 2019");
-        txtServiceAwaitingRequestsStudentNameAR.setText("Nombre: Juan Emmanuel López Laguna");
-        txtServiceAwaitingRequestsStudentIDAR.setText("Matrícula: 17171403");
+        txtSAR_StudentDate.setText("Fecha: 25 de octubre de 2019");
+        txtSAR_StudentName.setText("Nombre: Juan Emmanuel López Laguna");
+        txtSAR_StudentID.setText("Matrícula: 17171403");
 
     }
 
     @Override
     public void onClick(View view) {
-        //logica de aceptar o rechazar solicitud
+
         switch (view.getId()){
             case R.id.btnSAR_Review:{
-                Toast.makeText(getContext(),"Solicitud Aceptada",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(),"cargando pdf para revision",Toast.LENGTH_SHORT).show();
                 getActivity().getSupportFragmentManager().popBackStack();
-                //lógica para borrar la solicitud pendiente y actualizar el historial de solicitudes atendidas
+                //lógica para abrir el pdf
                 break;
             }
             case R.id.btnSAR_Confirm:{
-                Toast.makeText(getContext(),"Solicitud Rechazada",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(),"enviando solicitud",Toast.LENGTH_SHORT).show();
                 getActivity().getSupportFragmentManager().popBackStack();
-                //lógica para borrar la solicitud pendiente y actualizar el historial de solicitudes atendidas
+                //lógica para enviar el dictamen a service
                 break;
             }
         }

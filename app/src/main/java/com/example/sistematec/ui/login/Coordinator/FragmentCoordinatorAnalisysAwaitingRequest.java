@@ -1,0 +1,23 @@
+package com.example.sistematec.ui.login.Coordinator;
+
+import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import com.example.sistematec.R;
+
+
+public class FragmentCoordinatorAnalisysAwaitingRequest extends Fragment {
+
+
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View v = inflater.inflate(R.layout.fragment_coordinator_awaiting_request, container, false);
+        setData(v);
+        return v;
+    }
+
+    private void setData(View v) {
+
+    }
+}

@@ -29,7 +29,7 @@ public class FragmentAcademyProfile extends Fragment {
         txtServiceProfileName = v.findViewById(R.id.txtAcademyProfileName);
         txtServiceProfileEnrollment = v.findViewById(R.id.txtAcademyProfileID);
         txtServiceProfileJob = v.findViewById(R.id.txtAcademyProfileJob);
-        //procedimiento de llenado de la información
+        //procedimiento de llenado de la información incluyendo la imagen
 
         txtServiceProfileName.setText("Nombre: Perez Rodriguez Juan");
         txtServiceProfileEnrollment.setText("Matricula: AE131372");

@@ -31,12 +31,12 @@
         android:id="@+id/txtCAR_Analysis"
         android:layout_width="wrap_content"
         android:layout_height="65dp"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="55dp"
         android:text="ANÁLISIS ACADÉMICO"
         android:textColor="#000000"
         android:textSize="24sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -53,7 +53,7 @@
             android:id="@+id/linearLayoutCAR"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical" />
+            android:orientation="vertical"></LinearLayout>
     </ScrollView>
 
 

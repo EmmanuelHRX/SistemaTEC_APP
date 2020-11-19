@@ -15,9 +15,8 @@ import com.example.sistematec.R;
 
 public class FragmentAcademyAwaitingRequests extends Fragment implements View.OnClickListener {
 
-    TextView txtAcademyAwaitingRequestsStudentDateAR, txtAcademyAwaitingRequestsStudentNameAR, txtAcademyAwaitingRequestsStudentIDAR, txtAcademyAwaitingRequestsStudentOldSyllabusAR
-            , txtAcademyAwaitingRequestsStudentNewSyllabusAR;
-    Button btnAcademyAwaitingRequestsValidateAR, btnAcademyAwaitingRequestsDenyAR;
+    TextView txtAAR_StudentDate, txtAAR_StudentName, txtAAR_StudentID;
+    Button btnAAR_Upload, btnAAR_Review, btnAAR_Review2;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -27,40 +26,47 @@ public class FragmentAcademyAwaitingRequests extends Fragment implements View.On
     }
 
     private void setData(View v) {
-        txtAcademyAwaitingRequestsStudentDateAR = v.findViewById(R.id.txtAcademyAwaitingRequestsStudentDateAR);
-        txtAcademyAwaitingRequestsStudentNameAR = v.findViewById(R.id.txtAcademyAwaitingRequestsStudentNameAR);
-        txtAcademyAwaitingRequestsStudentIDAR = v.findViewById(R.id.txtAcademyAwaitingRequestsStudentIDAR);
+        txtAAR_StudentDate = v.findViewById(R.id.txtAAR_StudentDate);
+        txtAAR_StudentName = v.findViewById(R.id.txtAAR_StudentName);
+        txtAAR_StudentID = v.findViewById(R.id.txtAAR_StudentID);
 
-        btnAcademyAwaitingRequestsValidateAR = v.findViewById(R.id.btnAAR_Upload);
-        btnAcademyAwaitingRequestsDenyAR = v.findViewById(R.id.btnAAR_Upload);
+        btnAAR_Upload = v.findViewById(R.id.btnAAR_Upload);
+        btnAAR_Review = v.findViewById(R.id.btnAAR_Review);
+        btnAAR_Review2 = v.findViewById(R.id.btnAAR_Review2);
 
-        btnAcademyAwaitingRequestsValidateAR.setOnClickListener(this);
-        btnAcademyAwaitingRequestsDenyAR.setOnClickListener(this);
-        //procedimiento de llenado de información
-        txtAcademyAwaitingRequestsStudentDateAR.setText("Fecha: 25 de octubre de 2019");
-        txtAcademyAwaitingRequestsStudentNameAR.setText("Nombre: Juan Emmanuel López Laguna");
-        txtAcademyAwaitingRequestsStudentIDAR.setText("Matrícula: 17171403");
-        txtAcademyAwaitingRequestsStudentOldSyllabusAR.setText("Plan de Estudios Origen: ISIC-2010-224");
-        txtAcademyAwaitingRequestsStudentNewSyllabusAR.setText("Plan de Estudios Destino: IIND-2010-227");
+        btnAAR_Upload.setOnClickListener(this);
+        btnAAR_Review.setOnClickListener(this);
+        btnAAR_Review2.setOnClickListener(this);
+
+        //procedimiento de llenado de información con la BD
+        txtAAR_StudentDate.setText("Fecha: 25 de octubre de 2019");
+        txtAAR_StudentName.setText("Nombre: Juan Emmanuel López Laguna");
+        txtAAR_StudentID.setText("Matrícula: 17171403");
+
 
     }
 
     @Override
     public void onClick(View view) {
         //logica de aceptar o rechazar solicitud
-        final int a = R.id.btnAAR_Upload;
-        final int b = R.id.btnAAR_Upload;
+
         switch (view.getId()){
-            case 1:{
-                Toast.makeText(getContext(),"Solicitud Aceptada",Toast.LENGTH_SHORT).show();
+            case R.id.btnAAR_Review:{
+                Toast.makeText(getContext(),"cargando review 1",Toast.LENGTH_SHORT).show();
                 getActivity().getSupportFragmentManager().popBackStack();
-                //lógica para borrar la solicitud pendiente y actualizar el historial de solicitudes atendidas
+                //logica para abrir el pdf
                 break;
             }
-            case b:{
-                Toast.makeText(getContext(),"Solicitud Rechazada",Toast.LENGTH_SHORT).show();
+            case R.id.btnAAR_Review2:{
+                Toast.makeText(getContext(),"cargando review 2",Toast.LENGTH_SHORT).show();
                 getActivity().getSupportFragmentManager().popBackStack();
-                //lógica para borrar la solicitud pendiente y actualizar el historial de solicitudes atendidas
+                //lógica para abrir el pdf
+                break;
+            }
+            case R.id.btnAAR_Upload:{
+                Toast.makeText(getContext(),"subiendolo ",Toast.LENGTH_SHORT).show();
+                getActivity().getSupportFragmentManager().popBackStack();
+                //lógica para hacer el envio
                 break;
             }
         }
