@@ -27,7 +27,7 @@ public class FragmentCoordinatorAnalysisRequest extends Fragment {
     }
     private void setData(View v) {
         manager = getFragmentManager();
-        linearLayout = v.findViewById(R.id.linearLayoutCAR);
+        linearLayout = v.findViewById(R.id.linearLayoutCSAR);
         //obtener la cantidad de solicitudes de la base de datos
         int num = 15;
         buttonArray = new Button[num];
@@ -39,9 +39,9 @@ public class FragmentCoordinatorAnalysisRequest extends Fragment {
             buttonArray[i].setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    FragmentCoordinatorAnalisysAwaitingRequest FCAAR = new FragmentCoordinatorAnalisysAwaitingRequest();
+                    FragmentCoordinatorAnalysisAwaitingRequest FCAAR = new FragmentCoordinatorAnalysisAwaitingRequest();
                     FragmentTransaction transaction = manager.beginTransaction();
-                    transaction.replace(R.id.fragment_container_coordinator,FCAAR,"FragmentCoordinatorAwaitingRequest");
+                    transaction.replace(R.id.fragment_container_coordinator,FCAAR,"FragmentCoordinatorStudentAwaitingRequest");
                     transaction.addToBackStack("addFragmentCoordinatorAwaitingRequest");
                     transaction.commit();
                 }

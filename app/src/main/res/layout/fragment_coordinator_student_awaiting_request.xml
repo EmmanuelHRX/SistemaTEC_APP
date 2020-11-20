@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.login.Coordinator.FragmentCoordinatorStudentAwaitingRequest">
+
+    <TextView
+        android:id="@+id/txtApplicationCoordinatorRequest"
+        android:layout_width="wrap_content"
+        android:layout_height="65dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="55dp"
+        android:text="SOLICITUD DE CONVALIDACION DE ESTUDIOS"
+        android:textColor="#000000"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/linearLayoutCSAR"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@drawable/rectangle_layout_border"
+        android:layout_margin="20dp"
+        app:layout_constraintTop_toBottomOf="@id/txtApplicationCoordinatorRequest"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <TextView
+            android:id="@+id/txtCSAR_RequestDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/txtCSAR_StudentName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/txtCSAR_StudentID"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    />
+
+    <TextView
+        android:id="@+id/txtCSAR_ReviewRequest"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        app:layout_constraintStart_toStartOf="@id/linearLayoutCSAR"
+        app:layout_constraintTop_toBottomOf="@id/linearLayoutCSAR"
+        android:text="SOLICITUD"
+        android:textStyle="bold"
+        android:textSize="22dp"
+        />
+
+    <Button
+        android:id="@+id/btnCSAR_Review"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:background="@color/colorAccent"
+        android:text="REVISAR"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#FFFFFF"
+        app:layout_constraintTop_toTopOf="@id/txtCSAR_ReviewRequest"
+        app:layout_constraintEnd_toEndOf="@id/linearLayoutCSAR"
+         />
+
+    <TextView
+        android:id="@+id/txtCSAR_ReviewVoucher"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="COMPROBANTE LIBROS"
+        android:textSize="22dp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@id/linearLayoutCSAR"
+        app:layout_constraintTop_toBottomOf="@id/txtCSAR_ReviewRequest" />
+    <Button
+        android:id="@+id/btnCSAR_Review2"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:background="@color/colorAccent"
+        android:text="REVISAR"
+        android:textColor="#FFFFFF"
+        android:textColorHint="@color/cardview_dark_background"
+        app:layout_constraintTop_toTopOf="@id/txtCSAR_ReviewVoucher"
+        app:layout_constraintEnd_toEndOf="@id/linearLayoutCSAR" />
+
+    <TextView
+        android:id="@+id/txtCSAR_ReviewVoucher2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="COMPROBANTE LABORATORIO"
+        android:textSize="22dp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@id/linearLayoutCSAR"
+        app:layout_constraintTop_toBottomOf="@id/txtCSAR_ReviewVoucher" />
+    <Button
+        android:id="@+id/btnCSAR_Review3"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:background="@color/colorAccent"
+        android:text="REVISAR"
+        android:textColor="#FFFFFF"
+        app:layout_constraintEnd_toEndOf="@id/linearLayoutCSAR"
+        app:layout_constraintTop_toTopOf="@id/txtCSAR_ReviewVoucher2"
+        />
+
+    <TextView
+        android:id="@+id/txtCSAR_Kardex"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="KARDEX"
+        android:textSize="22dp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/txtCSAR_ReviewVoucher2"
+        app:layout_constraintTop_toBottomOf="@+id/txtCSAR_ReviewVoucher2" />
+
+    <Button
+        android:id="@+id/btnCSAR_Confirm"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginBottom="30dp"
+        android:background="@color/colorAccent"
+        android:text="CONFIRMAR"
+        android:textColor="#FFFFFF"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/linearLayoutCSAR" />
+
+    <Button
+        android:id="@+id/btnCSAR_Deny"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginBottom="36dp"
+        android:background="@color/colorAccent"
+        android:text="rechazar"
+        android:textColor="#FFFFFF"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/linearLayoutCSAR" />
+
+    <Button
+        android:id="@+id/btnCSAR_Review4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:text="REVISAR"
+        android:textColor="#FFFFFF"
+        app:layout_constraintEnd_toEndOf="@+id/linearLayoutCSAR"
+        app:layout_constraintTop_toTopOf="@+id/txtCSAR_Kardex" />
+
+</android.support.constraint.ConstraintLayout>

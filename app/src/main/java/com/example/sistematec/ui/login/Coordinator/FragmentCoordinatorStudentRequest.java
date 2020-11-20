@@ -12,14 +12,14 @@ import android.widget.LinearLayout;
 
 import com.example.sistematec.R;
 
-public class FragmentCoordinatorRequest extends Fragment {
+public class FragmentCoordinatorStudentRequest extends Fragment {
 
     LinearLayout linearLayout;
     FragmentManager manager;
     Button[] buttonArray;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.fragment_coordinator_request, container, false);
+        View v = inflater.inflate(R.layout.fragment_coordinator_student_request, container, false);
         setData(v);
         return v;
     }
@@ -38,9 +38,9 @@ public class FragmentCoordinatorRequest extends Fragment {
             buttonArray[i].setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    FragmentCoordinatorAwaitingRequest FCAR = new FragmentCoordinatorAwaitingRequest();
+                    FragmentCoordinatorStudentAwaitingRequest FCAR = new FragmentCoordinatorStudentAwaitingRequest();
                     FragmentTransaction transaction = manager.beginTransaction();
-                    transaction.replace(R.id.fragment_container_coordinator,FCAR,"FragmentCoordinatorAwaitingRequest");
+                    transaction.replace(R.id.fragment_container_coordinator,FCAR,"FragmentCoordinatorStudentAwaitingRequest");
                     transaction.addToBackStack("addFragmentCoordinatorAwaitingRequest");
                     transaction.commit();
                 }
