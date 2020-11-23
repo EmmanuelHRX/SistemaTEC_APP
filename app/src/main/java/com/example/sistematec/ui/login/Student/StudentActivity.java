@@ -1,16 +1,28 @@
 package com.example.sistematec.ui.login.Student;
 
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.app.NotificationCompat;
+import android.support.v4.app.NotificationManagerCompat;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.view.MenuItem;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import com.example.sistematec.R;
+import com.example.sistematec.ui.login.BackgroundTask.BackgroundTaks;
 import com.example.sistematec.ui.login.FragmentAllSettings;
 import com.example.sistematec.ui.login.Login.LoginActivity;
 
@@ -40,6 +52,12 @@ public class StudentActivity extends AppCompatActivity
     boolean checkOnBackstackchanges;
     private TextView txt_navHeaderStudent_name;
     private TextView txt_navHeaderStudent_id;
+
+
+    //Notification data
+    private static PendingIntent pendingIntent;
+    private static String CHANNEL_ID = "NOTIFICATION";
+    private static int NOTIFICATION_ID = 0;
 
 
 
@@ -74,6 +92,7 @@ public class StudentActivity extends AppCompatActivity
 
         setNecessaryData();
         setNavHeaderText();
+        setIntentService();
 
 
         if(savedInstanceState == null){
@@ -217,4 +236,66 @@ public class StudentActivity extends AppCompatActivity
             navigationView.setCheckedItem(R.id.nav_student_profile);
         }
     }
+
+    //métodos de implementación de notificaciones
+    private void setIntentService(){
+        Intent intent = new Intent(getApplicationContext(), new BackgroundTaks().getClass());
+        startService(intent);
+    }
+    private BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            createPendingIntent();
+            createNotification();
+        }
+    };
+
+    private void createPendingIntent() {
+        Intent intent = new Intent (this,StudentActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        pendingIntent = PendingIntent.getActivity(this,0,intent,0);
+    }
+
+    private void createNotification() {
+
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+            CharSequence name = "Notification";
+            NotificationChannel notificationChannel = new NotificationChannel(CHANNEL_ID,name, NotificationManager.IMPORTANCE_HIGH);
+            NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+            notificationManager.createNotificationChannel(notificationChannel);
+
+        }
+
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(getApplicationContext(), CHANNEL_ID);
+        builder.setContentTitle("SISTEMA TEC");
+        builder.setContentText("SE HAN REGISTRADO CAMBIOS EN SU PROCESO");
+        builder.setColor(152370);
+        builder.setSmallIcon(R.mipmap.logotecnm2017);
+        builder.setPriority(NotificationCompat.PRIORITY_HIGH);
+        builder.setLights(152370,1000,1000);
+        builder.setVibrate(new long[]{1000,1000,1000,1000,1000});
+        builder.setDefaults(Notification.DEFAULT_SOUND);
+
+        builder.setContentIntent(pendingIntent);
+        builder.setAutoCancel(true);
+
+        NotificationManagerCompat notificationManagerCompat = NotificationManagerCompat.from(getApplicationContext());
+        notificationManagerCompat.notify(NOTIFICATION_ID, builder.build());
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        IntentFilter intentFilter = new IntentFilter("broadcast");
+        LocalBroadcastManager.getInstance(this).registerReceiver(broadcastReceiver,intentFilter);
+
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(broadcastReceiver);
+    }
+
 }
