@@ -251,7 +251,7 @@ public class StudentActivity extends AppCompatActivity
     };
 
     private void createPendingIntent() {
-        Intent intent = new Intent (this,StudentActivity.class);
+        Intent intent = new Intent (this,LoginActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
         pendingIntent = PendingIntent.getActivity(this,0,intent,0);
     }
