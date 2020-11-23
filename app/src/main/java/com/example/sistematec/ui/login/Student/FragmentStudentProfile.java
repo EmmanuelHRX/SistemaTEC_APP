@@ -77,7 +77,7 @@ public class FragmentStudentProfile extends Fragment {
         txtAlumnoCarrera = view.findViewById(R.id.txtAlumnoCarrera);
         txtAlumnoSemestre = view.findViewById(R.id.txtAlumnoSemestre);
 
-        setData();
+        //setData();
 
         return view;
     }
