@@ -26,7 +26,7 @@ public class FragmentStudentRequestsCapture extends Fragment implements View.OnC
     private OnFragmentInteractionListener mListener;
 
     FragmentManager manager;
-    private Button btnStudentRequestsConfirm;
+
 
     private String id;
 
@@ -34,6 +34,19 @@ public class FragmentStudentRequestsCapture extends Fragment implements View.OnC
     TextView txt_studentReqCapture_id;
     TextView txt_studentReqCapture_career;
     TextView txt_studentReqCapture_semester;
+
+    Button btnStudentRequestsConfirm;
+    Button btnStudentRequestsViewSolForm;
+    Button btnStudentRequestsSolCapture;
+    Button btnStudentRequestsKardexCapture;
+    Button btnStudentRequestsNoDebtLabCapture;
+    Button btnStudentRequestsNoDebtLibCapture;
+
+    TextView txtStudentRequestsViewSolForm;
+    TextView txtStudentRequestsSolCapture;
+    TextView txtStudentRequestsKardexCapture;
+    TextView txtStudentRequestsNoDebtLabCapture;
+    TextView txtStudentRequestsNoDebtLibCapture;
 
     Spinner spnr_studentReqCapture_subjects;
 
@@ -72,11 +85,27 @@ public class FragmentStudentRequestsCapture extends Fragment implements View.OnC
 
         btnStudentRequestsConfirm = view.findViewById(R.id.btn_student_requests_confirm);
         btnStudentRequestsConfirm.setOnClickListener(this);
+        btnStudentRequestsViewSolForm = view.findViewById(R.id.btn_studentReqCapture_viewSolForm);
+        btnStudentRequestsViewSolForm.setOnClickListener(this);
+        btnStudentRequestsSolCapture = view.findViewById(R.id.btn_studentReqCapture_solCapture);
+        btnStudentRequestsSolCapture.setOnClickListener(this);
+        btnStudentRequestsKardexCapture = view.findViewById(R.id.btn_studentReqCapture_kardexCapture);
+        btnStudentRequestsKardexCapture.setOnClickListener(this);
+        btnStudentRequestsNoDebtLabCapture = view.findViewById(R.id.btn_studentReqCapture_noDebtLabCapture);
+        btnStudentRequestsNoDebtLabCapture.setOnClickListener(this);
+        btnStudentRequestsNoDebtLibCapture = view.findViewById(R.id.btn_studentReqCapture_noDebtLibCapture);
+        btnStudentRequestsNoDebtLibCapture.setOnClickListener(this);
 
-        spnr_studentReqCapture_subjects = view.findViewById(R.id.spnr_studentReqCapture_subjects);
-        spnr_studentReqCapture_subjects.setOnItemSelectedListener(this);
+        txtStudentRequestsViewSolForm = view.findViewById(R.id.txt_studentReqCapture_solForm);
+        txtStudentRequestsSolCapture = view.findViewById(R.id.txt_studentReqCapture_solCapture);
+        txtStudentRequestsKardexCapture = view.findViewById(R.id.txt_studentReqCapture_kardexCapture);
+        txtStudentRequestsNoDebtLabCapture = view.findViewById(R.id.txt_studentReqCapture_noDebtLabCapture);
+        txtStudentRequestsNoDebtLibCapture = view.findViewById(R.id.txt_studentReqCapture_noDebtLibCapture);
 
-        setSpinnerData();
+        //spnr_studentReqCapture_subjects = view.findViewById(R.id.spnr_studentReqCapture_subjects);
+        //spnr_studentReqCapture_subjects.setOnItemSelectedListener(this);
+
+        //setSpinnerData();
         setData();
 
         return view;
@@ -95,7 +124,7 @@ public class FragmentStudentRequestsCapture extends Fragment implements View.OnC
             //For para llenar el arreglo...
         }
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, subjects);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_item, subjects);
         spnr_studentReqCapture_subjects.setAdapter(adapter);
     }
 
@@ -138,11 +167,31 @@ public class FragmentStudentRequestsCapture extends Fragment implements View.OnC
 
         if (id == R.id.btn_student_requests_confirm) {
             FragmentStudentRequestsConfirmation frgStudentRCon = FragmentStudentRequestsConfirmation
-                    .newInstance(spnr_studentReqCapture_subjects.getSelectedItem().toString());
+                    .newInstance("");
             FragmentTransaction transaction = manager.beginTransaction();
             transaction.replace(R.id.fragment_container_student, frgStudentRCon, "StudentRCon");
             transaction.addToBackStack("addStudentRCon");
             transaction.commit();
+        }
+
+        if (view == btnStudentRequestsViewSolForm) {
+            Toast.makeText(getActivity(), "ViewSol", Toast.LENGTH_SHORT).show();
+        }
+
+        if (view == btnStudentRequestsSolCapture) {
+            Toast.makeText(getActivity(), "SolCap", Toast.LENGTH_SHORT).show();
+        }
+
+        if (view == btnStudentRequestsKardexCapture) {
+            Toast.makeText(getActivity(), "KarCap", Toast.LENGTH_SHORT).show();
+        }
+
+        if (view == btnStudentRequestsNoDebtLabCapture) {
+            Toast.makeText(getActivity(), "LabCap", Toast.LENGTH_SHORT).show();
+        }
+
+        if (view == btnStudentRequestsNoDebtLibCapture) {
+            Toast.makeText(getActivity(), "LibCap", Toast.LENGTH_SHORT).show();
         }
     }
 

@@ -8,8 +8,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.sistematec.R;
+import com.example.sistematec.ui.login.DatabaseConection.RetrofitClient;
+import com.example.sistematec.ui.login.DatabaseConection.StudentDataList;
+
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class FragmentStudentProfile extends Fragment {
 
@@ -107,12 +116,50 @@ public class FragmentStudentProfile extends Fragment {
 
         //TIPO_USUARIO MÉTODO DE LLENADO
 
-        this.txtAlumnoNombre.setText("Nombre: " + name);
-        this.txtAlumnoMatricula.setText("Matrícula: " + id);
-        this.txtAlumnoCarrera.setText("Carrera: " + career);
-        this.txtAlumnoSemestre.setText("Semestre: " + semester);
+        System.out.println("LLAMANDO");
+
+        getStudentData();
+
+
+
+
+
     }
 
+
+    private void getStudentData() {
+
+
+        Call<List<StudentDataList>> call = RetrofitClient.getInstance().getApi().getStudentData("17171403");
+        System.out.println("PASANDO");
+        call.enqueue(new Callback<List<StudentDataList>>() {
+            @Override
+            public void onResponse(Call<List<StudentDataList>> call, Response<List<StudentDataList>> response) {
+                System.out.println("COMPROBANDO");
+                if (response.body() != null) {
+                    id = response.body().get(0).getAluMatricula();
+                    System.out.println("MODIFICANDO: " + response.body().get(0).getAluMatricula());
+                    name = response.body().get(0).getUsuNombre();
+                    career = response.body().get(0).getCarNombre();
+                    semester = response.body().get(0).getAluSemestre();
+
+                    txtAlumnoNombre.setText("Nombre: " + name);
+                    txtAlumnoMatricula.setText("Matrícula: " + id);
+                    txtAlumnoCarrera.setText("Carrera: " + career);
+                    txtAlumnoSemestre.setText("Semestre: " + semester);
+
+                } else {
+                    Toast.makeText(getActivity(), "Matricula no válida, error.", Toast.LENGTH_SHORT).show();
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<List<StudentDataList>> call, Throwable t) {
+                System.out.println("FALLA - " + t.getCause().getMessage());
+            }
+        });
+    }
 
 
 }

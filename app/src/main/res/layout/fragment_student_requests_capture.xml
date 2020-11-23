@@ -42,7 +42,7 @@
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="10dp"
                 android:text="TextView"
-                android:textSize="20dp" />
+                android:textSize="15dp" />
 
             <TextView
                 android:id="@+id/txt_studentReqCapture_id"
@@ -51,7 +51,7 @@
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="14dp"
                 android:text="TextView"
-                android:textSize="20dp" />
+                android:textSize="15dp" />
 
             <TextView
                 android:id="@+id/txt_studentReqCapture_career"
@@ -60,7 +60,7 @@
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="14dp"
                 android:text="TextView"
-                android:textSize="20dp" />
+                android:textSize="15dp" />
 
             <TextView
                 android:id="@+id/txt_studentReqCapture_semester"
@@ -69,28 +69,9 @@
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="14dp"
                 android:text="TextView"
-                android:textSize="20dp" />
+                android:textSize="15dp" />
 
         </LinearLayout>
-
-        <TextView
-            android:id="@+id/txt_studentReqCapture_spinnerTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="20dp"
-            android:text="Carrera destino"
-            app:layout_constraintStart_toStartOf="@+id/linearLayout3"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout3" />
-
-        <Spinner
-            android:id="@+id/spnr_studentReqCapture_subjects"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            app:layout_constraintEnd_toEndOf="@+id/linearLayout3"
-            app:layout_constraintStart_toStartOf="@+id/linearLayout3"
-            app:layout_constraintTop_toBottomOf="@+id/txt_studentReqCapture_spinnerTitle" />
 
         <Button
             android:id="@+id/btn_student_requests_confirm"
@@ -98,13 +79,124 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="157dp"
             android:layout_marginEnd="166dp"
-            android:layout_marginBottom="73dp"
+            android:layout_marginBottom="20dp"
             android:background="@color/colorAccent"
             android:text="Confirmar"
             android:textColor="#FFFFFF"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
+
+        <Button
+            android:id="@+id/btn_studentReqCapture_viewSolForm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Ver"
+            android:background="@color/colorAccent"
+            android:textColor="#FFFFFF"
+            app:layout_constraintBottom_toBottomOf="@+id/txt_studentReqCapture_solForm"
+            app:layout_constraintEnd_toEndOf="@+id/linearLayout3"
+            app:layout_constraintTop_toTopOf="@+id/txt_studentReqCapture_solForm" />
+
+        <TextView
+            android:id="@+id/txt_studentReqCapture_solForm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="30dp"
+            android:text="Formato de solicitud"
+            app:layout_constraintStart_toStartOf="@+id/linearLayout3"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout3" />
+
+        <Button
+            android:id="@+id/btn_studentReqCapture_solCapture"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="Elegir"
+            android:background="@color/colorAccent"
+            android:textColor="#FFFFFF"
+            app:layout_constraintBottom_toBottomOf="@+id/txt_studentReqCapture_solCapture"
+            app:layout_constraintStart_toStartOf="@+id/linearLayout3"
+            app:layout_constraintTop_toTopOf="@+id/txt_studentReqCapture_solCapture" />
+
+        <TextView
+            android:id="@+id/txt_studentReqCapture_solCapture"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="8dp"
+            android:text="Captura tu solicitud"
+            app:layout_constraintEnd_toEndOf="@+id/linearLayout3"
+            app:layout_constraintTop_toBottomOf="@+id/btn_studentReqCapture_viewSolForm" />
+
+        <Button
+            android:id="@+id/btn_studentReqCapture_kardexCapture"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="Elegir"
+            android:background="@color/colorAccent"
+            android:textColor="#FFFFFF"
+            app:layout_constraintBottom_toBottomOf="@+id/txt_studentReqCapture_kardexCapture"
+            app:layout_constraintStart_toStartOf="@+id/linearLayout3"
+            app:layout_constraintTop_toTopOf="@+id/txt_studentReqCapture_kardexCapture" />
+
+        <TextView
+            android:id="@+id/txt_studentReqCapture_kardexCapture"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:layout_marginEnd="8dp"
+            android:text="Captura tu Kardex"
+            app:layout_constraintEnd_toEndOf="@+id/linearLayout3"
+            app:layout_constraintTop_toBottomOf="@+id/txt_studentReqCapture_solCapture" />
+
+        <Button
+            android:id="@+id/btn_studentReqCapture_noDebtLabCapture"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="Elegir"
+            android:background="@color/colorAccent"
+            android:textColor="#FFFFFF"
+            app:layout_constraintBottom_toBottomOf="@+id/txt_studentReqCapture_noDebtLabCapture"
+            app:layout_constraintStart_toStartOf="@+id/linearLayout3"
+            app:layout_constraintTop_toTopOf="@+id/txt_studentReqCapture_noDebtLabCapture" />
+
+        <TextView
+            android:id="@+id/txt_studentReqCapture_noDebtLabCapture"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="8dp"
+            android:maxWidth="180dp"
+            android:text="Captura tu comprobante de no adeudo de laboratorio"
+            app:layout_constraintEnd_toEndOf="@+id/linearLayout3"
+            app:layout_constraintTop_toBottomOf="@+id/txt_studentReqCapture_kardexCapture" />
+
+        <Button
+            android:id="@+id/btn_studentReqCapture_noDebtLibCapture"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="Elegir"
+            android:background="@color/colorAccent"
+            android:textColor="#FFFFFF"
+            app:layout_constraintBottom_toBottomOf="@+id/txt_studentReqCapture_noDebtLibCapture"
+            app:layout_constraintStart_toStartOf="@+id/linearLayout3"
+            app:layout_constraintTop_toTopOf="@+id/txt_studentReqCapture_noDebtLibCapture" />
+
+        <TextView
+            android:id="@+id/txt_studentReqCapture_noDebtLibCapture"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="8dp"
+            android:maxWidth="180dp"
+            android:text="Captura tu comprobante de no adeudo de biblioteca"
+            app:layout_constraintEnd_toEndOf="@+id/linearLayout3"
+            app:layout_constraintTop_toBottomOf="@+id/txt_studentReqCapture_noDebtLabCapture" />
     </android.support.constraint.ConstraintLayout>
 
 </FrameLayout>
