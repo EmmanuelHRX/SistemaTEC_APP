@@ -33,10 +33,9 @@ public class FragmentStudentRequestsConfirmation extends Fragment implements Vie
         // Required empty public constructor
     }
 
-    public static FragmentStudentRequestsConfirmation newInstance(String career) {
+    public static FragmentStudentRequestsConfirmation newInstance() {
         FragmentStudentRequestsConfirmation fragment = new FragmentStudentRequestsConfirmation();
         Bundle args = new Bundle();
-        args.putString(ARG_CAREER, career);
         fragment.setArguments(args);
         return fragment;
     }

@@ -1,6 +1,7 @@
 package com.example.sistematec.ui.login.Student;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -16,7 +17,16 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.sistematec.Data;
 import com.example.sistematec.R;
+import com.example.sistematec.UploadAndDownload;
+import com.example.sistematec.ui.login.DatabaseConection.ResponsePOJO;
+import com.example.sistematec.ui.login.DatabaseConection.RetrofitClient;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.http.Field;
 
 public class FragmentStudentRequestsCapture extends Fragment implements View.OnClickListener,
         AdapterView.OnItemSelectedListener {
@@ -49,6 +59,18 @@ public class FragmentStudentRequestsCapture extends Fragment implements View.OnC
     TextView txtStudentRequestsNoDebtLibCapture;
 
     Spinner spnr_studentReqCapture_subjects;
+
+    int docQueue;
+
+    String downloadedUrl = "http://192.168.56.1/sistematec/uploads/Formato-Solicitud.pdf";
+    String encodedSol;
+    String solName;
+    String encodedKardex;
+    String kardexName;
+    String encodedLab;
+    String labName;
+    String encodedLib;
+    String libName;
 
     public FragmentStudentRequestsCapture() {
         // Required empty public constructor
@@ -106,9 +128,24 @@ public class FragmentStudentRequestsCapture extends Fragment implements View.OnC
         //spnr_studentReqCapture_subjects.setOnItemSelectedListener(this);
 
         //setSpinnerData();
+        initVar();
         setData();
 
         return view;
+    }
+
+    private void initVar() {
+        solName = "Solicitud.pdf";
+        kardexName = "Kardex.pdf";
+        labName = "Laboratorio.pdf";
+        libName = "Biblioteca.pdf";
+
+        encodedSol = "";
+        encodedKardex = "";
+        encodedLab = "";
+        encodedLib = "";
+
+        docQueue = 0;
     }
 
     private void setSpinnerData() {
@@ -166,8 +203,14 @@ public class FragmentStudentRequestsCapture extends Fragment implements View.OnC
         int id = view.getId();
 
         if (id == R.id.btn_student_requests_confirm) {
+
+            uploadDocuments();
+
+            boolean a = true;
+            if (a)
+                return;
             FragmentStudentRequestsConfirmation frgStudentRCon = FragmentStudentRequestsConfirmation
-                    .newInstance("");
+                    .newInstance();
             FragmentTransaction transaction = manager.beginTransaction();
             transaction.replace(R.id.fragment_container_student, frgStudentRCon, "StudentRCon");
             transaction.addToBackStack("addStudentRCon");
@@ -175,23 +218,41 @@ public class FragmentStudentRequestsCapture extends Fragment implements View.OnC
         }
 
         if (view == btnStudentRequestsViewSolForm) {
-            Toast.makeText(getActivity(), "ViewSol", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(getActivity(), "ViewSol", Toast.LENGTH_SHORT).show();
+
+            if (downloadedUrl != null) {
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(downloadedUrl));
+                startActivity(browserIntent);
+            }
         }
 
         if (view == btnStudentRequestsSolCapture) {
-            Toast.makeText(getActivity(), "SolCap", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(getActivity(), "SolCap", Toast.LENGTH_SHORT).show();
+            docQueue = 1;
+            selectDocument();
+
+
         }
 
         if (view == btnStudentRequestsKardexCapture) {
-            Toast.makeText(getActivity(), "KarCap", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(getActivity(), "KarCap", Toast.LENGTH_SHORT).show();
+            docQueue = 2;
+            selectDocument();
+
         }
 
         if (view == btnStudentRequestsNoDebtLabCapture) {
-            Toast.makeText(getActivity(), "LabCap", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(getActivity(), "LabCap", Toast.LENGTH_SHORT).show();
+            docQueue = 3;
+            selectDocument();
+
         }
 
         if (view == btnStudentRequestsNoDebtLibCapture) {
-            Toast.makeText(getActivity(), "LibCap", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(getActivity(), "LibCap", Toast.LENGTH_SHORT).show();
+            docQueue = 4;
+            selectDocument();
+
         }
     }
 
@@ -210,4 +271,92 @@ public class FragmentStudentRequestsCapture extends Fragment implements View.OnC
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
+
+    public void selectDocument() {
+        UploadAndDownload.startPDFChooser(this);
+
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        UploadAndDownload.processPDFData(requestCode, resultCode, data, this.getActivity());
+        switch (docQueue) {
+            case 0: {
+                break;
+            }
+            case 1: {
+                encodedSol = UploadAndDownload.getEncodedPDF();
+                System.out.println(UploadAndDownload.getEncodedPDF() == null);
+                txtStudentRequestsSolCapture.setText(UploadAndDownload.getPdfRealName());
+                break;
+            }
+            case 2: {
+                encodedKardex = UploadAndDownload.getEncodedPDF();
+                System.out.println(UploadAndDownload.getEncodedPDF() == null);
+                txtStudentRequestsKardexCapture.setText(UploadAndDownload.getPdfRealName());
+                break;
+            }
+            case 3: {
+                encodedLab = UploadAndDownload.getEncodedPDF();
+                System.out.println(UploadAndDownload.getEncodedPDF() == null);
+                txtStudentRequestsNoDebtLabCapture.setText(UploadAndDownload.getPdfRealName());
+                break;
+            }
+            case 4: {
+                encodedLib = UploadAndDownload.getEncodedPDF();
+                System.out.println(UploadAndDownload.getEncodedPDF() == null);
+                txtStudentRequestsNoDebtLibCapture.setText(UploadAndDownload.getPdfRealName());
+                break;
+            }
+        }
+
+    }
+
+    public void uploadDocuments () {
+
+        if (encodedSol.isEmpty() || encodedKardex.isEmpty() || encodedLab.isEmpty() || encodedLib.isEmpty()) {
+            //Toast.makeText(getActivity(), "Documentación incompleta.", Toast.LENGTH_LONG).show();
+            //return;
+        }
+        System.out.println(Data.getStudentDepId());
+        Call<ResponsePOJO> call = RetrofitClient.getInstance()
+                .getApi().uploadRequestDocuments(Data.getStudentId(), Data.getStudentDepId(),
+                        encodedSol, solName, encodedKardex, kardexName);
+        call.enqueue(new Callback<ResponsePOJO>() {
+            @Override
+            public void onResponse(Call<ResponsePOJO> call, Response<ResponsePOJO> response) {
+                Toast.makeText(getActivity(), response.body().getRemarks(), Toast.LENGTH_SHORT).show();
+
+            }
+
+            @Override
+            public void onFailure(Call<ResponsePOJO> call, Throwable t) {
+                Toast.makeText(getActivity(), "Ha fallado el método 1", Toast.LENGTH_SHORT).show();
+
+                t.printStackTrace();
+            }
+        });
+
+        Call<ResponsePOJO> call2 = RetrofitClient.getInstance()
+                .getApi().uploadRequestDocuments2(Data.getStudentId(), encodedLab,
+                        labName, encodedLib, libName);
+        call2.enqueue(new Callback<ResponsePOJO>() {
+            @Override
+            public void onResponse(Call<ResponsePOJO> call2, Response<ResponsePOJO> response) {
+                Toast.makeText(getActivity(), response.body().getRemarks(), Toast.LENGTH_SHORT).show();
+
+            }
+
+            @Override
+            public void onFailure(Call<ResponsePOJO> call2, Throwable t) {
+                Toast.makeText(getActivity(), "Ha fallado el método 2", Toast.LENGTH_SHORT).show();
+
+                t.printStackTrace();
+            }
+        });
+
+    }
+
 }

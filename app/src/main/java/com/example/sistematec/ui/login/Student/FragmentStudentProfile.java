@@ -13,6 +13,7 @@ import android.widget.Toast;
 import com.example.sistematec.R;
 import com.example.sistematec.ui.login.DatabaseConection.RetrofitClient;
 import com.example.sistematec.ui.login.DatabaseConection.StudentDataList;
+import com.example.sistematec.Data;
 
 import java.util.List;
 
@@ -40,13 +41,9 @@ public class FragmentStudentProfile extends Fragment {
         // Required empty public constructor
     }
 
-    public static FragmentStudentProfile newInstance(String name, String id, String career, String semester) {
+    public static FragmentStudentProfile newInstance() {
         FragmentStudentProfile fragment = new FragmentStudentProfile();
         Bundle args = new Bundle();
-        args.putString(ARG_NAME, name);
-        args.putString(ARG_ID, id);
-        args.putString(ARG_CAREER, career);
-        args.putString(ARG_SEMESTER, semester);
         fragment.setArguments(args);
         return fragment;
     }
@@ -77,7 +74,7 @@ public class FragmentStudentProfile extends Fragment {
         txtAlumnoCarrera = view.findViewById(R.id.txtAlumnoCarrera);
         txtAlumnoSemestre = view.findViewById(R.id.txtAlumnoSemestre);
 
-        //setData();
+        setData();
 
         return view;
     }
@@ -121,9 +118,6 @@ public class FragmentStudentProfile extends Fragment {
         getStudentData();
 
 
-
-
-
     }
 
 
@@ -137,16 +131,17 @@ public class FragmentStudentProfile extends Fragment {
             public void onResponse(Call<List<StudentDataList>> call, Response<List<StudentDataList>> response) {
                 System.out.println("COMPROBANDO");
                 if (response.body() != null) {
-                    id = response.body().get(0).getAluMatricula();
                     System.out.println("MODIFICANDO: " + response.body().get(0).getAluMatricula());
-                    name = response.body().get(0).getUsuNombre();
-                    career = response.body().get(0).getCarNombre();
-                    semester = response.body().get(0).getAluSemestre();
+                    Data.setStudentId(response.body().get(0).getAluMatricula());
+                    Data.setStudentName(response.body().get(0).getUsuNombre());
+                    Data.setStudentCareer(response.body().get(0).getCarNombre());
+                    Data.setStudentSemester(response.body().get(0).getAluSemestre());
+                    Data.setStudentDepId(response.body().get(0).getDepId());
 
-                    txtAlumnoNombre.setText("Nombre: " + name);
-                    txtAlumnoMatricula.setText("Matrícula: " + id);
-                    txtAlumnoCarrera.setText("Carrera: " + career);
-                    txtAlumnoSemestre.setText("Semestre: " + semester);
+                    txtAlumnoNombre.setText("Nombre: " + Data.getStudentName());
+                    txtAlumnoMatricula.setText("Matrícula: " + Data.getStudentId());
+                    txtAlumnoCarrera.setText("Carrera: " + Data.getStudentCareer());
+                    txtAlumnoSemestre.setText("Semestre: " + Data.getStudentSemester());
 
                 } else {
                     Toast.makeText(getActivity(), "Matricula no válida, error.", Toast.LENGTH_SHORT).show();
@@ -156,7 +151,7 @@ public class FragmentStudentProfile extends Fragment {
 
             @Override
             public void onFailure(Call<List<StudentDataList>> call, Throwable t) {
-                System.out.println("FALLA - " + t.getCause().getMessage());
+                System.out.println("FALLA - " );
             }
         });
     }

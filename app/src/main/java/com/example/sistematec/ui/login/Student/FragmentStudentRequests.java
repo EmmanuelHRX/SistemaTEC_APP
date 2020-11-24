@@ -12,13 +12,24 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.*;
 
+import com.example.sistematec.Data;
 import com.example.sistematec.R;
+import com.example.sistematec.ui.login.DatabaseConection.RetrofitClient;
+import com.example.sistematec.ui.login.DatabaseConection.StudentDataList;
+import com.example.sistematec.ui.login.DatabaseConection.StudentRequestList;
+
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class FragmentStudentRequests extends Fragment implements View.OnClickListener {
 
     private static final String ARG_ID = "id";
 
     FragmentManager manager;
+    LinearLayout lay_studentRequests_lay1;
     FloatingActionButton floatbtnAddRequest;
     TextView txt_studentRequests_type;
     TextView txt_studentRequests_folio;
@@ -38,10 +49,9 @@ public class FragmentStudentRequests extends Fragment implements View.OnClickLis
     }
 
 
-    public static FragmentStudentRequests newInstance(String id) {
+    public static FragmentStudentRequests newInstance() {
         FragmentStudentRequests fragment = new FragmentStudentRequests();
         Bundle args = new Bundle();
-        args.putString(ARG_ID, id);
         fragment.setArguments(args);
         return fragment;
     }
@@ -62,6 +72,7 @@ public class FragmentStudentRequests extends Fragment implements View.OnClickLis
 
         manager = getFragmentManager();
 
+        lay_studentRequests_lay1 = view.findViewById(R.id.lay_studentRequests_lay1);
         txt_studentRequests_type = view.findViewById(R.id.txt_studentRequests_type);
         txt_studentRequests_folio = view.findViewById(R.id.txt_studentRequests_folio);
         txt_studentRequests_noReqWarn = view.findViewById(R.id.txt_studentRequests_noReqWarn);
@@ -72,7 +83,16 @@ public class FragmentStudentRequests extends Fragment implements View.OnClickLis
         floatbtnAddRequest = view.findViewById(R.id.floatbtn_student_requests_add);
         floatbtnAddRequest.setOnClickListener(this);
 
-        showRequestExistence();
+        lay_studentRequests_lay1.setVisibility(View.INVISIBLE);
+        txt_studentRequests_type.setVisibility(View.INVISIBLE);
+        txt_studentRequests_folio.setVisibility(View.INVISIBLE);
+        btn_studentRequests_check.setVisibility(View.INVISIBLE);
+        txt_studentRequests_noReqWarn.setVisibility(View.INVISIBLE);
+        img_studentRequests_noReq.setVisibility(View.INVISIBLE);
+        floatbtnAddRequest.hide();
+
+        checkForRequest();
+
         setRequestData();
 
         return view;
@@ -88,13 +108,13 @@ public class FragmentStudentRequests extends Fragment implements View.OnClickLis
 
     }
 
-    private void showRequestExistence() {
+    private void showRequestExistence(boolean isThereNayRequest) {
         //BD data request
         //If there's a request, shows the request and hide the noReq message and image
-        boolean testBool = false;
-        boolean theresARequest = true;
-        if (theresARequest) {
+        boolean testBool = true;
+        if (isThereNayRequest) {
 
+            lay_studentRequests_lay1.setVisibility(View.VISIBLE);
             txt_studentRequests_type.setVisibility(View.VISIBLE);
             txt_studentRequests_folio.setVisibility(View.VISIBLE);
             btn_studentRequests_check.setVisibility(View.VISIBLE);
@@ -114,6 +134,7 @@ public class FragmentStudentRequests extends Fragment implements View.OnClickLis
         floatbtnAddRequest.show();
 
         if (testBool) {
+            lay_studentRequests_lay1.setVisibility(View.INVISIBLE);
             txt_studentRequests_type.setVisibility(View.INVISIBLE);
             txt_studentRequests_folio.setVisibility(View.INVISIBLE);
             btn_studentRequests_check.setVisibility(View.INVISIBLE);
@@ -172,4 +193,33 @@ public class FragmentStudentRequests extends Fragment implements View.OnClickLis
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
+
+    private void checkForRequest() {
+
+        Call<List<StudentRequestList>> call = RetrofitClient.getInstance().getApi().getStudentRequest(Data.getStudentId());
+        call.enqueue(new Callback<List<StudentRequestList>>() {
+            @Override
+            public void onResponse(Call<List<StudentRequestList>> call, Response<List<StudentRequestList>> response) {
+                System.out.println(response.body());
+                if (response.body() != null) {
+                    //System.out.println("MODIFICANDO: " + response.body().get(0).getSolId());
+                    txt_studentRequests_folio.setText("Folio: " + response.body().get(0).getSolId());
+                    Data.setStudentSolId(response.body().get(0).getSolId());
+                    Data.setStudentSolPhaseId(response.body().get(0).getSolEtapaId());
+                    Data.setStudentSolPhaseDescription(response.body().get(0).getEtapaDescripcion());
+                    showRequestExistence(true);
+
+                } else {
+                    Toast.makeText(getActivity(), "No hay solicitudes.", Toast.LENGTH_SHORT).show();
+                    showRequestExistence(false);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<StudentRequestList>> call, Throwable t) {
+                System.out.println("FALLA - " );
+            }
+        });
+    }
+
 }

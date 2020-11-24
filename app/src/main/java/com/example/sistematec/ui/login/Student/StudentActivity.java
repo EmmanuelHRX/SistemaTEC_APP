@@ -41,11 +41,6 @@ public class StudentActivity extends AppCompatActivity
     FragmentManager manager;
 
     // Necessary data
-    private String userEmail;
-    private String name;
-    private String id;
-    private String career;
-    private String semester;
 
     //
 
@@ -98,7 +93,7 @@ public class StudentActivity extends AppCompatActivity
         if(savedInstanceState == null){
 
             getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.fragment_container_student, FragmentStudentProfile.newInstance(name, this.id, career, semester))
+                    .replace(R.id.fragment_container_student, FragmentStudentProfile.newInstance())
                     .commit();
 
             navigationView.setCheckedItem(R.id.nav_student_profile);
@@ -123,23 +118,14 @@ public class StudentActivity extends AppCompatActivity
     public void setNecessaryData() {
 
         //BD data request
-        userEmail = getIntent().getStringExtra("userEmail");
-        name = "Juan Emmanuel López Laguna";
-        id = "17171372";
-        career = "Ing. Sistemas Computacionales";
-        semester = "7vo :'c";
 
-        getIntent().putExtra("name", name);
-        getIntent().putExtra("id", id);
-        getIntent().putExtra("career", career);
-        getIntent().putExtra("semester", semester);
     }
 
     public void setNavHeaderText() {
         //Recolección de datos de BD
 
-        txt_navHeaderStudent_name.setText(name);
-        txt_navHeaderStudent_id.setText(userEmail);
+        txt_navHeaderStudent_name.setText("");
+        txt_navHeaderStudent_id.setText("");
     }
 
     @SuppressWarnings("StatementWithEmptyBody")
@@ -155,7 +141,7 @@ public class StudentActivity extends AppCompatActivity
                 manager.popBackStack(0, FragmentManager.POP_BACK_STACK_INCLUSIVE);
 
                 getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.fragment_container_student, FragmentStudentProfile.newInstance(name, this.id, career, semester))
+                        .replace(R.id.fragment_container_student, FragmentStudentProfile.newInstance())
                         .commit();
             }
 
@@ -168,7 +154,7 @@ public class StudentActivity extends AppCompatActivity
                 System.out.println("AFTER--------> " + manager.getBackStackEntryCount());
 
 
-                FragmentStudentRequests frgStudentR = FragmentStudentRequests.newInstance(this.id);
+                FragmentStudentRequests frgStudentR = FragmentStudentRequests.newInstance();
                 FragmentTransaction transaction = manager.beginTransaction();
                 transaction.replace(R.id.fragment_container_student, frgStudentR, "StudentR");
                 transaction.addToBackStack("addStudentR");

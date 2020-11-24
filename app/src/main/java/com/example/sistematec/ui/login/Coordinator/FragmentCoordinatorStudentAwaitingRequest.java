@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.sistematec.Data;
 import com.example.sistematec.R;
 
 public class FragmentCoordinatorStudentAwaitingRequest extends Fragment implements View.OnClickListener{
@@ -29,9 +30,9 @@ public class FragmentCoordinatorStudentAwaitingRequest extends Fragment implemen
         txtCSAR_StudentID = v.findViewById(R.id.txtCSAR_StudentID);
 
         //obtención de la información del estudiante mediante la BD
-        txtCSAR_RequestDate.setText("Fecha: 25 de octubre de 2019");
-        txtCSAR_StudentID.setText("Matrícula: 17171403");
-        txtCSAR_StudentName.setText("Nombre: Juan Emmanuel López Laguna");
+        txtCSAR_RequestDate.setText("Fecha: ---------");
+        txtCSAR_StudentID.setText("Matrícula: " + Data.getStudentId());
+        txtCSAR_StudentName.setText("Nombre: " + Data.getStudentName());
 
         btnCSAR_Review = v.findViewById(R.id.btnCSAR_Review);
         btnCSAR_Review2 = v.findViewById(R.id.btnCSAR_Review2);

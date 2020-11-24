@@ -11,19 +11,27 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.sistematec.Data;
 import com.example.sistematec.R;
+import com.example.sistematec.ui.login.DatabaseConection.RetrofitClient;
+import com.example.sistematec.ui.login.DatabaseConection.StudentRequestList;
+
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class FragmentStudentRequestsStatus extends Fragment implements View.OnClickListener {
 
     private OnFragmentInteractionListener mListener;
 
     ImageView img_studentReqStatus_info1;
-    ImageView img_studentReqStatus_info2;
-    ImageView img_studentReqStatus_info3;
-    ImageView img_studentReqStatus_info4;
-    ImageView img_studentReqStatus_info5;
-    ImageView img_studentReqStatus_info6;
+    TextView txt_studentReqStatus_info;
+    TextView txt_studentReqStatus_desc;
     Button btn_studentReqStatus_back;
 
 
@@ -52,11 +60,8 @@ public class FragmentStudentRequestsStatus extends Fragment implements View.OnCl
         View view = inflater.inflate(R.layout.fragment_student_requests_status, container, false);
 
         img_studentReqStatus_info1 = view.findViewById(R.id.img_studentReqStatus_info1);
-        img_studentReqStatus_info2 = view.findViewById(R.id.img_studentReqStatus_info2);
-        img_studentReqStatus_info3 = view.findViewById(R.id.img_studentReqStatus_info3);
-        img_studentReqStatus_info4 = view.findViewById(R.id.img_studentReqStatus_info4);
-        img_studentReqStatus_info5 = view.findViewById(R.id.img_studentReqStatus_info5);
-        img_studentReqStatus_info6 = view.findViewById(R.id.img_studentReqStatus_info6);
+        txt_studentReqStatus_info = view.findViewById(R.id.txt_studentReqStatus_info);
+        txt_studentReqStatus_desc =  view.findViewById(R.id.txt_studentReqStatus_desc);
         btn_studentReqStatus_back = view.findViewById(R.id.btn_studentReqStatus_back);
         btn_studentReqStatus_back.setOnClickListener(this);
 
@@ -65,92 +70,10 @@ public class FragmentStudentRequestsStatus extends Fragment implements View.OnCl
         return view;
     }
 
-    private void setInfoStatus() {
-        //DB request
-        int[] infoStatus = new int[] {1, 1, 1, 0, 0, 0};
 
-        for (int i = 0; i < infoStatus.length; i++) {
-            if (infoStatus[i] == 0) {
-                continue;
-            }
-            setInfoStatus(i);
-        }
-
-    }
     //TODO: Cambiar íconos ic_menu_send por palomitas
     private void setInfoStatus(int infoNumber) {
-        switch (infoNumber) {
 
-            case 0: {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                    img_studentReqStatus_info1.setImageDrawable(getResources().getDrawable(R.drawable.ic_menu_send,
-                            getActivity().getApplicationContext().getTheme()));
-                } else {
-                    img_studentReqStatus_info1.setImageDrawable(getResources().getDrawable(R.drawable.ic_menu_send));
-                }
-                break;
-            }
-
-            case 1: {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                    img_studentReqStatus_info2.setImageDrawable(getResources().getDrawable(R.drawable.ic_menu_send,
-                            getActivity().getApplicationContext().getTheme()));
-                } else {
-                    img_studentReqStatus_info2.setImageDrawable(getResources().getDrawable(R.drawable.ic_menu_send));
-                }
-
-                break;
-            }
-
-            case 2: {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                    img_studentReqStatus_info3.setImageDrawable(getResources().getDrawable(R.drawable.ic_menu_send,
-                            getActivity().getApplicationContext().getTheme()));
-                } else {
-                    img_studentReqStatus_info3.setImageDrawable(getResources().getDrawable(R.drawable.ic_menu_send));
-                }
-
-                break;
-            }
-
-            case 3: {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                    img_studentReqStatus_info4.setImageDrawable(getResources().getDrawable(R.drawable.ic_menu_send,
-                            getActivity().getApplicationContext().getTheme()));
-                } else {
-                    img_studentReqStatus_info4.setImageDrawable(getResources().getDrawable(R.drawable.ic_menu_send));
-                }
-
-                break;
-            }
-
-            case 4: {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                    img_studentReqStatus_info5.setImageDrawable(getResources().getDrawable(R.drawable.ic_menu_send,
-                            getActivity().getApplicationContext().getTheme()));
-                } else {
-                    img_studentReqStatus_info5.setImageDrawable(getResources().getDrawable(R.drawable.ic_menu_send));
-                }
-
-                break;
-            }
-
-            case 5: {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                    img_studentReqStatus_info6.setImageDrawable(getResources().getDrawable(R.drawable.ic_menu_send,
-                            getActivity().getApplicationContext().getTheme()));
-                } else {
-                    img_studentReqStatus_info6.setImageDrawable(getResources().getDrawable(R.drawable.ic_menu_send));
-                }
-
-                break;
-            }
-
-            default: {
-
-            }
-
-        }
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -189,5 +112,13 @@ public class FragmentStudentRequestsStatus extends Fragment implements View.OnCl
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
+    }
+
+    private void setInfoStatus() {
+        //DB request or not
+
+        txt_studentReqStatus_desc.setText(Data.getStudentSolPhaseDescription());
+
+
     }
 }

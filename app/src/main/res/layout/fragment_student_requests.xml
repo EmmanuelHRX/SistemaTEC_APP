@@ -56,7 +56,7 @@
             app:layout_constraintTop_toBottomOf="@+id/img_studentRequest_noReqs" />
 
         <LinearLayout
-            android:id="@+id/linearLayout2"
+            android:id="@+id/lay_studentRequests_lay1"
             android:layout_width="389dp"
             android:layout_height="60dp"
             android:layout_marginStart="8dp"
@@ -70,6 +70,7 @@
 
 
             <LinearLayout
+                android:id="@+id/lay_studentRequests_lay2"
                 android:layout_width="210dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -111,7 +112,7 @@
             android:src="@android:drawable/ic_delete"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
+            app:layout_constraintTop_toBottomOf="@+id/lay_studentRequests_lay1" />
     </android.support.constraint.ConstraintLayout>
 
 </FrameLayout>
