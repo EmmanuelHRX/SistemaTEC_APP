@@ -7,6 +7,8 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.view.MenuItem;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
+
+import com.example.sistematec.Data;
 import com.example.sistematec.R;
 import com.example.sistematec.ui.login.Login.LoginActivity;
 
@@ -52,7 +54,7 @@ public class ActivityCoordinator extends AppCompatActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.coordinator, menu);
+        
         return true;
     }
 
@@ -64,9 +66,7 @@ public class ActivityCoordinator extends AppCompatActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
+
 
         return super.onOptionsItemSelected(item);
     }
@@ -85,11 +85,16 @@ public class ActivityCoordinator extends AppCompatActivity
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_coordinator, new FragmentCoordinatorStudentRequest()).commit();
                 break;
             }
-            case R.id.nav_coordinator_dictums: {
+            case R.id.nav_coordinator_analysis: {
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_coordinator, new FragmentCoordinatorAnalysisRequest()).commit();
                 break;
             }
+            case R.id.nav_coordinator_conf: {
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_coordinator, new FragmentCoordinatorConRequest()).commit();
+                break;
+            }
             case R.id.nav_coordinator_logout: {
+                Data.resetLogindata();
                 Intent actLogin = new Intent(this, LoginActivity.class);
                 startActivity(actLogin);
                 finish();

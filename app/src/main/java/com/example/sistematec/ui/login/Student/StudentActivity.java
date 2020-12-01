@@ -21,6 +21,8 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.view.MenuItem;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
+
+import com.example.sistematec.Data;
 import com.example.sistematec.R;
 import com.example.sistematec.ui.login.BackgroundTask.BackgroundTaks;
 import com.example.sistematec.ui.login.FragmentAllSettings;
@@ -36,24 +38,16 @@ public class StudentActivity extends AppCompatActivity
         FragmentStudentRequests.OnFragmentInteractionListener, FragmentStudentRequestsCapture.OnFragmentInteractionListener,
         FragmentStudentRequestsConfirmation.OnFragmentInteractionListener,
         FragmentStudentRequestsNotifications.OnFragmentInteractionListener,
-        FragmentStudentRequestsStatus.OnFragmentInteractionListener{
+        FragmentStudentRequestsStatus.OnFragmentInteractionListener, FragmentStudentRequestsCon.OnFragmentInteractionListener {
 
     FragmentManager manager;
+    Intent intentService;
 
-    // Necessary data
 
-    //
 
     boolean checkOnBackstackchanges;
     private TextView txt_navHeaderStudent_name;
     private TextView txt_navHeaderStudent_id;
-
-
-    //Notification data
-    private static PendingIntent pendingIntent;
-    private static String CHANNEL_ID = "NOTIFICATION";
-    private static int NOTIFICATION_ID = 0;
-
 
 
     DrawerLayout drawer;
@@ -85,9 +79,7 @@ public class StudentActivity extends AppCompatActivity
         checkOnBackstackchanges = true;
         ////////////////////////////////////////////////////////////////////////////////////////////
 
-        setNecessaryData();
         setNavHeaderText();
-        setIntentService();
 
 
         if(savedInstanceState == null){
@@ -115,17 +107,11 @@ public class StudentActivity extends AppCompatActivity
         }
     }
 
-    public void setNecessaryData() {
-
-        //BD data request
-
-    }
-
     public void setNavHeaderText() {
         //Recolección de datos de BD
 
-        txt_navHeaderStudent_name.setText("");
-        txt_navHeaderStudent_id.setText("");
+        txt_navHeaderStudent_name.setText("Instituto Tecnológico de Culiacán");
+        txt_navHeaderStudent_id.setText("Menú");
     }
 
     @SuppressWarnings("StatementWithEmptyBody")
@@ -147,11 +133,9 @@ public class StudentActivity extends AppCompatActivity
 
         } else if (id == R.id.nav_student_requests) {
             if (navigationView.getCheckedItem().getItemId() != R.id.nav_student_requests) {
-                System.out.println("BEFORE--------> " + manager.getBackStackEntryCount());
                 checkOnBackstackchanges = false;
                 manager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
                 checkOnBackstackchanges = true;
-                System.out.println("AFTER--------> " + manager.getBackStackEntryCount());
 
 
                 FragmentStudentRequests frgStudentR = FragmentStudentRequests.newInstance();
@@ -164,11 +148,9 @@ public class StudentActivity extends AppCompatActivity
 
         } else if (id == R.id.nav_student_notifications) {
             if (navigationView.getCheckedItem().getItemId() != R.id.nav_student_notifications) {
-                System.out.println("BEFORE--------> " + manager.getBackStackEntryCount());
                 checkOnBackstackchanges = false;
                 manager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
                 checkOnBackstackchanges = true;
-                System.out.println("AFTER--------> " + manager.getBackStackEntryCount());
 
 
                 FragmentStudentRequestsNotifications frgStudentN = FragmentStudentRequestsNotifications.newInstance();
@@ -181,11 +163,9 @@ public class StudentActivity extends AppCompatActivity
 
         } else if (id == R.id.nav_student_settings) {
             if (navigationView.getCheckedItem().getItemId() != R.id.nav_student_settings) {
-                System.out.println("BEFORE--------> " + manager.getBackStackEntryCount());
                 checkOnBackstackchanges = false;
                 manager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
                 checkOnBackstackchanges = true;
-                System.out.println("AFTER--------> " + manager.getBackStackEntryCount());
 
 
                 FragmentAllSettings frgStudentSettings = new FragmentAllSettings();
@@ -198,6 +178,7 @@ public class StudentActivity extends AppCompatActivity
 
         } else if (id == R.id.nav_student_logout) {
             if (navigationView.getCheckedItem().getItemId() != R.id.nav_student_logout) {
+                Data.resetLogindata();
                 manager.popBackStack(0, FragmentManager.POP_BACK_STACK_INCLUSIVE);
                 Intent actLogin = new Intent(this, LoginActivity.class);
                 startActivity(actLogin);
@@ -223,65 +204,6 @@ public class StudentActivity extends AppCompatActivity
         }
     }
 
-    //métodos de implementación de notificaciones
-    private void setIntentService(){
-        Intent intent = new Intent(getApplicationContext(), new BackgroundTaks().getClass());
-        startService(intent);
-    }
-    private BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            createPendingIntent();
-            createNotification();
-        }
-    };
 
-    private void createPendingIntent() {
-        Intent intent = new Intent (this,LoginActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        pendingIntent = PendingIntent.getActivity(this,0,intent,0);
-    }
-
-    private void createNotification() {
-
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
-            CharSequence name = "Notification";
-            NotificationChannel notificationChannel = new NotificationChannel(CHANNEL_ID,name, NotificationManager.IMPORTANCE_HIGH);
-            NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-            notificationManager.createNotificationChannel(notificationChannel);
-
-        }
-
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(getApplicationContext(), CHANNEL_ID);
-        builder.setContentTitle("SISTEMA TEC");
-        builder.setContentText("SE HAN REGISTRADO CAMBIOS EN SU PROCESO");
-        builder.setColor(152370);
-        builder.setSmallIcon(R.mipmap.logotecnm2017);
-        builder.setPriority(NotificationCompat.PRIORITY_HIGH);
-        builder.setLights(152370,1000,1000);
-        builder.setVibrate(new long[]{1000,1000,1000,1000,1000});
-        builder.setDefaults(Notification.DEFAULT_SOUND);
-
-        builder.setContentIntent(pendingIntent);
-        builder.setAutoCancel(true);
-
-        NotificationManagerCompat notificationManagerCompat = NotificationManagerCompat.from(getApplicationContext());
-        notificationManagerCompat.notify(NOTIFICATION_ID, builder.build());
-
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        IntentFilter intentFilter = new IntentFilter("broadcast");
-        LocalBroadcastManager.getInstance(this).registerReceiver(broadcastReceiver,intentFilter);
-
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        LocalBroadcastManager.getInstance(this).unregisterReceiver(broadcastReceiver);
-    }
 
 }

@@ -8,12 +8,15 @@ public class PersonalDataList implements Serializable {
     private String usuNombre;
     private String perDepId;
     private String depNombre;
+    private String usuFotoUrl;
 
-    public PersonalDataList(String perMatricula, String usuNombre, String perDepId, String depNombre) {
+
+    public PersonalDataList(String perMatricula, String usuNombre, String perDepId, String depNombre, String usuFotoUrl) {
         this.perMatricula = perMatricula;
         this.usuNombre = usuNombre;
         this.perDepId = perDepId;
         this.depNombre = depNombre;
+        this.usuFotoUrl = usuFotoUrl;
     }
 
     public String getPerMatricula() {
@@ -30,5 +33,9 @@ public class PersonalDataList implements Serializable {
 
     public String getDepNombre() {
         return depNombre;
+    }
+
+    public String getUsuFotoUrl() {
+        return usuFotoUrl;
     }
 }

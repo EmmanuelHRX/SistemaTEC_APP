@@ -4,13 +4,13 @@ import java.io.Serializable;
 
 public class CheckedCredentialsList implements Serializable {
 
-    private String cargo;
+    private String ocupacion;
 
-    public CheckedCredentialsList(String cargo) {
-        this.cargo = cargo;
+    public CheckedCredentialsList(String ocupacion) {
+        this.ocupacion = ocupacion;
     }
 
-    public String getCargo() {
-        return cargo;
+    public String getOcupacion() {
+        return ocupacion;
     }
 }

@@ -11,6 +11,11 @@ public class Data {
 
 
     //////////////////////////////////////////
+    private static int loggedUser;
+    private static String loginId;
+    private static String loginPass;
+
+    //////////////////////////////////////////
     //User Data
     //Student
     private static String studentId;
@@ -21,6 +26,7 @@ public class Data {
     private static String studentSolId;
     private static String studentSolPhaseId;
     private static String studentSolPhaseDescription;
+    private static String studentPhotoURL;
 
 
     //Coord/Academy
@@ -29,6 +35,7 @@ public class Data {
     private static String coordAcName;
     private static String coordAcDepId;
     private static String coordAcDepName;
+    private static String coorAcPhotoURL;
 
 
 
@@ -100,6 +107,14 @@ public class Data {
         Data.studentSolPhaseDescription = studentSolPhaseDescription;
     }
 
+    public static String getStudentPhotoURL() {
+        return studentPhotoURL;
+    }
+
+    public static void setStudentPhotoURL(String studentPhotoURL) {
+        Data.studentPhotoURL = studentPhotoURL;
+    }
+
     public static String getCoordAcId() {
         return coordAcId;
     }
@@ -134,5 +149,43 @@ public class Data {
         Data.coordAcDepName = coordAcDepName;
     }
 
+    public static String getCoorAcPhotoURL() {
+        return coorAcPhotoURL;
+    }
 
+    public static void setCoorAcPhotoURL(String coorAcPhotoURL) {
+        Data.coorAcPhotoURL = coorAcPhotoURL;
+    }
+
+    public static int getLoggedUser() {
+        return loggedUser;
+    }
+
+    public static void setLoggedUser(int loggedUser) {
+        Data.loggedUser = loggedUser;
+    }
+
+    public static String getLoginId() {
+        return loginId;
+    }
+
+    public static void setLoginId(String loginId) {
+        Data.loginId = loginId;
+    }
+
+    public static String getLoginPass() {
+        return loginPass;
+    }
+
+    public static void setLoginPass(String loginPass) {
+        Data.loginPass = loginPass;
+    }
+
+    public static void resetLogindata() {
+        Data.loggedUser = 0;
+        Data.loginId = null;
+        Data.loginPass = null;
+    }
 }
+
+

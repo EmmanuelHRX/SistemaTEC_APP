@@ -22,6 +22,9 @@ import com.example.sistematec.R;
 import com.example.sistematec.UploadAndDownload;
 import com.example.sistematec.ui.login.DatabaseConection.ResponsePOJO;
 import com.example.sistematec.ui.login.DatabaseConection.RetrofitClient;
+import com.example.sistematec.ui.login.DatabaseConection.StudentRequestDocumentsList;
+
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -38,12 +41,7 @@ public class FragmentStudentRequestsCapture extends Fragment implements View.OnC
     FragmentManager manager;
 
 
-    private String id;
-
     TextView txt_studentReqCapture_name;
-    TextView txt_studentReqCapture_id;
-    TextView txt_studentReqCapture_career;
-    TextView txt_studentReqCapture_semester;
 
     Button btnStudentRequestsConfirm;
     Button btnStudentRequestsViewSolForm;
@@ -62,7 +60,7 @@ public class FragmentStudentRequestsCapture extends Fragment implements View.OnC
 
     int docQueue;
 
-    String downloadedUrl = "http://192.168.56.1/sistematec/uploads/Formato-Solicitud.pdf";
+    String downloadedUrl = "https://sistematecapp.000webhostapp.com/sistematec/util/SolicitudFormato.pdf";
     String encodedSol;
     String solName;
     String encodedKardex;
@@ -88,7 +86,6 @@ public class FragmentStudentRequestsCapture extends Fragment implements View.OnC
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            id = getArguments().getString(ARG_ID);
         }
     }
 
@@ -101,9 +98,6 @@ public class FragmentStudentRequestsCapture extends Fragment implements View.OnC
         manager = getFragmentManager();
 
         txt_studentReqCapture_name = view.findViewById(R.id.txt_studentReqCapture_name);
-        txt_studentReqCapture_id = view.findViewById(R.id.txt_studentReqCapture_id);;
-        txt_studentReqCapture_career = view.findViewById(R.id.txt_studentReqCapture_career);;
-        txt_studentReqCapture_semester = view.findViewById(R.id.txt_studentReqCapture_semester);;
 
         btnStudentRequestsConfirm = view.findViewById(R.id.btn_student_requests_confirm);
         btnStudentRequestsConfirm.setOnClickListener(this);
@@ -168,10 +162,6 @@ public class FragmentStudentRequestsCapture extends Fragment implements View.OnC
     private void setData() {
         //DB request
 
-        this.txt_studentReqCapture_name.setText("Nombre: " + getActivity().getIntent().getStringExtra("name"));
-        this.txt_studentReqCapture_id.setText("Matrícula: " + getActivity().getIntent().getStringExtra("id"));
-        this.txt_studentReqCapture_career.setText("Carrera: " + getActivity().getIntent().getStringExtra("career"));
-        this.txt_studentReqCapture_semester.setText("Semestre: " + getActivity().getIntent().getStringExtra("semester"));
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -282,6 +272,7 @@ public class FragmentStudentRequestsCapture extends Fragment implements View.OnC
         super.onActivityResult(requestCode, resultCode, data);
 
         UploadAndDownload.processPDFData(requestCode, resultCode, data, this.getActivity());
+
         switch (docQueue) {
             case 0: {
                 break;
@@ -306,7 +297,8 @@ public class FragmentStudentRequestsCapture extends Fragment implements View.OnC
             }
             case 4: {
                 encodedLib = UploadAndDownload.getEncodedPDF();
-                System.out.println(UploadAndDownload.getEncodedPDF() == null);
+                System.out.println("-----------------------------------------------------------------------------");
+                System.out.println("-----------------------------------------------------ENCODED " + String.valueOf(encodedLib == null));
                 txtStudentRequestsNoDebtLibCapture.setText(UploadAndDownload.getPdfRealName());
                 break;
             }
@@ -327,15 +319,15 @@ public class FragmentStudentRequestsCapture extends Fragment implements View.OnC
         call.enqueue(new Callback<ResponsePOJO>() {
             @Override
             public void onResponse(Call<ResponsePOJO> call, Response<ResponsePOJO> response) {
-                Toast.makeText(getActivity(), response.body().getRemarks(), Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getActivity(), response.body().getRemarks(), Toast.LENGTH_SHORT).show();
 
             }
 
             @Override
             public void onFailure(Call<ResponsePOJO> call, Throwable t) {
                 Toast.makeText(getActivity(), "Ha fallado el método 1", Toast.LENGTH_SHORT).show();
-
                 t.printStackTrace();
+                return;
             }
         });
 
@@ -345,18 +337,64 @@ public class FragmentStudentRequestsCapture extends Fragment implements View.OnC
         call2.enqueue(new Callback<ResponsePOJO>() {
             @Override
             public void onResponse(Call<ResponsePOJO> call2, Response<ResponsePOJO> response) {
-                Toast.makeText(getActivity(), response.body().getRemarks(), Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getActivity(), response.body().getRemarks(), Toast.LENGTH_SHORT).show();
+                insertInitialNotification();
 
             }
 
             @Override
             public void onFailure(Call<ResponsePOJO> call2, Throwable t) {
                 Toast.makeText(getActivity(), "Ha fallado el método 2", Toast.LENGTH_SHORT).show();
-
                 t.printStackTrace();
             }
         });
 
+    }
+
+    private void insertInitialNotification() {
+
+        Call<List<StudentRequestDocumentsList>> call = RetrofitClient.getInstance().getApi()
+                .getStudentRequestDocuments(Data.getStudentId());
+        call.enqueue(new Callback<List<StudentRequestDocumentsList>>() {
+            @Override
+            public void onResponse(Call<List<StudentRequestDocumentsList>> call, Response<List<StudentRequestDocumentsList>> response) {
+                System.out.println(response.body());
+                if (response.body() != null) {
+
+                    Data.setStudentSolId(response.body().get(0).getSolId());
+                    insertNotification();
+
+                } else {
+                    Toast.makeText(getActivity(), "No info.", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<StudentRequestDocumentsList>> call, Throwable t) {
+                System.out.println("FALLA - " );
+            }
+        });
+
+    }
+
+    private void insertNotification() {
+        System.out.println("SOLID: " + Data.getStudentSolId());
+        Call<ResponsePOJO> call3 = RetrofitClient.getInstance()
+                .getApi().insertNotification(Data.getStudentSolId(), "0");
+        call3.enqueue(new Callback<ResponsePOJO>() {
+            @Override
+            public void onResponse(Call<ResponsePOJO> call3, Response<ResponsePOJO> response) {
+                //Toast.makeText(getActivity(), response.body().getRemarks(), Toast.LENGTH_SHORT).show();
+                System.out.println(response.body().getRemarks());
+            }
+
+            @Override
+            public void onFailure(Call<ResponsePOJO> call3, Throwable t) {
+                //Toast.makeText(getActivity(), "Ha fallado el método 1", Toast.LENGTH_SHORT).show();
+                t.printStackTrace();
+            }
+        });
+        getFragmentManager().popBackStack();
     }
 
 }

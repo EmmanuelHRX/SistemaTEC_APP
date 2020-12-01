@@ -1,5 +1,7 @@
 package com.example.sistematec.ui.login.Coordinator;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -11,33 +13,72 @@ import android.widget.Toast;
 
 import com.example.sistematec.Data;
 import com.example.sistematec.R;
+import com.example.sistematec.ui.login.DatabaseConection.PersonalRequestsList;
+import com.example.sistematec.ui.login.DatabaseConection.ResponsePOJO;
+import com.example.sistematec.ui.login.DatabaseConection.RetrofitClient;
+import com.example.sistematec.ui.login.DatabaseConection.StudentRequestDocumentsList;
+
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class FragmentCoordinatorStudentAwaitingRequest extends Fragment implements View.OnClickListener{
 
     TextView txtCSAR_RequestDate, txtCSAR_StudentName, txtCSAR_StudentID;
+    TextView txtCSAR_Request, txtCSAR_Kardex, txtCSAR_Lab, txtCSAR_Lib;
     Button btnCSAR_Review, btnCSAR_Review2, btnCSAR_Review3, btnCSAR_Review4, btnCSAR_Confirm, btnCSAR_Deny;
+    String requestUrl;
+    String kardexUrl;
+    String labUrl;
+    String libUrl;
+
+    String requestName;
+    String kardexName;
+    String labName;
+    String libName;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_coordinator_student_awaiting_request, container, false);
-        setData(v);
+
+        setData();
+        setViews(v);
+        setStudentData();
+        getDocumentData();
+
         return v;
     }
 
-    private void setData(View v) {
+    private void setData() {
+        requestName = "-Solicitud.pdf";
+        kardexName = "-Kardex.pdf";
+        labName = "-laboratorio.pdf";
+        libName = "-biblioteca.pdf";
+    }
+
+    private void setStudentData() {
+        //obtención de la información del estudiante mediante la BD
+        txtCSAR_RequestDate.setText("Fecha: ---------");
+        txtCSAR_StudentID.setText("Matrícula: " + Data.getStudentId());
+        txtCSAR_StudentName.setText("Nombre: " + Data.getStudentName());
+    }
+
+    private void setViews(View v) {
         //lo que sea que muestre awaiting requests
         txtCSAR_RequestDate = v.findViewById(R.id.txtCSAR_RequestDate);
         txtCSAR_StudentName = v.findViewById(R.id.txtCSAR_StudentName);
         txtCSAR_StudentID = v.findViewById(R.id.txtCSAR_StudentID);
 
-        //obtención de la información del estudiante mediante la BD
-        txtCSAR_RequestDate.setText("Fecha: ---------");
-        txtCSAR_StudentID.setText("Matrícula: " + Data.getStudentId());
-        txtCSAR_StudentName.setText("Nombre: " + Data.getStudentName());
+        txtCSAR_Request = v.findViewById(R.id.txtCSAR_ReviewRequest);
+        txtCSAR_Kardex = v.findViewById(R.id.txtCSAR_Kardex);
+        txtCSAR_Lab = v.findViewById(R.id.txtCSAR_ReviewLab);
+        txtCSAR_Lib = v.findViewById(R.id.txtCSAR_ReviewLib);
 
         btnCSAR_Review = v.findViewById(R.id.btnCSAR_Review);
-        btnCSAR_Review2 = v.findViewById(R.id.btnCSAR_Review2);
+        btnCSAR_Review2 = v.findViewById(R.id.btnCSAR_Review4);
         btnCSAR_Review3 = v.findViewById(R.id.btnCSAR_Review3);
-        btnCSAR_Review4 = v.findViewById(R.id.btnCSAR_Review4);
+        btnCSAR_Review4 = v.findViewById(R.id.btnCSAR_Review2);
         btnCSAR_Confirm = v.findViewById(R.id.btnCSAR_Confirm);
         btnCSAR_Deny = v.findViewById(R.id.btnCSAR_Deny);
 
@@ -48,40 +89,148 @@ public class FragmentCoordinatorStudentAwaitingRequest extends Fragment implemen
         btnCSAR_Confirm.setOnClickListener(this);
         btnCSAR_Deny.setOnClickListener(this);
     }
+
     @Override
     public void onClick(View view) {
         switch(view.getId()){
             case R.id.btnCSAR_Review:{
-                Toast.makeText(getContext(),"abriendo solicitud", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getContext(),"abriendo solicitud", Toast.LENGTH_SHORT).show();
                 //logica para abrir la solicitud
+                if (requestUrl != null) {
+                    Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(requestUrl));
+                    startActivity(browserIntent);
+                }
                 break;
             }
             case R.id.btnCSAR_Review2:{
-                Toast.makeText(getContext(),"abriendo comprobante de no adeudo de libros", Toast.LENGTH_SHORT).show();
-                //logica para abrir la comprobante
+                //Toast.makeText(getContext(),"abriendo kardex", Toast.LENGTH_SHORT).show();
+                //logica para abrir el comprobante
+                if (libUrl != null) {
+                    Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(kardexUrl));
+                    startActivity(browserIntent);
+                }
                 break;
             }
             case R.id.btnCSAR_Review3:{
-                Toast.makeText(getContext(),"abriendo comprobante de no adeudo de laboratorio", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getContext(),"abriendo comprobante de no adeudo de laboratorio", Toast.LENGTH_SHORT).show();
                 //logica para abrir el comprobante
+                if (labUrl != null) {
+                    Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(labUrl));
+                    startActivity(browserIntent);
+                }
                 break;
             }
             case R.id.btnCSAR_Review4:{
-                Toast.makeText(getContext(),"abriendo kardex", Toast.LENGTH_SHORT).show();
-                //logica para abrir el kardex
+                //Toast.makeText(getContext(),"abriendo comprobante de no adeudo de libros", Toast.LENGTH_SHORT).show();
+                //logica para abrir la kardex
+                if (kardexUrl != null) {
+                    Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(libUrl));
+                    startActivity(browserIntent);
+                }
                 break;
             }
             case R.id.btnCSAR_Confirm:{
-                Toast.makeText(getContext(),"enviando a análisis", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getContext(),"enviando a análisis", Toast.LENGTH_SHORT).show();
                 //lógica cambiar el estado del proceso mediante la BD
+                acceptRequest();
                 break;
             }
             case R.id.btnCSAR_Deny:{
-                Toast.makeText(getContext(),"enviando resultado", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getContext(),"enviando resultado", Toast.LENGTH_SHORT).show();
                 //lógica para rechazar
+                rejectRequest();
                 break;
             }
         }
     }
+
+    private void getDocumentData() {
+
+        Call<List<StudentRequestDocumentsList>> call = RetrofitClient.getInstance().getApi()
+                .getStudentRequestDocuments(Data.getStudentId());
+        call.enqueue(new Callback<List<StudentRequestDocumentsList>>() {
+            @Override
+            public void onResponse(Call<List<StudentRequestDocumentsList>> call, Response<List<StudentRequestDocumentsList>> response) {
+                System.out.println(response.body());
+                if (response.body() != null) {
+
+                    Data.setStudentSolId(response.body().get(0).getSolId());
+
+                    txtCSAR_Request.setText(response.body().get(0).getAluMatricula() + requestName);
+                    txtCSAR_Kardex.setText(response.body().get(0).getAluMatricula() + kardexName);
+                    txtCSAR_Lab.setText(response.body().get(0).getAluMatricula() + labName);
+                    txtCSAR_Lib.setText(response.body().get(0).getAluMatricula() + libName);
+
+                    requestUrl = response.body().get(0).getSolDocUrl();
+                    kardexUrl = response.body().get(0).getSolKardexUrl();
+                    labUrl = response.body().get(0).getSolLabDocUrl();
+                    libUrl = response.body().get(0).getSolLibDocUrl();
+
+                } else {
+                    Toast.makeText(getActivity(), "No info.", Toast.LENGTH_SHORT).show();
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<StudentRequestDocumentsList>> call, Throwable t) {
+                System.out.println("FALLA - " );
+            }
+        });
+
+    }
+
+    private void acceptRequest() {
+        changeRequestStatus("2", "2");
+        changeRequestStatus("2", "3");
+    }
+
+    private void rejectRequest() {
+        changeRequestStatus("1", "1");
+
+    }
+
+    private void changeRequestStatus(String newPhase, String notifMessage) {
+
+
+        Call<ResponsePOJO> call = RetrofitClient.getInstance()
+                .getApi().setRequestPhase(Data.getStudentId(), newPhase);
+        call.enqueue(new Callback<ResponsePOJO>() {
+            @Override
+            public void onResponse(Call<ResponsePOJO> call, Response<ResponsePOJO> response) {
+                //Toast.makeText(getActivity(), response.body().getRemarks(), Toast.LENGTH_SHORT).show();
+                System.out.println(response.body().getRemarks());
+            }
+
+            @Override
+            public void onFailure(Call<ResponsePOJO> call, Throwable t) {
+                Toast.makeText(getActivity(), "Ha fallado el método 1", Toast.LENGTH_SHORT).show();
+
+                t.printStackTrace();
+            }
+        });
+
+        //Insert new notification
+
+        Call<ResponsePOJO> call2 = RetrofitClient.getInstance()
+                .getApi().insertNotification(Data.getStudentSolId(), notifMessage);
+        call2.enqueue(new Callback<ResponsePOJO>() {
+            @Override
+            public void onResponse(Call<ResponsePOJO> call2, Response<ResponsePOJO> response) {
+                //Toast.makeText(getActivity(), response.body().getRemarks(), Toast.LENGTH_SHORT).show();
+                System.out.println(response.body().getRemarks());
+            }
+
+            @Override
+            public void onFailure(Call<ResponsePOJO> call2, Throwable t) {
+                Toast.makeText(getActivity(), "Ha fallado el método 1", Toast.LENGTH_SHORT).show();
+
+                t.printStackTrace();
+            }
+        });
+        getFragmentManager().popBackStack();
+    }
+
+
 
 }

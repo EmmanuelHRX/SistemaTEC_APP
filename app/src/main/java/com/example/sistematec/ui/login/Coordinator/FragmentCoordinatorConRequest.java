@@ -16,7 +16,6 @@ import com.example.sistematec.R;
 import com.example.sistematec.ui.login.DatabaseConection.PersonalRequestsList;
 import com.example.sistematec.ui.login.DatabaseConection.RetrofitClient;
 import com.example.sistematec.ui.login.DatabaseConection.StudentDataList;
-import com.example.sistematec.ui.login.DatabaseConection.StudentRequestList;
 
 import java.util.List;
 
@@ -24,25 +23,25 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class FragmentCoordinatorStudentRequest extends Fragment implements View.OnClickListener {
+
+public class FragmentCoordinatorConRequest extends Fragment {
 
     LinearLayout linearLayout;
     FragmentManager manager;
     Button[] buttonArray;
     int[] idArray;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.fragment_coordinator_student_request, container, false);
-
+        View v = inflater.inflate(R.layout.fragment_coordinator_con_request, container, false);
         setViews(v);
         getStudentRequests();
-
         return v;
     }
 
     private void setViews(View v) {
         manager = getFragmentManager();
-        linearLayout = v.findViewById(R.id.linearLayoutCR);
+        linearLayout = v.findViewById(R.id.linearLayoutCCR);
     }
 
     private void setData(final List<PersonalRequestsList> requests) {
@@ -62,10 +61,8 @@ public class FragmentCoordinatorStudentRequest extends Fragment implements View.
                 public void onClick(View view) {
 
                     Data.setStudentId(String.valueOf(view.getId()));
-
+                    System.out.println("Click on ID: " + Data.getStudentId());
                     getStudentData(Data.getStudentId());
-
-
                 }
             });
             //llenado de botones al view
@@ -74,20 +71,15 @@ public class FragmentCoordinatorStudentRequest extends Fragment implements View.
         }
     }
 
-    @Override
-    public void onClick(View v) {
-
-    }
-
     private void getStudentRequests() {
         Call<List<PersonalRequestsList>> call = RetrofitClient.getInstance().getApi()
-            .getPersonalRequests(Data.getCoordAcDepId(), "0");
+                .getPersonalRequests(Data.getCoordAcDepId(), "6");
         call.enqueue(new Callback<List<PersonalRequestsList>>() {
             @Override
             public void onResponse(Call<List<PersonalRequestsList>> call, Response<List<PersonalRequestsList>> response) {
                 System.out.println(response.body());
                 if (response.body() != null) {
-                   setData(response.body());
+                    setData(response.body());
 
                 } else {
                     Toast.makeText(getActivity(), "No hay solicitudes.", Toast.LENGTH_SHORT).show();
@@ -97,7 +89,7 @@ public class FragmentCoordinatorStudentRequest extends Fragment implements View.
 
             @Override
             public void onFailure(Call<List<PersonalRequestsList>> call, Throwable t) {
-                System.out.println("FALLA - " );
+                System.out.println("-FALLA SOL - ANÁLISIS- " );
             }
         });
     }
@@ -131,13 +123,10 @@ public class FragmentCoordinatorStudentRequest extends Fragment implements View.
     }
 
     private void openRequestFragment() {
-        FragmentCoordinatorStudentAwaitingRequest FCAR = new FragmentCoordinatorStudentAwaitingRequest();
+        FragmentCoordinatorConAwaitingRequest FCCAR = new FragmentCoordinatorConAwaitingRequest();
         FragmentTransaction transaction = manager.beginTransaction();
-        transaction.replace(R.id.fragment_container_coordinator,FCAR,"FragmentCoordinatorStudentAwaitingRequest");
-        transaction.addToBackStack("addFragmentCoordinatorAwaitingRequest");
+        transaction.replace(R.id.fragment_container_coordinator, FCCAR,"FragmentCoordinatorConAwaitingRequests");
+        transaction.addToBackStack("addFragmentCoordinatorConAwaitingRequests");
         transaction.commit();
     }
-
-
-
 }

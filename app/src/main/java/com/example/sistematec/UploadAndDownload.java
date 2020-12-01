@@ -57,6 +57,14 @@ public class UploadAndDownload {
         return result;
     }
 
+    public static String getFileName(String path) {
+        int cut = path.lastIndexOf('/');
+        if (cut != -1) {
+            path = path.substring(cut + 1);
+        }
+        return path;
+    }
+
     public static void startPDFChooser(Fragment fragment) {
         Intent chooseFile = new Intent(Intent.ACTION_GET_CONTENT);
         chooseFile.setType("application/pdf");
@@ -67,7 +75,7 @@ public class UploadAndDownload {
     public static void processPDFData(int requestCode, int resultCode, @Nullable Intent data,
                                       FragmentActivity activity) {
         if (requestCode == Data.getReqPdf() && resultCode == RESULT_OK && data != null) {
-
+            encodedPDF = null;
             Uri path = data.getData();
 
             pdfRealName = getFileName(path, activity);

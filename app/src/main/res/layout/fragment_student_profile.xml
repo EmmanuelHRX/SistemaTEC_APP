@@ -29,7 +29,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
-                android:id="@+id/ImgAlumno"
+                android:id="@+id/img_studentProfile_photo"
                 android:layout_width="281dp"
                 android:layout_height="257dp"
                 android:layout_marginTop="20dp"
@@ -48,7 +48,7 @@
                 android:orientation="vertical"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/ImgAlumno">
+                app:layout_constraintTop_toBottomOf="@+id/img_studentProfile_photo">
 
                 <TextView
                     android:id="@+id/txtAlumnoNombre"

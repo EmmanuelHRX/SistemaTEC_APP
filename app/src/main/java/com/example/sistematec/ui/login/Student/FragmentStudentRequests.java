@@ -180,6 +180,14 @@ public class FragmentStudentRequests extends Fragment implements View.OnClickLis
             return;
         }
         if (id == R.id.btn_studentRequests_check) {
+            if (Integer.parseInt(Data.getStudentSolPhaseId()) == 5) {
+                FragmentStudentRequestsCon frgStudentRC = FragmentStudentRequestsCon.newInstance();
+                FragmentTransaction transaction = manager.beginTransaction();
+                transaction.replace(R.id.fragment_container_student, frgStudentRC, "StudentRC");
+                transaction.addToBackStack("addStudentRC");
+                transaction.commit();
+                return;
+            }
             FragmentStudentRequestsStatus frgStudentRS = FragmentStudentRequestsStatus.newInstance();
             FragmentTransaction transaction = manager.beginTransaction();
             transaction.replace(R.id.fragment_container_student, frgStudentRS, "StudentRS");

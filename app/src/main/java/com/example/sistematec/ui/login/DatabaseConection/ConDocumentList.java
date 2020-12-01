@@ -2,7 +2,7 @@ package com.example.sistematec.ui.login.DatabaseConection;
 
 import java.io.Serializable;
 
-public class ConfDocumentList implements Serializable {
+public class ConDocumentList implements Serializable {
 
     private String aluMatricula;
     private String usuNombre;
@@ -11,7 +11,7 @@ public class ConfDocumentList implements Serializable {
     private String solId;
     private String solConformidadDocUrl;
 
-    public ConfDocumentList(String aluMatricula, String usuNombre, String aluSemestre, String carNombre, String solId, String solConformidadDocUrl) {
+    public ConDocumentList(String aluMatricula, String usuNombre, String aluSemestre, String carNombre, String solId, String solConformidadDocUrl) {
         this.aluMatricula = aluMatricula;
         this.usuNombre = usuNombre;
         this.aluSemestre = aluSemestre;

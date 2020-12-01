@@ -10,10 +10,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.sistematec.Data;
+import com.example.sistematec.ImageGetter;
 import com.example.sistematec.R;
 import com.example.sistematec.ui.login.DatabaseConection.PersonalDataList;
 import com.example.sistematec.ui.login.DatabaseConection.RetrofitClient;
-import com.example.sistematec.ui.login.DatabaseConection.StudentDataList;
 
 import java.util.List;
 
@@ -32,15 +32,20 @@ public class FragmentCoordinatorProfile extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v =inflater.inflate(R.layout.fragment_coordinator_profile, container, false);
-        img = v.findViewById(R.id.imgCoordinatorProfile);
-        txtCoordinatorProfileName = v.findViewById(R.id.txtCoordinatorProfileName);
-        txtCoordinatorProfileEnrollment = v.findViewById(R.id.txtCoordinatorProfileID);
-        txtCoordinatorProfileJob = v.findViewById(R.id.txtCoordinatorProfileJob);
 
+        setViews(v);
         getCoordinatorData();
 
         return v;
     }
+
+    private void setViews(View v) {
+        img = v.findViewById(R.id.img_coordinatorProfile_photo);
+        txtCoordinatorProfileName = v.findViewById(R.id.txtCoordinatorProfileName);
+        txtCoordinatorProfileEnrollment = v.findViewById(R.id.txtCoordinatorProfileID);
+        txtCoordinatorProfileJob = v.findViewById(R.id.txtCoordinatorProfileJob);
+    }
+
     private void setData() {
 
         //procedimiento de llenado de la información incluyendo la imagen
@@ -48,10 +53,11 @@ public class FragmentCoordinatorProfile extends Fragment {
         txtCoordinatorProfileName.setText("Nombre: " + Data.getCoordAcName());
         txtCoordinatorProfileEnrollment.setText("Matricula: " + Data.getCoordAcId());
         txtCoordinatorProfileJob.setText("Departamento: " + Data.getCoordAcDepName());
+        ImageGetter.getInstance().getAndSetImageFromUrl(img, Data.getCoorAcPhotoURL());
     }
 
     private void getCoordinatorData() {
-        Call<List<PersonalDataList>> call = RetrofitClient.getInstance().getApi().getPersonalData("21354612");
+        Call<List<PersonalDataList>> call = RetrofitClient.getInstance().getApi().getPersonalData(Data.getCoordAcId());
         System.out.println("PASANDO");
         call.enqueue(new Callback<List<PersonalDataList>>() {
             @Override
@@ -63,6 +69,7 @@ public class FragmentCoordinatorProfile extends Fragment {
                     Data.setCoordAcName(response.body().get(0).getUsuNombre());
                     Data.setCoordAcDepId(response.body().get(0).getPerDepId());
                     Data.setCoordAcDepName(response.body().get(0).getDepNombre());
+                    Data.setCoorAcPhotoURL(response.body().get(0).getUsuFotoUrl());
 
                     setData();
 

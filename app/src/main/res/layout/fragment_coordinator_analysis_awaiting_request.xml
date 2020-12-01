@@ -10,11 +10,12 @@
         android:id="@+id/txtCAAR_Analysis"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
         android:layout_marginTop="55dp"
         android:text="ANÁLISIS TÉCNICO ACADÉMICO"
         android:textColor="#000000"
+        android:textSize="24sp"
         android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -22,27 +23,29 @@
         android:id="@+id/linearLayoutCAAR"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:orientation="vertical"
-        android:layout_marginTop="20dp"
         android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
         android:layout_marginEnd="20dp"
-        app:layout_constraintTop_toBottomOf="@+id/txtCAAR_Analysis"
+        android:background="@drawable/custom_layout_border"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        app:layout_constraintTop_toBottomOf="@+id/txtCAAR_Analysis">
 
         <TextView
             android:id="@+id/txtCAAR_StudentDate"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            />
+            android:layout_height="wrap_content" />
+
         <TextView
             android:id="@+id/txtCAAR_StudentName"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content" />
+
         <TextView
             android:id="@+id/txtCAAR_StudentID"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content" />
 
 
     </LinearLayout>
@@ -53,20 +56,23 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:text="ANÁLISIS"
+        android:textColor="#000000"
         android:textSize="22dp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@id/linearLayoutCAAR"
         app:layout_constraintTop_toBottomOf="@id/linearLayoutCAAR" />
 
     <TextView
-        android:id="@+id/txtCAAR_Upload"
+        android:id="@+id/txtCAAR_dictumCapture"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="DOCUMENTO"
+        android:layout_marginTop="30dp"
+        android:text="Carga de dictamen"
+        android:textColor="#000000"
         android:textSize="22dp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/linearLayoutCAAR"
-        app:layout_constraintTop_toTopOf="@+id/btnCAAR_Upload" />
+        app:layout_constraintTop_toBottomOf="@+id/txtCAAR_description" />
 
     <Button
         android:id="@+id/btnCAAR_ReviewAnalysis"
@@ -79,26 +85,63 @@
         app:layout_constraintTop_toTopOf="@id/txtCAAR_ReviewAnalysis" />
 
     <Button
-        android:id="@+id/btnCAAR_Upload"
+        android:id="@+id/btnCAAR_dictumCapture"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="30dp"
         android:background="@color/colorPrimary"
         android:text="cargar"
         android:textColor="#FFFFFFFF"
-        app:layout_constraintBottom_toTopOf="@+id/btnCAAR_Send"
-        app:layout_constraintStart_toStartOf="@+id/linearLayoutCAAR" />
+        app:layout_constraintBottom_toBottomOf="@+id/txtCAAR_dictumCapture"
+        app:layout_constraintStart_toStartOf="@+id/linearLayoutCAAR"
+        app:layout_constraintTop_toTopOf="@+id/txtCAAR_dictumCapture" />
 
     <Button
-        android:id="@+id/btnCAAR_Send"
+        android:id="@+id/btnCAAR_conCapture"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:text="cargar"
+        android:textColor="#FFFFFFFF"
+        app:layout_constraintBottom_toBottomOf="@+id/txtCAAR_conCapture"
+        app:layout_constraintStart_toStartOf="@+id/linearLayoutCAAR"
+        app:layout_constraintTop_toTopOf="@+id/txtCAAR_conCapture" />
+
+    <TextView
+        android:id="@+id/txtCAAR_conCapture"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:text="Documento de conformidad"
+        android:textColor="#000000"
+        android:textSize="22dp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/linearLayoutCAAR"
+        app:layout_constraintTop_toBottomOf="@+id/txtCAAR_dictumCapture" />
+
+    <Button
+        android:id="@+id/btnCAAR_uploadDictum"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="50dp"
         android:background="@color/colorPrimary"
-        android:text="enviar"
+        android:text="CONFIRMAR"
         android:textColor="#FFFFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/txtCAAR_description"
+        android:layout_width="364dp"
+        android:layout_height="134dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/custom_layout_border"
+        android:text="Se ha recibido el análisis técnico académico.\nTras elaborar el dictamen técnico, cárguelo a la aplicación, junto al formato del documento de conformidad que deberá firmar el alumno.\nSe le notificará al alumno solicitante."
+        android:textAlignment="textStart"
+        android:textColor="#000000"
+        app:layout_constraintEnd_toEndOf="@+id/linearLayoutCAAR"
+        app:layout_constraintStart_toStartOf="@+id/linearLayoutCAAR"
+        app:layout_constraintTop_toBottomOf="@+id/txtCAAR_ReviewAnalysis" />
 
 </android.support.constraint.ConstraintLayout>

@@ -7,9 +7,11 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.sistematec.ImageGetter;
 import com.example.sistematec.R;
 import com.example.sistematec.ui.login.DatabaseConection.RetrofitClient;
 import com.example.sistematec.ui.login.DatabaseConection.StudentDataList;
@@ -23,19 +25,11 @@ import retrofit2.Response;
 
 public class FragmentStudentProfile extends Fragment {
 
-    private static final String ARG_NAME = "name";
-    private static final String ARG_ID = "id";
-    private static final String ARG_CAREER = "career";
-    private static final String ARG_SEMESTER = "semester";
-
     private OnFragmentInteractionListener mListener;
 
     private TextView txtAlumnoNombre, txtAlumnoMatricula, txtAlumnoCarrera, txtAlumnoSemestre;
+    private ImageView img_studentProfile_photo;
 
-    private String name;
-    private String id;
-    private String career;
-    private String semester;
 
     public FragmentStudentProfile() {
         // Required empty public constructor
@@ -52,15 +46,7 @@ public class FragmentStudentProfile extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            name = getArguments().getString(ARG_NAME);
-            id = getArguments().getString(ARG_ID);
-            career = getArguments().getString(ARG_CAREER);
-            semester = getArguments().getString(ARG_SEMESTER);
         }
-
-
-
-
     }
 
     @Override
@@ -73,6 +59,7 @@ public class FragmentStudentProfile extends Fragment {
         txtAlumnoMatricula = view.findViewById(R.id.txtAlumnoMatricula);
         txtAlumnoCarrera = view.findViewById(R.id.txtAlumnoCarrera);
         txtAlumnoSemestre = view.findViewById(R.id.txtAlumnoSemestre);
+        img_studentProfile_photo = view.findViewById(R.id.img_studentProfile_photo);
 
         setData();
 
@@ -124,7 +111,7 @@ public class FragmentStudentProfile extends Fragment {
     private void getStudentData() {
 
 
-        Call<List<StudentDataList>> call = RetrofitClient.getInstance().getApi().getStudentData("17171403");
+        Call<List<StudentDataList>> call = RetrofitClient.getInstance().getApi().getStudentData(Data.getStudentId());
         System.out.println("PASANDO");
         call.enqueue(new Callback<List<StudentDataList>>() {
             @Override
@@ -137,11 +124,13 @@ public class FragmentStudentProfile extends Fragment {
                     Data.setStudentCareer(response.body().get(0).getCarNombre());
                     Data.setStudentSemester(response.body().get(0).getAluSemestre());
                     Data.setStudentDepId(response.body().get(0).getDepId());
+                    Data.setStudentPhotoURL(response.body().get(0).getUsuFotoUrl());
 
                     txtAlumnoNombre.setText("Nombre: " + Data.getStudentName());
                     txtAlumnoMatricula.setText("Matrícula: " + Data.getStudentId());
                     txtAlumnoCarrera.setText("Carrera: " + Data.getStudentCareer());
                     txtAlumnoSemestre.setText("Semestre: " + Data.getStudentSemester());
+                    ImageGetter.getInstance().getAndSetImageFromUrl(img_studentProfile_photo, Data.getStudentPhotoURL());
 
                 } else {
                     Toast.makeText(getActivity(), "Matricula no válida, error.", Toast.LENGTH_SHORT).show();

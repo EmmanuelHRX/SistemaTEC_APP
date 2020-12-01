@@ -11,8 +11,10 @@ public class StudentDataList implements Serializable {
     private String carNombre;
     private String depId;
     private String depNombre;
+    private String usuFotoUrl;
 
-    public StudentDataList(String aluMatricula, String usuNombre, String aluSemestre, String aluCarId, String carNombre, String depId, String depNombre) {
+    public StudentDataList(String aluMatricula, String usuNombre, String aluSemestre, String aluCarId,
+                           String carNombre, String depId, String depNombre, String usuFotoUrl) {
         this.aluMatricula = aluMatricula;
         this.usuNombre = usuNombre;
         this.aluSemestre = aluSemestre;
@@ -20,6 +22,7 @@ public class StudentDataList implements Serializable {
         this.carNombre = carNombre;
         this.depId = depId;
         this.depNombre = depNombre;
+        this.usuFotoUrl = usuFotoUrl;
     }
 
     public String getAluMatricula() {
@@ -48,5 +51,9 @@ public class StudentDataList implements Serializable {
 
     public String getDepNombre() {
         return depNombre;
+    }
+
+    public String getUsuFotoUrl() {
+        return usuFotoUrl;
     }
 }

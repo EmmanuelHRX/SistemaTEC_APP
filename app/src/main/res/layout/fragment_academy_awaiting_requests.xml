@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="55dp"
-        android:text="ANALISIS ACADEMICO"
+        android:text="SOLICITUD DE ANÁLISIS ACADÉMICO"
         android:textColor="#000000"
         android:textSize="24sp"
         android:textStyle="bold"
@@ -23,17 +23,18 @@
     <LinearLayout
         android:id="@+id/linearLayoutAAR"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        app:layout_constraintTop_toBottomOf="@id/txtAAR_Analysis"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="20dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
         android:layout_marginEnd="20dp"
-        android:orientation="vertical">
+        android:background="@drawable/custom_layout_border"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/txtAAR_Analysis">
 
         <TextView
-            android:id="@+id/txtAAR_StudentName"
+            android:id="@+id/txtAAR_StudentDate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="0dp"
@@ -41,7 +42,7 @@
             android:text="TextView" />
 
         <TextView
-            android:id="@+id/txtAAR_StudentDate"
+            android:id="@+id/txtAAR_StudentName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="0dp"
@@ -82,23 +83,23 @@
         app:layout_constraintTop_toBottomOf="@+id/txtAAR_Request" />
 
     <Button
-        android:id="@+id/btnAAR_Upload"
+        android:id="@+id/btnAAR_AnalysisCaptrue"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="50dp"
         android:background="@color/colorAccent"
         android:text="CARGAR ANALISIS "
         android:textColor="#FFFFFF"
-        app:layout_constraintBottom_toTopOf="@+id/btnAcademyAwaitingRequestsValidateAR3"
+        app:layout_constraintBottom_toTopOf="@+id/btnAAR_UploadAn"
         app:layout_constraintStart_toStartOf="@+id/txtAAR_Kardex" />
 
     <Button
-        android:id="@+id/btnAcademyAwaitingRequestsValidateAR3"
+        android:id="@+id/btnAAR_UploadAn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="20dp"
         android:background="@color/colorAccent"
-        android:text=" ENVIAR ANALISIS "
+        android:text="CONFIRMAR"
         android:textColor="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -125,16 +126,29 @@
         app:layout_constraintTop_toTopOf="@+id/txtAAR_Kardex" />
 
     <TextView
-        android:id="@+id/txtAAR_UploadDescription"
+        android:id="@+id/txtAAR_AnalysisCapture"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="DOCUMENTO"
+        android:text="Carga de análsis"
         android:textAlignment="viewStart"
         android:textColor="#000000"
         android:textSize="22sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/btnAAR_Upload"
-        app:layout_constraintEnd_toEndOf="@+id/btnAAR_Review2" />
+        app:layout_constraintBottom_toBottomOf="@+id/btnAAR_AnalysisCaptrue"
+        app:layout_constraintEnd_toEndOf="@+id/btnAAR_Review2"
+        app:layout_constraintTop_toTopOf="@+id/btnAAR_AnalysisCaptrue" />
+
+    <TextView
+        android:id="@+id/btnAAR_Desc"
+        android:layout_width="351dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="50dp"
+        android:background="@drawable/custom_layout_border"
+        android:text="Se ha recibido una solicitud de análisis técnico.\nTras la elaboración del análisis técnico académico, cargue el documento y enviélo para continuar con el proceso."
+        android:textColor="#000000"
+        app:layout_constraintStart_toStartOf="@+id/linearLayoutAAR"
+        app:layout_constraintTop_toBottomOf="@+id/txtAAR_Kardex" />
 
 
 </android.support.constraint.ConstraintLayout>

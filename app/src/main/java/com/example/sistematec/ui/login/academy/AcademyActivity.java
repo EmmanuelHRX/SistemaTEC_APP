@@ -7,6 +7,8 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.view.MenuItem;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
+
+import com.example.sistematec.Data;
 import com.example.sistematec.R;
 import com.example.sistematec.ui.login.FragmentAllSettings;
 import com.example.sistematec.ui.login.Login.LoginActivity;
@@ -76,6 +78,7 @@ public class AcademyActivity extends AppCompatActivity
                 break;
             }
             case R.id.nav_academy_Close_Session :{
+                Data.resetLogindata();
                 Intent actLogin = new Intent(this, LoginActivity.class);
                 startActivity(actLogin);
                 finish();
