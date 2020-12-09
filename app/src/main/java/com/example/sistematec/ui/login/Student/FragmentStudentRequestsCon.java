@@ -1,13 +1,13 @@
 package com.example.sistematec.ui.login.Student;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,12 +17,12 @@ import android.widget.Toast;
 
 import com.example.sistematec.Data;
 import com.example.sistematec.R;
-import com.example.sistematec.UploadAndDownload;
+import com.example.sistematec.PDFMethods;
 import com.example.sistematec.ui.login.DatabaseConection.ConDocumentList;
 import com.example.sistematec.ui.login.DatabaseConection.DictumDocumentList;
 import com.example.sistematec.ui.login.DatabaseConection.ResponsePOJO;
 import com.example.sistematec.ui.login.DatabaseConection.RetrofitClient;
-import com.example.sistematec.ui.login.DatabaseConection.StudentRequestDocumentsList;
+import com.example.sistematec.ui.login.Dialog;
 
 import java.util.List;
 
@@ -144,12 +144,10 @@ public class FragmentStudentRequestsCon extends Fragment implements View.OnClick
                 Toast.makeText(getActivity(), "Documentación incompleta.", Toast.LENGTH_LONG).show();
                 return;
             }
-            uploadDocument();
+            confirmUpload();
         }
 
         if (view == btnStudentRequestsConViewDicForm) {
-            //Toast.makeText(getActivity(), "ViewSol", Toast.LENGTH_SHORT).show();
-
             if (dicURL != null) {
                 Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(dicURL));
                 startActivity(browserIntent);
@@ -157,8 +155,6 @@ public class FragmentStudentRequestsCon extends Fragment implements View.OnClick
         }
 
         if (view == btnStudentRequestsConViewConForm) {
-            //Toast.makeText(getActivity(), "ViewSol", Toast.LENGTH_SHORT).show();
-
             if (conURL != null) {
                 Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(conURL));
                 startActivity(browserIntent);
@@ -166,7 +162,6 @@ public class FragmentStudentRequestsCon extends Fragment implements View.OnClick
         }
 
         if (view == btnStudentRequestsConConCapture) {
-            //Toast.makeText(getActivity(), "SolCap", Toast.LENGTH_SHORT).show();
             selectDocument();
 
         }
@@ -190,7 +185,7 @@ public class FragmentStudentRequestsCon extends Fragment implements View.OnClick
 
                     Data.setStudentSolId(response.body().get(0).getSolId());
 
-                    txtStudentRequestsConViewDicForm.setText(UploadAndDownload.getFileName(response.body().get(0).getSolDictamenDocUrl()));
+                    txtStudentRequestsConViewDicForm.setText(PDFMethods.getFileName(response.body().get(0).getSolDictamenDocUrl()));
 
                     dicURL = response.body().get(0).getSolDictamenDocUrl();
 
@@ -202,7 +197,7 @@ public class FragmentStudentRequestsCon extends Fragment implements View.OnClick
 
             @Override
             public void onFailure(Call<List<DictumDocumentList>> call2, Throwable t) {
-                System.out.println("FALLA -  DICTAMEN" );
+                System.out.println("Error de conexión FSRCO:1" );
             }
         });
 
@@ -216,7 +211,7 @@ public class FragmentStudentRequestsCon extends Fragment implements View.OnClick
 
                     Data.setStudentSolId(response.body().get(0).getSolId());
 
-                    txtStudentRequestsConViewConForm.setText(UploadAndDownload.getFileName(response.body().get(0).getSolConformidadDocUrl()));
+                    txtStudentRequestsConViewConForm.setText(PDFMethods.getFileName(response.body().get(0).getSolConformidadDocUrl()));
 
                     conURL = response.body().get(0).getSolConformidadDocUrl();
 
@@ -228,7 +223,7 @@ public class FragmentStudentRequestsCon extends Fragment implements View.OnClick
 
             @Override
             public void onFailure(Call<List<ConDocumentList>> call, Throwable t) {
-                System.out.println("FALLA - CONFORMIDAD" );
+                System.out.println("Error de conexión FSRCO:2" );
             }
         });
 
@@ -236,7 +231,7 @@ public class FragmentStudentRequestsCon extends Fragment implements View.OnClick
 
 
     public void selectDocument() {
-        UploadAndDownload.startPDFChooser(this);
+        PDFMethods.startPDFChooser(this);
 
     }
 
@@ -244,14 +239,29 @@ public class FragmentStudentRequestsCon extends Fragment implements View.OnClick
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        UploadAndDownload.processPDFData(requestCode, resultCode, data, this.getActivity());
+        PDFMethods.processPDFData(requestCode, resultCode, data, this.getActivity());
 
-        encodedCon = UploadAndDownload.getEncodedPDF();
-        txtStudentRequestsConConCapture.setText(UploadAndDownload.getPdfRealName());
+        encodedCon = PDFMethods.getEncodedPDF();
+        txtStudentRequestsConConCapture.setText(PDFMethods.getPdfRealName());
 
     }
 
+    public void confirmUpload() {
+        Dialog.showConfirmDialog(getActivity(), new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                uploadDocument();
+            }
+        }, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+            }
+        });
+    }
+
     public void uploadDocument () {
+
+        Dialog.showLoadingDialog(getActivity());
 
         Call<ResponsePOJO> call = RetrofitClient.getInstance()
                 .getApi().uploadCon(Data.getStudentId(),
@@ -259,16 +269,15 @@ public class FragmentStudentRequestsCon extends Fragment implements View.OnClick
         call.enqueue(new Callback<ResponsePOJO>() {
             @Override
             public void onResponse(Call<ResponsePOJO> call, Response<ResponsePOJO> response) {
-                //Toast.makeText(getActivity(), response.body().getRemarks(), Toast.LENGTH_SHORT).show();
                 System.out.println("SUBIDA EXITOSA");
                 changeRequestStatus("6", "7");
             }
 
             @Override
             public void onFailure(Call<ResponsePOJO> call, Throwable t) {
-                Toast.makeText(getActivity(), "Ha fallado el método 1", Toast.LENGTH_SHORT).show();
-
+                Toast.makeText(getActivity(), "Error de conexión FSRCO:3", Toast.LENGTH_SHORT).show();
                 t.printStackTrace();
+                Dialog.hideDialog();
             }
         });
 
@@ -282,15 +291,14 @@ public class FragmentStudentRequestsCon extends Fragment implements View.OnClick
         call.enqueue(new Callback<ResponsePOJO>() {
             @Override
             public void onResponse(Call<ResponsePOJO> call, Response<ResponsePOJO> response) {
-                //Toast.makeText(getActivity(), response.body().getRemarks(), Toast.LENGTH_SHORT).show();
                 System.out.println(response.body().getRemarks());
             }
 
             @Override
             public void onFailure(Call<ResponsePOJO> call, Throwable t) {
-                Toast.makeText(getActivity(), "Ha fallado el método Estado", Toast.LENGTH_SHORT).show();
-
+                Toast.makeText(getActivity(), "Error de conexión FSRCO:4", Toast.LENGTH_SHORT).show();
                 t.printStackTrace();
+                Dialog.hideDialog();
             }
         });
 
@@ -301,15 +309,15 @@ public class FragmentStudentRequestsCon extends Fragment implements View.OnClick
         call2.enqueue(new Callback<ResponsePOJO>() {
             @Override
             public void onResponse(Call<ResponsePOJO> call2, Response<ResponsePOJO> response) {
-                //Toast.makeText(getActivity(), response.body().getRemarks(), Toast.LENGTH_SHORT).show();
                 System.out.println(response.body().getRemarks());
+                Dialog.hideDialog();
             }
 
             @Override
             public void onFailure(Call<ResponsePOJO> call2, Throwable t) {
-                Toast.makeText(getActivity(), "Ha fallado el método Notif", Toast.LENGTH_SHORT).show();
-
+                Toast.makeText(getActivity(), "Error de conexión FSRCO:5", Toast.LENGTH_SHORT).show();
                 t.printStackTrace();
+                Dialog.hideDialog();
             }
         });
         getFragmentManager().popBackStack();

@@ -1,5 +1,6 @@
 package com.example.sistematec.ui.login.Coordinator;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -17,6 +18,7 @@ import com.example.sistematec.ui.login.DatabaseConection.PersonalRequestsList;
 import com.example.sistematec.ui.login.DatabaseConection.ResponsePOJO;
 import com.example.sistematec.ui.login.DatabaseConection.RetrofitClient;
 import com.example.sistematec.ui.login.DatabaseConection.StudentRequestDocumentsList;
+import com.example.sistematec.ui.login.Dialog;
 
 import java.util.List;
 
@@ -59,7 +61,7 @@ public class FragmentCoordinatorStudentAwaitingRequest extends Fragment implemen
 
     private void setStudentData() {
         //obtención de la información del estudiante mediante la BD
-        txtCSAR_RequestDate.setText("Fecha: ---------");
+        //txtCSAR_RequestDate.setText("Fecha: ---------");
         txtCSAR_StudentID.setText("Matrícula: " + Data.getStudentId());
         txtCSAR_StudentName.setText("Nombre: " + Data.getStudentName());
     }
@@ -94,7 +96,6 @@ public class FragmentCoordinatorStudentAwaitingRequest extends Fragment implemen
     public void onClick(View view) {
         switch(view.getId()){
             case R.id.btnCSAR_Review:{
-                //Toast.makeText(getContext(),"abriendo solicitud", Toast.LENGTH_SHORT).show();
                 //logica para abrir la solicitud
                 if (requestUrl != null) {
                     Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(requestUrl));
@@ -103,7 +104,6 @@ public class FragmentCoordinatorStudentAwaitingRequest extends Fragment implemen
                 break;
             }
             case R.id.btnCSAR_Review2:{
-                //Toast.makeText(getContext(),"abriendo kardex", Toast.LENGTH_SHORT).show();
                 //logica para abrir el comprobante
                 if (libUrl != null) {
                     Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(kardexUrl));
@@ -112,7 +112,6 @@ public class FragmentCoordinatorStudentAwaitingRequest extends Fragment implemen
                 break;
             }
             case R.id.btnCSAR_Review3:{
-                //Toast.makeText(getContext(),"abriendo comprobante de no adeudo de laboratorio", Toast.LENGTH_SHORT).show();
                 //logica para abrir el comprobante
                 if (labUrl != null) {
                     Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(labUrl));
@@ -121,7 +120,6 @@ public class FragmentCoordinatorStudentAwaitingRequest extends Fragment implemen
                 break;
             }
             case R.id.btnCSAR_Review4:{
-                //Toast.makeText(getContext(),"abriendo comprobante de no adeudo de libros", Toast.LENGTH_SHORT).show();
                 //logica para abrir la kardex
                 if (kardexUrl != null) {
                     Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(libUrl));
@@ -130,15 +128,13 @@ public class FragmentCoordinatorStudentAwaitingRequest extends Fragment implemen
                 break;
             }
             case R.id.btnCSAR_Confirm:{
-                //Toast.makeText(getContext(),"enviando a análisis", Toast.LENGTH_SHORT).show();
                 //lógica cambiar el estado del proceso mediante la BD
-                acceptRequest();
+                confirmRequest();
                 break;
             }
             case R.id.btnCSAR_Deny:{
-                //Toast.makeText(getContext(),"enviando resultado", Toast.LENGTH_SHORT).show();
                 //lógica para rechazar
-                rejectRequest();
+                notConfirmRequest();
                 break;
             }
         }
@@ -174,10 +170,38 @@ public class FragmentCoordinatorStudentAwaitingRequest extends Fragment implemen
 
             @Override
             public void onFailure(Call<List<StudentRequestDocumentsList>> call, Throwable t) {
-                System.out.println("FALLA - " );
+                System.out.println("Error de conexión FCSAR:1" );
             }
         });
 
+    }
+
+    public void confirmRequest() {
+
+        Dialog.showConfirmDialog(getActivity(), new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                acceptRequest();
+            }
+        }, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+            }
+        });
+    }
+
+    public void notConfirmRequest() {
+
+        Dialog.showConfirmDialog(getActivity(), new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                rejectRequest();
+            }
+        }, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+            }
+        });
     }
 
     private void acceptRequest() {
@@ -192,21 +216,23 @@ public class FragmentCoordinatorStudentAwaitingRequest extends Fragment implemen
 
     private void changeRequestStatus(String newPhase, String notifMessage) {
 
+        if (!Dialog.loadingDialogIsShowing()) {
+            Dialog.showLoadingDialog(getActivity());
+        }
 
         Call<ResponsePOJO> call = RetrofitClient.getInstance()
                 .getApi().setRequestPhase(Data.getStudentId(), newPhase);
         call.enqueue(new Callback<ResponsePOJO>() {
             @Override
             public void onResponse(Call<ResponsePOJO> call, Response<ResponsePOJO> response) {
-                //Toast.makeText(getActivity(), response.body().getRemarks(), Toast.LENGTH_SHORT).show();
                 System.out.println(response.body().getRemarks());
             }
 
             @Override
             public void onFailure(Call<ResponsePOJO> call, Throwable t) {
-                Toast.makeText(getActivity(), "Ha fallado el método 1", Toast.LENGTH_SHORT).show();
-
+                Toast.makeText(getActivity(), "Error de conexión FCSAR:2", Toast.LENGTH_SHORT).show();
                 t.printStackTrace();
+                Dialog.hideDialog();
             }
         });
 
@@ -217,15 +243,15 @@ public class FragmentCoordinatorStudentAwaitingRequest extends Fragment implemen
         call2.enqueue(new Callback<ResponsePOJO>() {
             @Override
             public void onResponse(Call<ResponsePOJO> call2, Response<ResponsePOJO> response) {
-                //Toast.makeText(getActivity(), response.body().getRemarks(), Toast.LENGTH_SHORT).show();
                 System.out.println(response.body().getRemarks());
+                Dialog.hideDialog();
             }
 
             @Override
             public void onFailure(Call<ResponsePOJO> call2, Throwable t) {
-                Toast.makeText(getActivity(), "Ha fallado el método 1", Toast.LENGTH_SHORT).show();
-
+                Toast.makeText(getActivity(), "Error de conexión FCSAR:3", Toast.LENGTH_SHORT).show();
                 t.printStackTrace();
+                Dialog.hideDialog();
             }
         });
         getFragmentManager().popBackStack();

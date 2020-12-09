@@ -1,5 +1,6 @@
 package com.example.sistematec.ui.login.academy;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -15,10 +16,11 @@ import android.widget.Toast;
 
 import com.example.sistematec.Data;
 import com.example.sistematec.R;
-import com.example.sistematec.UploadAndDownload;
+import com.example.sistematec.PDFMethods;
 import com.example.sistematec.ui.login.DatabaseConection.ResponsePOJO;
 import com.example.sistematec.ui.login.DatabaseConection.RetrofitClient;
 import com.example.sistematec.ui.login.DatabaseConection.StudentRequestDocumentsList;
+import com.example.sistematec.ui.login.Dialog;
 
 import java.util.List;
 
@@ -59,7 +61,7 @@ public class FragmentAcademyAwaitingRequests extends Fragment implements View.On
 
     private void setStudentData() {
         //procedimiento de llenado de información con la BD
-        txtAAR_StudentDate.setText("Fecha: 25 de octubre de 2019");
+        //txtAAR_StudentDate.setText("Fecha: 25 de octubre de 2019");
         txtAAR_StudentName.setText("Nombre: " + Data.getStudentName());
         txtAAR_StudentID.setText("Matrícula: " + Data.getStudentId());
     }
@@ -112,25 +114,25 @@ public class FragmentAcademyAwaitingRequests extends Fragment implements View.On
                     Toast.makeText(getActivity(), "Documentación incompleta.", Toast.LENGTH_LONG).show();
                     return;
                 }
-                uploadDocument();
+                confirmUpload();
                 break;
             }
         }
     }
 
     public void selectDocument() {
-        UploadAndDownload.startPDFChooser(this);
+        PDFMethods.startPDFChooser(this);
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        UploadAndDownload.processPDFData(requestCode, resultCode, data, this.getActivity());
+        PDFMethods.processPDFData(requestCode, resultCode, data, this.getActivity());
 
-        encodedAn = UploadAndDownload.getEncodedPDF();
-        System.out.println(UploadAndDownload.getEncodedPDF() == null);
-        txtAAR_AnalysisCapture.setText(UploadAndDownload.getPdfRealName());
+        encodedAn = PDFMethods.getEncodedPDF();
+        System.out.println(PDFMethods.getEncodedPDF() == null);
+        txtAAR_AnalysisCapture.setText(PDFMethods.getPdfRealName());
     }
 
 
@@ -160,7 +162,45 @@ public class FragmentAcademyAwaitingRequests extends Fragment implements View.On
 
             @Override
             public void onFailure(Call<List<StudentRequestDocumentsList>> call, Throwable t) {
-                System.out.println("FALLA - DOCUMENTACIÓN" );
+                System.out.println("Error de conexión FAAR:1" );
+            }
+        });
+
+    }
+
+    public void confirmUpload() {
+
+        Dialog.showConfirmDialog(getActivity(), new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                uploadDocument();
+            }
+        }, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+            }
+        });
+    }
+
+    public void uploadDocument () {
+
+        Dialog.showLoadingDialog(getActivity());
+
+        System.out.println(Data.getStudentDepId());
+        Call<ResponsePOJO> call = RetrofitClient.getInstance()
+                .getApi().uploadAnalysis(Data.getStudentId(),
+                        encodedAn, analysisName);
+        call.enqueue(new Callback<ResponsePOJO>() {
+            @Override
+            public void onResponse(Call<ResponsePOJO> call, Response<ResponsePOJO> response) {
+                changeRequestStatus("3", "2");
+            }
+
+            @Override
+            public void onFailure(Call<ResponsePOJO> call, Throwable t) {
+                Toast.makeText(getActivity(), "Error de conexión FAAR:4", Toast.LENGTH_SHORT).show();
+                t.printStackTrace();
+                Dialog.hideDialog();
             }
         });
 
@@ -174,15 +214,14 @@ public class FragmentAcademyAwaitingRequests extends Fragment implements View.On
         call.enqueue(new Callback<ResponsePOJO>() {
             @Override
             public void onResponse(Call<ResponsePOJO> call, Response<ResponsePOJO> response) {
-                //Toast.makeText(getActivity(), response.body().getRemarks(), Toast.LENGTH_SHORT).show();
                 System.out.println(response.body().getRemarks());
             }
 
             @Override
             public void onFailure(Call<ResponsePOJO> call, Throwable t) {
-                Toast.makeText(getActivity(), "Ha fallado el método Estado", Toast.LENGTH_SHORT).show();
-
+                Toast.makeText(getActivity(), "Error de conexión FAAR:3", Toast.LENGTH_SHORT).show();
                 t.printStackTrace();
+                Dialog.hideDialog();
             }
         });
 
@@ -193,41 +232,18 @@ public class FragmentAcademyAwaitingRequests extends Fragment implements View.On
         call2.enqueue(new Callback<ResponsePOJO>() {
             @Override
             public void onResponse(Call<ResponsePOJO> call2, Response<ResponsePOJO> response) {
-                //Toast.makeText(getActivity(), response.body().getRemarks(), Toast.LENGTH_SHORT).show();
                 System.out.println(response.body().getRemarks());
+                Dialog.hideDialog();
             }
 
             @Override
             public void onFailure(Call<ResponsePOJO> call2, Throwable t) {
-                Toast.makeText(getActivity(), "Ha fallado el método Notif", Toast.LENGTH_SHORT).show();
-
+                Toast.makeText(getActivity(), "Error de conexión FAAR:4", Toast.LENGTH_SHORT).show();
                 t.printStackTrace();
+                Dialog.hideDialog();
             }
         });
         getFragmentManager().popBackStack();
-    }
-
-    public void uploadDocument () {
-
-        System.out.println(Data.getStudentDepId());
-        Call<ResponsePOJO> call = RetrofitClient.getInstance()
-                .getApi().uploadAnalysis(Data.getStudentId(),
-                        encodedAn, analysisName);
-        call.enqueue(new Callback<ResponsePOJO>() {
-            @Override
-            public void onResponse(Call<ResponsePOJO> call, Response<ResponsePOJO> response) {
-                //Toast.makeText(getActivity(), response.body().getRemarks(), Toast.LENGTH_SHORT).show();
-                changeRequestStatus("3", "4");
-            }
-
-            @Override
-            public void onFailure(Call<ResponsePOJO> call, Throwable t) {
-                Toast.makeText(getActivity(), "Ha fallado el método 1", Toast.LENGTH_SHORT).show();
-
-                t.printStackTrace();
-            }
-        });
-
     }
 
 

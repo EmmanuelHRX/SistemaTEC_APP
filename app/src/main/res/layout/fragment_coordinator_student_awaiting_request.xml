@@ -35,15 +35,20 @@
         <TextView
             android:id="@+id/txtCSAR_RequestDate"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:text="Información del alumno" />
+
         <TextView
             android:id="@+id/txtCSAR_StudentName"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:text="Nombre" />
+
         <TextView
             android:id="@+id/txtCSAR_StudentID"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:text="Matrícula" />
     </LinearLayout>
 
     />

@@ -56,8 +56,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
                     android:layout_marginTop="10dp"
-                    android:textSize="20dp"
-                    android:text="TextView" />
+                    android:text="Nombre"
+                    android:textSize="20dp" />
 
                 <TextView
                     android:id="@+id/txtAlumnoMatricula"
@@ -65,8 +65,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
                     android:layout_marginTop="14dp"
-                    android:textSize="20dp"
-                    android:text="TextView" />
+                    android:text="Matrícula"
+                    android:textSize="20dp" />
 
                 <TextView
                     android:id="@+id/txtAlumnoCarrera"
@@ -74,8 +74,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
                     android:layout_marginTop="14dp"
-                    android:textSize="20dp"
-                    android:text="TextView" />
+                    android:text="Carrera"
+                    android:textSize="20dp" />
 
                 <TextView
                     android:id="@+id/txtAlumnoSemestre"
@@ -83,8 +83,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
                     android:layout_marginTop="14dp"
-                    android:textSize="20dp"
-                    android:text="TextView" />
+                    android:text="Semestre"
+                    android:textSize="20dp" />
 
             </LinearLayout>
 

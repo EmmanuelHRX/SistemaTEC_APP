@@ -1,5 +1,6 @@
 package com.example.sistematec.ui.login.Coordinator;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -13,10 +14,11 @@ import android.widget.Toast;
 
 import com.example.sistematec.Data;
 import com.example.sistematec.R;
-import com.example.sistematec.UploadAndDownload;
+import com.example.sistematec.PDFMethods;
 import com.example.sistematec.ui.login.DatabaseConection.AnalysisDocumentList;
 import com.example.sistematec.ui.login.DatabaseConection.ResponsePOJO;
 import com.example.sistematec.ui.login.DatabaseConection.RetrofitClient;
+import com.example.sistematec.ui.login.Dialog;
 
 import java.util.List;
 
@@ -78,7 +80,7 @@ public class FragmentCoordinatorAnalysisAwaitingRequest extends Fragment impleme
     }
 
     private void setStudentData() {
-        txtCAAR_StudentDate.setText("Fecha: ---");
+        //txtCAAR_StudentDate.setText("Fecha: ---");
         txtCAAR_StudentName.setText("Nombre: " + Data.getStudentName());
         txtCAAR_StudentID.setText("Matricula: " + Data.getStudentId());
     }
@@ -112,7 +114,7 @@ public class FragmentCoordinatorAnalysisAwaitingRequest extends Fragment impleme
                     Toast.makeText(getActivity(), "Documentación incompleta.", Toast.LENGTH_LONG).show();
                     return;
                 }
-                uploadDocument();
+                confirmUpload();
                 break;
             }
         }
@@ -142,32 +144,32 @@ public class FragmentCoordinatorAnalysisAwaitingRequest extends Fragment impleme
 
             @Override
             public void onFailure(Call<List<AnalysisDocumentList>> call, Throwable t) {
-                System.out.println("FALLA - " );
+                System.out.println("Error de conexión FCAAR:1");
             }
         });
 
     }
 
     public void selectDocument() {
-        UploadAndDownload.startPDFChooser(this);
+        PDFMethods.startPDFChooser(this);
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        UploadAndDownload.processPDFData(requestCode, resultCode, data, this.getActivity());
+        PDFMethods.processPDFData(requestCode, resultCode, data, this.getActivity());
 
         switch (docQueue) {
             case 1: {
-                encodedDictum = UploadAndDownload.getEncodedPDF();
-                txtCAAR_DictumCapture.setText(UploadAndDownload.getPdfRealName());
+                encodedDictum = PDFMethods.getEncodedPDF();
+                txtCAAR_DictumCapture.setText(PDFMethods.getPdfRealName());
                 break;
             }
 
             case 2: {
-                encodedCon = UploadAndDownload.getEncodedPDF();
-                txtCAAR_ConCapture.setText(UploadAndDownload.getPdfRealName());
+                encodedCon = PDFMethods.getEncodedPDF();
+                txtCAAR_ConCapture.setText(PDFMethods.getPdfRealName());
                 break;
             }
         }
@@ -175,7 +177,23 @@ public class FragmentCoordinatorAnalysisAwaitingRequest extends Fragment impleme
 
     }
 
+    public void confirmUpload() {
+
+        Dialog.showConfirmDialog(getActivity(), new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                uploadDocument();
+            }
+        }, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+            }
+        });
+    }
+
     public void uploadDocument () {
+
+        Dialog.showLoadingDialog(getActivity());
 
         Call<ResponsePOJO> call = RetrofitClient.getInstance()
                 .getApi().uploadDictum(Data.getStudentId(),
@@ -183,15 +201,14 @@ public class FragmentCoordinatorAnalysisAwaitingRequest extends Fragment impleme
         call.enqueue(new Callback<ResponsePOJO>() {
             @Override
             public void onResponse(Call<ResponsePOJO> call, Response<ResponsePOJO> response) {
-                //Toast.makeText(getActivity(), response.body().getRemarks(), Toast.LENGTH_SHORT).show();
+
             }
 
             @Override
             public void onFailure(Call<ResponsePOJO> call, Throwable t) {
-                Toast.makeText(getActivity(), "Ha fallado el método 1", Toast.LENGTH_SHORT).show();
-
+                Toast.makeText(getActivity(), "Error de conexión FCAAR:2", Toast.LENGTH_SHORT).show();
                 t.printStackTrace();
-                return;
+                Dialog.hideDialog();
             }
         });
 
@@ -201,15 +218,14 @@ public class FragmentCoordinatorAnalysisAwaitingRequest extends Fragment impleme
         call2.enqueue(new Callback<ResponsePOJO>() {
             @Override
             public void onResponse(Call<ResponsePOJO> call2, Response<ResponsePOJO> response) {
-                //Toast.makeText(getActivity(), response.body().getRemarks(), Toast.LENGTH_SHORT).show();
                 changeRequestStatus("5", "6");
             }
 
             @Override
             public void onFailure(Call<ResponsePOJO> call2, Throwable t) {
-                Toast.makeText(getActivity(), "Ha fallado el método 1", Toast.LENGTH_SHORT).show();
-
+                Toast.makeText(getActivity(), "Error de conexión FCAAR:3", Toast.LENGTH_SHORT).show();
                 t.printStackTrace();
+                Dialog.hideDialog();
             }
         });
 
@@ -217,21 +233,19 @@ public class FragmentCoordinatorAnalysisAwaitingRequest extends Fragment impleme
 
     private void changeRequestStatus(String newPhase, String notifMessage) {
 
-
         Call<ResponsePOJO> call = RetrofitClient.getInstance()
                 .getApi().setRequestPhase(Data.getStudentId(), newPhase);
         call.enqueue(new Callback<ResponsePOJO>() {
             @Override
             public void onResponse(Call<ResponsePOJO> call, Response<ResponsePOJO> response) {
-                //Toast.makeText(getActivity(), response.body().getRemarks(), Toast.LENGTH_SHORT).show();
                 System.out.println(response.body().getRemarks());
             }
 
             @Override
             public void onFailure(Call<ResponsePOJO> call, Throwable t) {
-                Toast.makeText(getActivity(), "Ha fallado el método 1", Toast.LENGTH_SHORT).show();
-
+                Toast.makeText(getActivity(), "Error de conexión FCAAR:4", Toast.LENGTH_SHORT).show();
                 t.printStackTrace();
+                Dialog.hideDialog();
             }
         });
 
@@ -242,15 +256,15 @@ public class FragmentCoordinatorAnalysisAwaitingRequest extends Fragment impleme
         call2.enqueue(new Callback<ResponsePOJO>() {
             @Override
             public void onResponse(Call<ResponsePOJO> call2, Response<ResponsePOJO> response) {
-                //Toast.makeText(getActivity(), response.body().getRemarks(), Toast.LENGTH_SHORT).show();
                 System.out.println(response.body().getRemarks());
+                Dialog.hideDialog();
             }
 
             @Override
             public void onFailure(Call<ResponsePOJO> call2, Throwable t) {
-                Toast.makeText(getActivity(), "Ha fallado el método 1", Toast.LENGTH_SHORT).show();
-
+                Toast.makeText(getActivity(), "Error de conexión FCAAR:5", Toast.LENGTH_SHORT).show();
                 t.printStackTrace();
+                Dialog.hideDialog();
             }
         });
         getFragmentManager().popBackStack();

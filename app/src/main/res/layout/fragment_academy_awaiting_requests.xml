@@ -39,7 +39,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="0dp"
             android:layout_marginTop="0dp"
-            android:text="TextView" />
+            android:text="Información del alumno" />
 
         <TextView
             android:id="@+id/txtAAR_StudentName"
@@ -47,7 +47,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="0dp"
             android:layout_marginTop="0dp"
-            android:text="TextView" />
+            android:text="Nombre" />
 
         <TextView
             android:id="@+id/txtAAR_StudentID"
@@ -55,7 +55,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="0dp"
             android:layout_marginTop="0dp"
-            android:text="TextView" />
+            android:text="Matrícula" />
     </LinearLayout>
 
     <TextView

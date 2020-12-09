@@ -17,7 +17,7 @@ import java.io.InputStream;
 
 import static android.app.Activity.RESULT_OK;
 
-public class UploadAndDownload {
+public class PDFMethods {
 
     private static String pdfRealName;
     private static String pdfUploadName;

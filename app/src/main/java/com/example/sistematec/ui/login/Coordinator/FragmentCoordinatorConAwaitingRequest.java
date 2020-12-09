@@ -1,5 +1,6 @@
 package com.example.sistematec.ui.login.Coordinator;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -13,11 +14,11 @@ import android.widget.Toast;
 
 import com.example.sistematec.Data;
 import com.example.sistematec.R;
-import com.example.sistematec.UploadAndDownload;
-import com.example.sistematec.ui.login.DatabaseConection.AnalysisDocumentList;
+import com.example.sistematec.PDFMethods;
 import com.example.sistematec.ui.login.DatabaseConection.ConDocumentList;
 import com.example.sistematec.ui.login.DatabaseConection.ResponsePOJO;
 import com.example.sistematec.ui.login.DatabaseConection.RetrofitClient;
+import com.example.sistematec.ui.login.Dialog;
 
 import java.util.List;
 
@@ -60,7 +61,7 @@ public class FragmentCoordinatorConAwaitingRequest extends Fragment implements V
     }
 
     private void setStudentData() {
-        txtCCAR_StudentDate.setText("Fecha: ---");
+        //txtCCAR_StudentDate.setText("Fecha: ---");
         txtCCAR_StudentName.setText("Nombre: " + Data.getStudentName());
         txtCCAR_StudentID.setText("Matricula: " + Data.getStudentId());
     }
@@ -78,7 +79,7 @@ public class FragmentCoordinatorConAwaitingRequest extends Fragment implements V
             }
 
             case R.id.btnCCAR_confirm:{
-                changeRequestStatus("7", "8");
+                confirmRequest();
                 break;
             }
         }
@@ -96,10 +97,9 @@ public class FragmentCoordinatorConAwaitingRequest extends Fragment implements V
 
                     Data.setStudentSolId(response.body().get(0).getSolId());
 
-                    txtCCAR_ReviewCon.setText(UploadAndDownload.getFileName(response.body().get(0).getSolConformidadDocUrl()));
+                    txtCCAR_ReviewCon.setText(PDFMethods.getFileName(response.body().get(0).getSolConformidadDocUrl()));
 
                     conURL = response.body().get(0).getSolConformidadDocUrl();
-                    System.out.println("CONURL: " + conURL);
 
                 } else {
                     Toast.makeText(getActivity(), "No info.", Toast.LENGTH_SHORT).show();
@@ -109,29 +109,43 @@ public class FragmentCoordinatorConAwaitingRequest extends Fragment implements V
 
             @Override
             public void onFailure(Call<List<ConDocumentList>> call, Throwable t) {
-                System.out.println("FALLA - " );
+                System.out.println("Error de conexión FCCAR:1" );
             }
         });
 
     }
 
+    public void confirmRequest() {
+
+        Dialog.showConfirmDialog(getActivity(), new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                changeRequestStatus("7", "8");
+            }
+        }, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+            }
+        });
+    }
+
     private void changeRequestStatus(String newPhase, String notifMessage) {
 
+        Dialog.showLoadingDialog(getActivity());
 
         Call<ResponsePOJO> call = RetrofitClient.getInstance()
                 .getApi().setRequestPhase(Data.getStudentId(), newPhase);
         call.enqueue(new Callback<ResponsePOJO>() {
             @Override
             public void onResponse(Call<ResponsePOJO> call, Response<ResponsePOJO> response) {
-                //Toast.makeText(getActivity(), response.body().getRemarks(), Toast.LENGTH_SHORT).show();
                 System.out.println(response.body().getRemarks());
             }
 
             @Override
             public void onFailure(Call<ResponsePOJO> call, Throwable t) {
-                Toast.makeText(getActivity(), "Ha fallado el método 1", Toast.LENGTH_SHORT).show();
-
+                Toast.makeText(getActivity(), "Error de conexión FCCAR:2", Toast.LENGTH_SHORT).show();
                 t.printStackTrace();
+                Dialog.hideDialog();
             }
         });
 
@@ -142,15 +156,15 @@ public class FragmentCoordinatorConAwaitingRequest extends Fragment implements V
         call2.enqueue(new Callback<ResponsePOJO>() {
             @Override
             public void onResponse(Call<ResponsePOJO> call2, Response<ResponsePOJO> response) {
-                //Toast.makeText(getActivity(), response.body().getRemarks(), Toast.LENGTH_SHORT).show();
                 System.out.println(response.body().getRemarks());
+                Dialog.hideDialog();
             }
 
             @Override
             public void onFailure(Call<ResponsePOJO> call2, Throwable t) {
-                Toast.makeText(getActivity(), "Ha fallado el método 1", Toast.LENGTH_SHORT).show();
-
+                Toast.makeText(getActivity(), "Error de conexión FCCAR:3", Toast.LENGTH_SHORT).show();
                 t.printStackTrace();
+                Dialog.hideDialog();
             }
         });
         getFragmentManager().popBackStack();
