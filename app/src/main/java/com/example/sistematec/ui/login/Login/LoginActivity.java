@@ -319,6 +319,14 @@ public class LoginActivity extends AppCompatActivity {
 
     private void createNotification(int count) {
 
+        String plural1 = "ÓN";
+        String plural2 = "";
+
+        if (count > 1) {
+            plural1 = "ONES";
+            plural2 = "S";
+        }
+
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
             CharSequence name = "Notification";
             NotificationChannel notificationChannel = new NotificationChannel(CHANNEL_ID,name, NotificationManager.IMPORTANCE_HIGH);
@@ -329,7 +337,7 @@ public class LoginActivity extends AppCompatActivity {
 
         NotificationCompat.Builder builder = new NotificationCompat.Builder(getApplicationContext(), CHANNEL_ID);
         builder.setContentTitle("SISTEMA TEC");
-        builder.setContentText("SE HAN REGISTRADO " + count + " CAMBIOS EN SU SOLICITUD");
+        builder.setContentText("TIENE " + count + " NOTIFICACI" + plural1 + " NUEVA" + plural2);
         builder.setColor(152370);
         builder.setSmallIcon(R.mipmap.logotecnm2017);
         builder.setPriority(NotificationCompat.PRIORITY_HIGH);
