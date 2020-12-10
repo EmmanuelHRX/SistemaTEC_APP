@@ -71,8 +71,9 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
         android:text="Carga de dictamen"
+        android:textAlignment="textEnd"
         android:textColor="#000000"
-        android:textSize="22dp"
+        android:textSize="19dp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/linearLayoutCAAR"
         app:layout_constraintTop_toBottomOf="@+id/txtCAAR_description" />
@@ -116,8 +117,9 @@
         android:layout_marginTop="40dp"
         android:maxWidth="200dp"
         android:text="Documento de conformidad"
+        android:textAlignment="textEnd"
         android:textColor="#000000"
-        android:textSize="22dp"
+        android:textSize="19dp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/linearLayoutCAAR"
         app:layout_constraintTop_toBottomOf="@+id/txtCAAR_dictumCapture" />

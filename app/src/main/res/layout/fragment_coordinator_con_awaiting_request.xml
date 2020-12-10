@@ -60,7 +60,7 @@
         android:layout_marginTop="50dp"
         android:text="CONFORMIDAD"
         android:textColor="#000000"
-        android:textSize="22dp"
+        android:textSize="19dp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@id/linearLayoutCCAR"
         app:layout_constraintTop_toBottomOf="@id/linearLayoutCCAR" />
