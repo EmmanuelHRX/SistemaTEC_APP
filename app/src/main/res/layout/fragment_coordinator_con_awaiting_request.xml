@@ -99,7 +99,7 @@
         android:text="Para finalizar el proceso, confirme la documentación proporcionada por el alumno solicitante.\nSe le enviará la notificación correspondiente una vez se haya confirmado."
         android:textColor="#000000"
         android:textSize="16dp"
-        app:layout_constraintEnd_toEndOf="@+id/linearLayoutCAAR"
+        app:layout_constraintEnd_toEndOf="@+id/linearLayoutCCAR"
         app:layout_constraintStart_toStartOf="@+id/linearLayoutCCAR"
         app:layout_constraintTop_toBottomOf="@+id/txtCCAR_ReviewCon" />
 

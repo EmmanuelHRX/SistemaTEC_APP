@@ -142,11 +142,12 @@
         android:id="@+id/btnAAR_Desc"
         android:layout_width="351dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
         android:layout_marginTop="50dp"
+        android:layout_marginEnd="8dp"
         android:background="@drawable/custom_layout_border"
         android:text="Se ha recibido una solicitud de análisis técnico.\nTras la elaboración del análisis técnico académico, cargue el documento y enviélo para continuar con el proceso."
         android:textColor="#000000"
+        app:layout_constraintEnd_toEndOf="@+id/linearLayoutAAR"
         app:layout_constraintStart_toStartOf="@+id/linearLayoutAAR"
         app:layout_constraintTop_toBottomOf="@+id/txtAAR_Kardex" />
 
